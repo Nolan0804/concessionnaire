@@ -13,7 +13,7 @@ public class Color {
 
     public void setHexColor(String hexColor) throws InvalidInputException {
         if(hexColor == null || !hexColor.matches("^#[0-9A-Fa-f]{6}$")) {
-            throw new InvalidInputException("Invalid hex color format");
+            throw new InvalidInputException("Le Hex color doit être au format #RRGGBB, où RR, GG et BB sont des valeurs hexadécimales représentant les composantes rouge, verte et bleue de la couleur.");
         }
         this.hexColor = hexColor;
     }
