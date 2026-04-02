@@ -1,6 +1,7 @@
 package model;
 
 import exception.InvalidInputException;
+import java.time.Year;
 
 public class Brand {
     private String name;
@@ -20,11 +21,19 @@ public class Brand {
         this.name = name;
     }
 
+
     public void setYearCreated(Integer yearCreated) throws InvalidInputException {
-        if(yearCreated < 1886) { // 1886 est l'année de création de la voiture
+        int currentYear = Year.now().getValue();
+        if (yearCreated == null) {
+            throw new InvalidInputException("L'année ne peut pas être nulle.");
+        } else if (yearCreated < 1886) { 
             throw new InvalidInputException("La première voiture a été créée en 1886. Merci d'entrer une date postérieure.");
+        } else if (yearCreated > currentYear) {
+            throw new InvalidInputException("Impossible d'ajouter une marque qui n'existe pas encore.");
         }
+        this.yearCreated = yearCreated;
     }
+
 
     // Getter
     public String getName() {
