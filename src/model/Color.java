@@ -17,4 +17,12 @@ public class Color {
         }
         this.hexColor = hexColor;
     }
+
+    public void setType(String type) throws InvalidInputException {
+        if (type == null || type.isEmpty()) {
+            throw new InvalidInputException("Le type de couleur ne peut pas être vide.");
+        }
+        this.type = type;
+    }
+
 }
