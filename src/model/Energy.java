@@ -6,7 +6,7 @@ public class Energy {
     private String name;
     private Boolean isEcoFriendly;
 
-    public Energy(String name, Boolean isEcoFriendly) {
+    public Energy(String name, Boolean isEcoFriendly) throws InvalidInputException {
         setName(name);
         this.isEcoFriendly = isEcoFriendly;
     }
