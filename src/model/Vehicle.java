@@ -26,7 +26,7 @@ public class Vehicle {
     private Customer saler;
     private String state;
 
-     public Vehicle(String VIN, Double kilometer, LocalDate arrivalDate, Double sale_price, Double purshase_price,
+    public Vehicle(String VIN, Double kilometer, LocalDate arrivalDate, Double sale_price, Double purshase_price,
             String registrationNumber, Integer power, String gearBox, Integer gearNumber, Integer doorNumber,
             Integer seatNumber, String information, Integer euroStandard, Integer yearOfProduction,
             Boolean isVatDeductible, Garanty garanty, Color color, Energy energy, Brand brand, State state,
