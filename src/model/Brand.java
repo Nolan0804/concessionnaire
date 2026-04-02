@@ -33,8 +33,8 @@ public class Brand {
         }
         this.yearCreated = yearCreated;
     }
-    //test
-
+    
+    
     // Getter
     public String getName() {
         return name;
