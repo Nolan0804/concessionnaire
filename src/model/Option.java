@@ -6,8 +6,8 @@ public class Option {
     private String name, description;
     private Integer price;
 
-    public Option(String name, String description, Integer price) {
-        this.name = name;
+    public Option(String name, String description, Integer price) throws InvalidInputException {
+        setName(name);
         this.description = description;
         this.price = price;
     }
