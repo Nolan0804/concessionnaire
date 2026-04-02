@@ -22,15 +22,13 @@ public class Vehicle {
     private Color color;
     private Energy energy;
     private Brand brand;
-    private State state;
-    private Customer saler;
     private String state;
+    private Customer saler;
 
     public Vehicle(String VIN, Double kilometer, LocalDate arrivalDate, Double sale_price, Double purshase_price,
             String registrationNumber, Integer power, String gearBox, Integer gearNumber, Integer doorNumber,
             Integer seatNumber, String information, Integer euroStandard, Integer yearOfProduction,
-            Boolean isVatDeductible, Garanty garanty, Color color, Energy energy, Brand brand, State state,
-            Customer saler, String state) {
+            Boolean isVatDeductible, Garanty garanty, Color color, Energy energy, Brand brand, String state, Customer saler) {
         this.VIN = VIN;
         this.kilometer = kilometer;
         this.arrivalDate = arrivalDate;
@@ -52,6 +50,5 @@ public class Vehicle {
         this.brand = brand;
         this.state = state;
         this.saler = saler;
-        this.state = state;
     }
 }
