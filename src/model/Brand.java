@@ -21,7 +21,7 @@ public class Brand {
         this.name = name;
     }
 
-    // Bonjour
+
 
     public void setYearCreated(Integer yearCreated) throws InvalidInputException {
         int currentYear = Year.now().getValue();
