@@ -1,0 +1,24 @@
+// TOP (optionnel si tu as déjà JMenuBar)
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.GRAY);
+        topPanel.setPreferredSize(new Dimension(100, 50));
+
+// LEFT (sidebar)
+        JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(Color.DARK_GRAY);
+        leftPanel.setPreferredSize(new Dimension(150, 100));
+
+// CENTER (contenu principal)
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBackground(Color.WHITE);
+
+// BOTTOM (footer)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(Color.GRAY);
+        bottomPanel.setPreferredSize(new Dimension(100, 40));
+
+// Ajout dans la frame
+        add(topPanel, BorderLayout.NORTH);
+        add(leftPanel, BorderLayout.WEST);
+        add(centerPanel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
