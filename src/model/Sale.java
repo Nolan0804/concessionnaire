@@ -10,7 +10,7 @@ public class Sale {
     private Customer customer;
     private Double price;
 
-     public Sale(LocalDate date, String paymentMethod, String state, Vehicle vehicle, Customer customer, Double price) {
+    public Sale(LocalDate date, String paymentMethod, String state, Vehicle vehicle, Customer customer, Double price) {
         this.date = date;
         this.paymentMethod = paymentMethod;
         this.state = state;
