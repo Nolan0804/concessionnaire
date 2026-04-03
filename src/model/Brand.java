@@ -13,6 +13,7 @@ public class Brand {
         setYearCreated(yearCreated);
         this.originCountry = originCountry;
     }
+
     // Setter
     public void setName(String name) throws InvalidInputException {
         if (name == null || name.isEmpty()) {
