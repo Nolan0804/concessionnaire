@@ -2,7 +2,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
-import view.components.MenuBarView;
+
+import view.components.*;
 
 public class MainFrame extends JFrame {
     public MenuBarView menuBarView;
@@ -10,7 +11,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("Concessionnaire SiNo");
         ImageIcon icon = new ImageIcon(
-                Objects.requireNonNull(MainFrame.class.getResource("/img/logo.png"))
+                Objects.requireNonNull(MainFrame.class.getResource("/img/logo.webp"))
         );
         this.setIconImage(icon.getImage());
         this.setSize(1080, 600);
@@ -20,22 +21,12 @@ public class MainFrame extends JFrame {
         menuBarView = new MenuBarView();
         setJMenuBar(menuBarView);
 
-        container = new JPanel(new GridBagLayout()); // centre automatiquement
+        container = new JPanel(new GridBagLayout());
+        container.setBackground(new Color(212, 212, 212));
 
-        JPanel homePanel = new JPanel();
-        homePanel.setLayout(new GridLayout(2,2,10,10)); // 3 boutons verticaux
-
-        homePanel.add(new JButton("Meilleure vente du jour"));
-        homePanel.add(new JButton("Listing Client"));
-        homePanel.add(new JButton("Listing Voiture"));
-        homePanel.add(new JButton("Eteindre l'application"));
-
-        homePanel.setPreferredSize(new Dimension(600, 300));
-
-        container.add(homePanel); // centré
+        container.add(new HomePanel()); // centré
 
         add(container, BorderLayout.CENTER);
-
         this.setVisible(true);
     }
 
@@ -45,6 +36,7 @@ public class MainFrame extends JFrame {
 
     public void showHome(){
         getContentPane().removeAll();
+        getContentPane().add(container, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
