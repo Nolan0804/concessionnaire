@@ -3,12 +3,11 @@ package view.components;
 import javax.swing.*;
 
 public class MenuBarView extends JMenuBar {
-    private JMenuItem menu;
-    private JMenuItem exitApps;
-    private JMenuItem backHome;
-    public JMenuItem showListVehicle;
-    public JMenuItem addVehicle;
-
+    private JMenuItem menu, exitApps, backHome;
+    private JMenuItem vehicleMenu, showListVehicle, addVehicle;
+    private JMenuItem customerMenu, showListCustomer, addCustomer;
+    private JMenuItem saleMenu, showListSale, addSale;
+    private JMenuItem garantyMenu, showListGaranty;
 
     public MenuBarView() {
         menu = new JMenu("Menu");
@@ -17,23 +16,30 @@ public class MenuBarView extends JMenuBar {
         menu.add(backHome);
         menu.add(exitApps);
 
-        JMenu vehicleMenu = new JMenu("Voitures");
-        showListVehicle = new JMenuItem("Voir liste voitures");
+        vehicleMenu = new JMenu("Voitures");
+        showListVehicle = new JMenuItem("Liste voitures");
         addVehicle = new JMenuItem("Ajouter une voiture");
         vehicleMenu.add(showListVehicle);
         vehicleMenu.add(addVehicle);
 
-        JMenu customerMenu = new JMenu("Clients");
-        JMenuItem showListCustomer = new JMenuItem("Voir liste clients");
-        JMenuItem addCustomer = new JMenuItem("Créer un client");
+        customerMenu = new JMenu("Clients");
+        showListCustomer = new JMenuItem("Liste clients");
+        addCustomer = new JMenuItem("Créer un client");
         customerMenu.add(showListCustomer);
         customerMenu.add(addCustomer);
 
-        JMenu garantyMenu = new JMenu("Garanties");
-        JMenuItem showListGaranty = new JMenuItem("Voir liste garanties");
+        saleMenu = new JMenu("Clients");
+        showListSale = new JMenuItem("Liste clients");
+        addSale = new JMenuItem("Créer une vente");
+        customerMenu.add(showListSale);
+        customerMenu.add(addSale);
+
+        garantyMenu = new JMenu("Garanties");
+        showListGaranty = new JMenuItem("Voir liste garanties");
         garantyMenu.add(showListGaranty);
 
         add(menu);
+        add(saleMenu);
         add(vehicleMenu);
         add(customerMenu);
         add(garantyMenu);
@@ -42,7 +48,6 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getExitApps() {
         return exitApps;
     }
-
     public JMenuItem getBackHome() {
         return backHome;
     }
