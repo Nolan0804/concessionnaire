@@ -28,8 +28,8 @@ public class MenuBarView extends JMenuBar {
         customerMenu.add(showListCustomer);
         customerMenu.add(addCustomer);
 
-        saleMenu = new JMenu("Clients");
-        showListSale = new JMenuItem("Liste clients");
+        saleMenu = new JMenu("Ventes");
+        showListSale = new JMenuItem("Liste ventes");
         addSale = new JMenuItem("Créer une vente");
         customerMenu.add(showListSale);
         customerMenu.add(addSale);
