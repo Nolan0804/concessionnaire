@@ -2,7 +2,6 @@ package controller;
 import view.MainFrame;
 
 public class MainController {
-
     private final MainFrame view;
 
     public MainController(MainFrame view) {
@@ -11,7 +10,7 @@ public class MainController {
     }
 
     private void initController() {
-        view.menuBar.getExitApps().addActionListener(new ExitListener());
-        view.menuBar.getBackHome().addActionListener(e -> view.showHome());
+        view.getmenuBarView().getExitApps().addActionListener(new ExitListener());
+        view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
     }
 }
