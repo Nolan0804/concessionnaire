@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("Concessionnaire SiNo");
         ImageIcon icon = new ImageIcon(
-                Objects.requireNonNull(MainFrame.class.getResource("/img/logo.webp"))
+                Objects.requireNonNull(MainFrame.class.getResource("/img/logo.png"))
         );
         this.setIconImage(icon.getImage());
         this.setSize(1080, 600);
