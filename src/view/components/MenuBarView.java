@@ -51,5 +51,40 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getBackHome() {
         return backHome;
     }
-
+    public JMenuItem getMenu() {
+        return menu;
+    }
+    public JMenuItem getVehicleMenu() {
+        return vehicleMenu;
+    }
+    public JMenuItem getShowListVehicle() {
+        return showListVehicle;
+    }
+    public JMenuItem getAddVehicle() {
+        return addVehicle;
+    }
+    public JMenuItem getCustomerMenu() {
+        return customerMenu;
+    }
+    public JMenuItem getShowListCustomer() {
+        return showListCustomer;
+    }
+    public JMenuItem getAddCustomer() {
+        return addCustomer;
+    }
+    public JMenuItem getSaleMenu() {
+        return saleMenu;
+    }
+    public JMenuItem getShowListSale() {
+        return showListSale;
+    }
+    public JMenuItem getAddSale() {
+        return addSale;
+    }
+    public JMenuItem getGarantyMenu() {
+        return garantyMenu;
+    }
+    public JMenuItem getShowListGaranty() {
+        return showListGaranty;
+    }
 }
