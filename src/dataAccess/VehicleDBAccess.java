@@ -14,7 +14,7 @@ public class VehicleDBAccess implements VehicleDAO {
     }
 
     @Override
-    public void insert(Vehicle vehicle) throws SQLException {
+    public void insertVehicle(Vehicle vehicle) throws SQLException {
         String sql = """
             INSERT INTO vehicle(vin, kilometer, arrival_date, sale_price, purchase_price, registration, power, gear_box_type, door_number, seat_number, information, euro_standard,
             is_vat_deductible, year, guaranty_type, flex_color, type_color, energy, brand_name, state, saler)

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface VehicleDAO {
-    void insert(Vehicle vehicle) throws SQLException;
+    void insertVehicle(Vehicle vehicle) throws SQLException;
 
     // List<Vehicle> getAllVehicles() throws SQLException;
 
