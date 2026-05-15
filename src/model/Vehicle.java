@@ -51,4 +51,88 @@ public class Vehicle {
         this.state = state;
         this.saler = saler;
     }
+
+    public String getVIN() {
+        return VIN;
+    }
+
+    public Double getKilometer() {
+        return kilometer;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public Double getSalePrice() {
+        return sale_price;
+    }
+
+    public Double getPurchasePrice() {
+        return purshase_price;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public Integer getPower() {
+        return power;
+    }
+
+    public String getGearBox() {
+        return gearBox;
+    }
+
+    public Integer getGearNumber() {
+        return gearNumber;
+    }
+
+    public Integer getDoorNumber() {
+        return doorNumber;
+    }
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public Integer getEuroStandard() {
+        return euroStandard;
+    }
+
+    public Integer getYearOfProduction() {
+        return yearOfProduction;
+    }
+
+    public Boolean getIsVatDeductible() {
+        return isVatDeductible;
+    }
+
+    public Garanty getGaranty() {
+        return garanty;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Energy getEnergy() {
+        return energy;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public Customer getSaler() {
+        return saler;
+    }
 }
