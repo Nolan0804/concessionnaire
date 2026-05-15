@@ -19,4 +19,8 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
         this.locality = locality;
     }
+
+    public Integer getCustomerNumber() {
+        return customerNumber;
+    }
 }

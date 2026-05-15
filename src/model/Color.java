@@ -25,4 +25,11 @@ public class Color {
         this.type = type;
     }
 
+    public String getHexColor() {
+        return hexColor;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
