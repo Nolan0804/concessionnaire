@@ -11,7 +11,7 @@ public class SingletonConnection {
     public static Connection getInstance() throws SQLException {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/bookdb?useSSL=false",
+                    "jdbc:mysql://localhost:3306/cardealer?useSSL=false",
                     "root",
                     "root"
             );
