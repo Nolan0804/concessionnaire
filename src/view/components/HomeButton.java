@@ -11,15 +11,11 @@ public class HomeButton extends JButton {
     private boolean pressed = false;
 
     public HomeButton(String textButton, String imgName) {
-
         super(textButton);
 
-        // 🔥 IMAGE
         if (imgName != null) {
             image = new ImageIcon(
-                    Objects.requireNonNull(
-                            HomeButton.class.getResource("/img/" + imgName)
-                    )
+                    Objects.requireNonNull(HomeButton.class.getResource("/img/" + imgName))
             ).getImage();
         }
 

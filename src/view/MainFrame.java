@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         container = new JPanel(new GridBagLayout());
         container.setBackground(new Color(212, 212, 212));
 
-        container.add(new HomePanel()); // centré
+        container.add(new HomePanel());
 
         add(container, BorderLayout.CENTER);
         this.setVisible(true);
