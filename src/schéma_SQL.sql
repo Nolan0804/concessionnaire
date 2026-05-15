@@ -12,12 +12,7 @@ CREATE TABLE Brand (
 
     CONSTRAINT fk_brand_country
         FOREIGN KEY (origin_country)
-        REFERENCES Country(name),
-
-    CHECK (
-        year_created BETWEEN 1886
-        AND YEAR(CURRENT_DATE)
-    )
+        REFERENCES Country(name)
 );
 
 CREATE TABLE Energy (
@@ -122,11 +117,6 @@ CREATE TABLE Customer (
     CHECK (
         email LIKE '%@%.%'
     ),
-
-    CHECK (
-        birthday_date IS NULL OR birthday_date <= CURRENT_DATE
-    ),
-
     CHECK (
         CHAR_LENGTH(phone_number) >= 8
     )
@@ -191,6 +181,10 @@ CREATE TABLE Vehicle (
     ),
 
     CHECK (
+        production_year >= 1886
+    ),
+
+    CHECK (
         kilometer BETWEEN 0 AND 999999.99
     ),
 
@@ -231,14 +225,6 @@ CREATE TABLE Vehicle (
 
     CHECK (
         euro_standard BETWEEN 1 AND 7
-    ),
-
-    CHECK (
-        production_year BETWEEN 1886 AND YEAR(CURRENT_DATE)
-    ),
-
-    CHECK (
-        arrival_date <= CURRENT_DATE
     )
 );
 
@@ -280,10 +266,6 @@ CREATE TABLE Entretien (
 
     CHECK (
         kilometer BETWEEN 0 AND 999999.99
-    ),
-
-    CHECK (
-        date <= CURRENT_DATE
     )
 );
 
@@ -321,10 +303,6 @@ CREATE TABLE Sale (
             'Completed',
             'Cancelled'
         )
-    ),
-
-    CHECK (
-        date <= CURRENT_DATE
     )
 );
 
@@ -350,12 +328,7 @@ CREATE TABLE Trial (
         REFERENCES Customer(customer_number),
 
     CHECK (
-        duration BETWEEN 1
-        AND 180
-    ),
-
-    CHECK (
-        date <= CURRENT_DATE
+        duration BETWEEN 1 AND 180
     )
 );
 
@@ -390,6 +363,10 @@ BEGIN
 
 END$$
 
+DELIMITER ;
+
+DELIMITER $$
+
 CREATE TRIGGER trg_customer_email_lowercase
 BEFORE INSERT
 ON Customer
@@ -397,6 +374,128 @@ FOR EACH ROW
 BEGIN
 
     SET NEW.email = LOWER(NEW.email);
+
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE TRIGGER trg_customer_birthday
+BEFORE INSERT
+ON Customer
+FOR EACH ROW
+BEGIN
+
+    IF NEW.birthday_date IS NOT NULL
+    AND NEW.birthday_date > CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Birthday date cannot be in the future';
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_vehicle_production_year
+BEFORE INSERT
+ON Vehicle
+FOR EACH ROW
+BEGIN
+
+    IF NEW.production_year > YEAR(CURDATE()) THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Production year cannot be in the future';
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_vehicle_arrival_date
+BEFORE INSERT
+ON Vehicle
+FOR EACH ROW
+BEGIN
+
+    IF NEW.arrival_date > CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Arrival date cannot be in the future';
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_entretien_date
+BEFORE INSERT
+ON Entretien
+FOR EACH ROW
+BEGIN
+
+    IF NEW.date > CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Maintenance date cannot be in the future';
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_sale_date
+BEFORE INSERT
+ON Sale
+FOR EACH ROW
+BEGIN
+
+    IF NEW.date > CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Sale date cannot be in the future';
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_trial_date
+BEFORE INSERT
+ON Trial
+FOR EACH ROW
+BEGIN
+
+    IF NEW.date > CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+        'Trial date cannot be in the future';
+
+    END IF;
 
 END$$
 
