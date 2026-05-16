@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.Objects;
 
 import view.components.*;
+import view.panels.*;
 
 public class MainFrame extends JFrame {
     public MenuBarView menuBarView;
@@ -24,8 +25,6 @@ public class MainFrame extends JFrame {
         container = new JPanel(new GridBagLayout());
         container.setBackground(new Color(212, 212, 212));
 
-        container.add(new HomePanel());
-
         add(container, BorderLayout.CENTER);
         this.setVisible(true);
     }
@@ -34,10 +33,10 @@ public class MainFrame extends JFrame {
         return menuBarView;
     }
 
-    public void showHome(){
-        getContentPane().removeAll();
-        getContentPane().add(container, BorderLayout.CENTER);
-        revalidate();
-        repaint();
+    public void showAddVehiclePanel() {
+        container.removeAll();
+        container.add(new AddVehiclePanel());
+        container.revalidate();
+        container.repaint();
     }
 }
