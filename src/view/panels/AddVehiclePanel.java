@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.time.Year;
+import java.util.Date;
+import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
 import utils.LimitDocumentFilter;
+import utils.NumberOnlyFilter;
 
 public class AddVehiclePanel extends JPanel {
-
     private JTextField txtVin;
     private JTextField txtKilometer;
     private JTextField txtSalePrice;
@@ -49,9 +51,8 @@ public class AddVehiclePanel extends JPanel {
         );
         wrapper.setBackground(new Color(230,230,230));
 
-        JPanel formPanel = new JPanel(
-                new GridBagLayout()
-        );
+        JPanel formPanel = new JPanel(new GridBagLayout());
+
         formPanel.setPreferredSize(
                 new Dimension(700, 950)
         );
@@ -72,15 +73,23 @@ public class AddVehiclePanel extends JPanel {
 
         txtVin = new JTextField();
         ((AbstractDocument) txtVin.getDocument()).setDocumentFilter(new LimitDocumentFilter(17));
-        txtKilometer = new JTextField();
-        txtSalePrice = new JTextField();
-        txtPurchasePrice = new JTextField();
-        txtRegistration = new JTextField();
-        txtPower = new JTextField();
-        txtInformation = new JTextArea();
+
+        txtKilometer = new JTextField("0.00");
+        ((AbstractDocument) txtKilometer.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+
+        txtSalePrice = new JTextField("0.00");
+        ((AbstractDocument) txtSalePrice.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+
+        txtPurchasePrice = new JTextField("0.00");
+        ((AbstractDocument) txtPurchasePrice.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+
+        txtRegistration = new JTextField("X-XXX-XXX");
+
+        txtPower = new JTextField("0.00");
+        ((AbstractDocument) txtPower.getDocument()).setDocumentFilter(new NumberOnlyFilter());
 
         spArrivalDate = new JSpinner(
-                new SpinnerDateModel()
+                new SpinnerDateModel(new Date(), null, new Date(), Calendar.DAY_OF_MONTH)
         );
 
         JSpinner.DateEditor editorDate = new JSpinner.DateEditor(spArrivalDate, "yyyy-MM-dd");
@@ -101,6 +110,7 @@ public class AddVehiclePanel extends JPanel {
         spProductionYear = new JSpinner(
                 new SpinnerNumberModel(2020,1886,Year.now().getValue(),1)
         );
+
         JSpinner.NumberEditor editorProductionYear = new JSpinner.NumberEditor(spProductionYear, "#");
         spProductionYear.setEditor(editorProductionYear);
 
