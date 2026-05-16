@@ -121,22 +121,13 @@ public class AddVehiclePanel extends JPanel {
         cbGearBox.addItem("Manual");
 
         cbGaranty = new JComboBox<>();
-        cbGaranty.addItem("Basic");
-        cbGaranty.addItem("Premium");
-        cbGaranty.addItem("Gold");
+        // TODO: add garanty BDD
 
         cbEnergy = new JComboBox<>();
-        cbEnergy.addItem("Petrol");
-        cbEnergy.addItem("Diesel");
-        cbEnergy.addItem("Hybrid");
-        cbEnergy.addItem("Electric");
+        // TODO: add energy BDD
 
         cbBrand = new JComboBox<>();
-        cbBrand.addItem("BMW");
-        cbBrand.addItem("Audi");
-        cbBrand.addItem("Toyota");
-        cbBrand.addItem("Ford");
-        cbBrand.addItem("Renault");
+        // Todo : add brand BDD
 
         cbState = new JComboBox<>();
         cbState.addItem("New");
@@ -144,9 +135,8 @@ public class AddVehiclePanel extends JPanel {
         cbState.addItem("Good");
         cbState.addItem("Average");
         cbState.addItem("Damaged");
-        cbState.addItem("Sold");
 
-        txtHexColor = new JTextField("#fcba03");
+        txtHexColor = new JTextField("#000000");
 
         cbColorType = new JComboBox<>();
         cbColorType.addItem("Glossy");
