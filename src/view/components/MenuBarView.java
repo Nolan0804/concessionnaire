@@ -17,22 +17,22 @@ public class MenuBarView extends JMenuBar {
         menu.add(exitApps);
 
         vehicleMenu = new JMenu("Voiture");
-        showListVehicle = new JMenuItem("Liste voitures");
         addVehicle = new JMenuItem("Ajouter une voiture");
-        vehicleMenu.add(showListVehicle);
+        showListVehicle = new JMenuItem("Liste voitures");
         vehicleMenu.add(addVehicle);
+        vehicleMenu.add(showListVehicle);
 
         customerMenu = new JMenu("Client");
+        addCustomer = new JMenuItem("Ajouter un client");
         showListCustomer = new JMenuItem("Liste clients");
-        addCustomer = new JMenuItem("Créer un client");
-        customerMenu.add(showListCustomer);
         customerMenu.add(addCustomer);
+        customerMenu.add(showListCustomer);
 
         saleMenu = new JMenu("Vente");
+        addSale = new JMenuItem("Ajouter une vente");
         showListSale = new JMenuItem("Liste ventes");
-        addSale = new JMenuItem("Créer une vente");
-        saleMenu.add(showListSale);
         saleMenu.add(addSale);
+        saleMenu.add(showListSale);
 
         garantyMenu = new JMenu("Garanties");
         showListGaranty = new JMenuItem("Voir liste garanties");
