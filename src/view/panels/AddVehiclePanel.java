@@ -34,7 +34,6 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<String> cbColorType;
     private JComboBox<String> cbSaler;
     private JButton btnAdd;
-    private JButton btnReset;
 
     public AddVehiclePanel() {
         setLayout(new BorderLayout());
@@ -42,7 +41,7 @@ public class AddVehiclePanel extends JPanel {
 
         JLabel title = new JLabel("Ajouter voiture dans le catalogue");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 28));
+        title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setBorder(new EmptyBorder(20,0,20,0));
         add(title, BorderLayout.NORTH);
 
@@ -71,7 +70,7 @@ public class AddVehiclePanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
 
-        txtVin = new JTextField();
+        txtVin = new JTextField("XXXXXXXXXXXXXXXXX");
         ((AbstractDocument) txtVin.getDocument()).setDocumentFilter(new LimitDocumentFilter(17));
 
         txtKilometer = new JTextField("0.00");
@@ -147,7 +146,8 @@ public class AddVehiclePanel extends JPanel {
         cbState.addItem("Damaged");
         cbState.addItem("Sold");
 
-        txtHexColor = new JTextField();
+        txtHexColor = new JTextField("#fcba03");
+
         cbColorType = new JComboBox<>();
         cbColorType.addItem("Glossy");
         cbColorType.addItem("Matte");
@@ -162,10 +162,7 @@ public class AddVehiclePanel extends JPanel {
 
         btnAdd = new JButton("Ajouter");
 
-        btnReset = new JButton("Reset");
-
         btnAdd.setPreferredSize(new Dimension(140,40));
-        btnReset.setPreferredSize(new Dimension(140,40));
 
         int y = 0;
         addLine(formPanel, gbc, y++, "VIN (Vehicle Identification Number)", txtVin);
@@ -180,7 +177,6 @@ public class AddVehiclePanel extends JPanel {
         addLine(formPanel, gbc, y++, "Doors", spDoorNumber);
         addLine(formPanel, gbc, y++, "Seats", spSeatNumber);
 
-        gbc.gridx = 0;
         gbc.gridy = y;
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -231,7 +227,6 @@ public class AddVehiclePanel extends JPanel {
 
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(btnAdd);
-        buttonPanel.add(btnReset);
 
         gbc.gridx = 0;
         gbc.gridy = y;
