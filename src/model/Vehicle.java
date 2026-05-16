@@ -19,7 +19,8 @@ public class Vehicle {
     private Integer yearOfProduction;
     private Boolean isVatDeductible;
     private Garanty garanty;
-    private Color color;
+    private String hexColor;
+    private String typeColor;
     private Energy energy;
     private Brand brand;
     private String state;
@@ -28,7 +29,7 @@ public class Vehicle {
     public Vehicle(String VIN, Double kilometer, LocalDate arrivalDate, Double sale_price, Double purshase_price,
             String registrationNumber, Integer power, String gearBox, Integer gearNumber, Integer doorNumber,
             Integer seatNumber, String information, Integer euroStandard, Integer yearOfProduction,
-            Boolean isVatDeductible, Garanty garanty, Color color, Energy energy, Brand brand, String state, Customer saler) {
+            Boolean isVatDeductible, Garanty garanty, String hexColor, String typeColor, Energy energy, Brand brand, String state, Customer saler) {
         this.VIN = VIN;
         this.kilometer = kilometer;
         this.arrivalDate = arrivalDate;
@@ -45,7 +46,8 @@ public class Vehicle {
         this.yearOfProduction = yearOfProduction;
         this.isVatDeductible = isVatDeductible;
         this.garanty = garanty;
-        this.color = color;
+        this.hexColor = hexColor;
+        this.typeColor = typeColor;
         this.energy = energy;
         this.brand = brand;
         this.state = state;
@@ -116,8 +118,12 @@ public class Vehicle {
         return garanty;
     }
 
-    public Color getColor() {
-        return color;
+    public String getHexColor() {
+        return hexColor;
+    }
+
+    public String getTypeColor() {
+        return typeColor;
     }
 
     public Energy getEnergy() {

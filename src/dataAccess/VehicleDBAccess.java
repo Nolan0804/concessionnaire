@@ -2,7 +2,6 @@ package dataAccess;
 import exception.InvalidInputException;
 import model.Vehicle;
 import model.Garanty;
-import model.Color;
 import model.Energy;
 import model.Brand;
 
@@ -53,8 +52,8 @@ public class VehicleDBAccess implements VehicleDAO {
         statement.setBoolean(14, vehicle.getIsVatDeductible());
         statement.setInt(15, vehicle.getYearOfProduction());
         statement.setString(16, vehicle.getGaranty().getType());
-        statement.setString(17, vehicle.getColor().getHexColor());
-        statement.setString(18, vehicle.getColor().getType());
+        statement.setString(17, vehicle.getHexColor());
+        statement.setString(18, vehicle.getTypeColor());
         statement.setString(19, vehicle.getEnergy().getName());
         statement.setString(20, vehicle.getBrand().getName());
         statement.setString(21, vehicle.getState());
@@ -94,10 +93,8 @@ public class VehicleDBAccess implements VehicleDAO {
                             0
                     ),
 
-                    new Color(
-                            rs.getString("hex_color"),
-                            rs.getString("type_color")
-                    ),
+                    rs.getString("hex_color"),
+                    rs.getString("type_color"),
 
                     new Energy(
                             rs.getString("energy"),

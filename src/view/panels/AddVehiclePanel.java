@@ -3,6 +3,9 @@ package view.panels;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.time.Year;
+import javax.swing.text.AbstractDocument;
+import utils.LimitDocumentFilter;
 
 public class AddVehiclePanel extends JPanel {
 
@@ -12,6 +15,7 @@ public class AddVehiclePanel extends JPanel {
     private JTextField txtPurchasePrice;
     private JTextField txtRegistration;
     private JTextField txtPower;
+    private JTextField txtHexColor;
     private JTextArea txtInformation;
     private JSpinner spArrivalDate;
     private JSpinner spGearNumber;
@@ -27,7 +31,6 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<String> cbState;
     private JComboBox<String> cbColorType;
     private JComboBox<String> cbSaler;
-    private JTextField txtHexColor;
     private JButton btnAdd;
     private JButton btnReset;
 
@@ -66,41 +69,41 @@ public class AddVehiclePanel extends JPanel {
         gbc.insets = new Insets(8,8,8,8);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
+
         txtVin = new JTextField();
+        ((AbstractDocument) txtVin.getDocument()).setDocumentFilter(new LimitDocumentFilter(17));
         txtKilometer = new JTextField();
         txtSalePrice = new JTextField();
         txtPurchasePrice = new JTextField();
         txtRegistration = new JTextField();
         txtPower = new JTextField();
-        txtInformation = new JTextArea(5,20);
-        txtInformation.setLineWrap(true);
-        txtInformation.setWrapStyleWord(true);
-        txtHexColor = new JTextField();
+        txtInformation = new JTextArea();
+
         spArrivalDate = new JSpinner(
                 new SpinnerDateModel()
         );
 
-        JSpinner.DateEditor editor =
-                new JSpinner.DateEditor(
-                        spArrivalDate,
-                        "yyyy-MM-dd"
-                );
-        spArrivalDate.setEditor(editor);
+        JSpinner.DateEditor editorDate = new JSpinner.DateEditor(spArrivalDate, "yyyy-MM-dd");
+        spArrivalDate.setEditor(editorDate);
+
         spGearNumber = new JSpinner(
-                new SpinnerNumberModel(6,1,12,1)
+                new SpinnerNumberModel(6,5,8,1)
         );
         spDoorNumber = new JSpinner(
-                new SpinnerNumberModel(5,1,10,1)
+                new SpinnerNumberModel(5,3,5,1)
         );
         spSeatNumber = new JSpinner(
-                new SpinnerNumberModel(5,1,10,1)
+                new SpinnerNumberModel(5,1,9,1)
         );
         spEuroStandard = new JSpinner(
-                new SpinnerNumberModel(6,1,10,1)
+                new SpinnerNumberModel(1,1,7,1)
         );
         spProductionYear = new JSpinner(
-                new SpinnerNumberModel(2024,1900,2100,1)
+                new SpinnerNumberModel(2020,1886,Year.now().getValue(),1)
         );
+        JSpinner.NumberEditor editorProductionYear = new JSpinner.NumberEditor(spProductionYear, "#");
+        spProductionYear.setEditor(editorProductionYear);
+
         chkVatDeductible = new JCheckBox("VAT deductible");
         chkVatDeductible.setBackground(Color.WHITE);
 
@@ -134,11 +137,13 @@ public class AddVehiclePanel extends JPanel {
         cbState.addItem("Damaged");
         cbState.addItem("Sold");
 
+        txtHexColor = new JTextField();
         cbColorType = new JComboBox<>();
         cbColorType.addItem("Glossy");
         cbColorType.addItem("Matte");
+        cbColorType.addItem("Satin");
         cbColorType.addItem("Metallic");
-        cbColorType.addItem("Pearl");
+        cbColorType.addItem("Pearlescent");
 
         cbSaler = new JComboBox<>();
         cbSaler.addItem("1");
@@ -167,19 +172,20 @@ public class AddVehiclePanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = y;
-
-        formPanel.add(new JLabel("Information"), gbc);
-
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.gridx = 1;
 
-        JScrollPane infoScroll =
-                new JScrollPane(txtInformation);
+        txtInformation = new JTextArea(8, 35);
+        txtInformation.setLineWrap(true);
+        txtInformation.setWrapStyleWord(true);
+        addLine(formPanel, gbc, y++, "Information", txtInformation);
+        JScrollPane infoScroll = new JScrollPane(txtInformation);
 
-        infoScroll.setPreferredSize(
-                new Dimension(300,120)
-        );
-
+        gbc.fill = GridBagConstraints.BOTH;
         formPanel.add(infoScroll, gbc);
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         y++;
 
@@ -239,16 +245,16 @@ public class AddVehiclePanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = y;
         gbc.weightx = 0.3;
-        JLabel jLabel = new JLabel(label);
-        jLabel.setFont(
-                new Font("Arial", Font.BOLD, 14)
-        );
 
+        JLabel jLabel = new JLabel(label);
+        jLabel.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(jLabel, gbc);
+
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-
-
+        if(!(component instanceof JScrollPane)) {
+            component.setPreferredSize(new Dimension(300,35));
+        }
         panel.add(component, gbc);
     }
 }

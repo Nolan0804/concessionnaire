@@ -10,4 +10,6 @@ public class MainController {
         view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
     }
 
+
+
 }
