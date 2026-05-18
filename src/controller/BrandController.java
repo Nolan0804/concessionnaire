@@ -1,15 +1,11 @@
 package controller;
 
 import dataAccess.BrandDBAccess;
-import dataAccess.EnergyDAO;
-import dataAccess.EnergyDBAccess;
-import model.Energy;
-
+import model.Brand;
 import java.util.List;
 
 public class BrandController {
-    private EnergyController dao;
-
+    private BrandDBAccess dao;
     public BrandController() {
         try {
             dao = new BrandDBAccess();
@@ -18,7 +14,7 @@ public class BrandController {
         }
     }
 
-    public List<Energy> getAllBrand() {
+    public List<Brand> getAllBrand() {
         try {
             return dao.getAllBrand();
         } catch (Exception e) {

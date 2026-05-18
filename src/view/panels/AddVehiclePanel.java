@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
 
-import model.Energy;
-import model.Garanty;
+import model.*;
 import utils.LimitDocumentFilter;
 import utils.NumberOnlyFilter;
 
 import controller.EnergyController;
+import controller.BrandController;
 
 public class AddVehiclePanel extends JPanel {
     private JTextField txtVin;
@@ -34,7 +34,7 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<String> cbGearBox;
     private JComboBox<Garanty> cbGaranty;
     private JComboBox<Energy> cbEnergy;
-    private JComboBox<String> cbBrand;
+    private JComboBox<Brand> cbBrand;
     private JComboBox<String> cbState;
     private JComboBox<String> cbColorType;
     private JComboBox<String> cbSaler;
@@ -128,7 +128,7 @@ public class AddVehiclePanel extends JPanel {
         loadEnergy();
 
         cbBrand = new JComboBox<>();
-        // Todo : add brand BDD
+        loadBrand();
 
         cbState = new JComboBox<>();
         cbState.addItem("New");
@@ -250,6 +250,14 @@ public class AddVehiclePanel extends JPanel {
         gbc.weightx = 0.7;
 
         panel.add(component, gbc);
+    }
+
+    private void loadBrand() {
+        BrandController controller = new BrandController();
+
+        for(Brand brand : controller.getAllBrand()) {
+            cbBrand.addItem(brand);
+        }
     }
 
     private void loadEnergy() {

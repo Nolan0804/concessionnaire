@@ -2,7 +2,7 @@ package dataAccess;
 
 import exception.InvalidInputException;
 import model.Brand;
-import model.Energy;
+import model.Country;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,13 +28,15 @@ public class BrandDBAccess implements BrandDAO {
         ResultSet rs = statement.executeQuery();
 
         while(rs.next()) {
+            Country country;
             Brand brand = new Brand(
                     rs.getString("name"),
                     rs.getInt("year_created"),
-                    rs.getBoolean("is_eco_friendly"));
+                    country = new Country(rs.getString("origin_country"))
+            );
             brands.add(brand);
         }
 
-        return energies;
+        return brands;
     }
 }
