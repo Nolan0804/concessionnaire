@@ -39,29 +39,25 @@ public class AddVehiclePanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(230,230,230));
 
-        JLabel title = new JLabel("Ajouter voiture dans le catalogue");
+        JLabel title = new JLabel("Ajouter une voiture dans le catalogue");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setBorder(new EmptyBorder(20,0,20,0));
         add(title, BorderLayout.NORTH);
 
-        JPanel wrapper = new JPanel(
-                new FlowLayout(FlowLayout.CENTER)
-        );
+        JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         wrapper.setBackground(new Color(230,230,230));
 
         JPanel formPanel = new JPanel(new GridBagLayout());
-
         formPanel.setPreferredSize(
                 new Dimension(700, 950)
         );
         formPanel.setBackground(Color.WHITE);
-        formPanel.setBorder(
-                BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(
-                                new Color(200,200,200)
-                        ),
-                        new EmptyBorder(20,20,20,20)
+        formPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(
+                        new Color(200,200,200)
+                ),
+                    new EmptyBorder(20,20,20,20)
                 )
         );
 
@@ -121,10 +117,10 @@ public class AddVehiclePanel extends JPanel {
         cbGearBox.addItem("Manual");
 
         cbGaranty = new JComboBox<>();
-        // TODO: add garanty BDD
+        // TODO : add garanty BDD
 
         cbEnergy = new JComboBox<>();
-        // TODO: add energy BDD
+        // TODO : add energy BDD
 
         cbBrand = new JComboBox<>();
         // Todo : add brand BDD
@@ -247,9 +243,7 @@ public class AddVehiclePanel extends JPanel {
 
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-        if(!(component instanceof JScrollPane)) {
-            component.setPreferredSize(new Dimension(300,35));
-        }
+
         panel.add(component, gbc);
     }
 }
