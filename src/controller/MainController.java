@@ -9,7 +9,4 @@ public class MainController {
         view.getmenuBarView().getExitApps().addActionListener(new ExitListener());
         view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
     }
-
-
-
 }

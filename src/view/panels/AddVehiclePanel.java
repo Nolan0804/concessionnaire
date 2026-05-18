@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
 
+import controller.CustomerController;
 import model.*;
 import utils.LimitDocumentFilter;
 import utils.NumberOnlyFilter;
@@ -38,7 +39,7 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<Brand> cbBrand;
     private JComboBox<String> cbState;
     private JComboBox<String> cbColorType;
-    private JComboBox<String> cbSaler;
+    private JComboBox<Customer> cbSaler;
     private JButton btnAdd;
 
     public AddVehiclePanel() {
@@ -148,9 +149,7 @@ public class AddVehiclePanel extends JPanel {
         cbColorType.addItem("Pearlescent");
 
         cbSaler = new JComboBox<>();
-        cbSaler.addItem("1");
-        cbSaler.addItem("2");
-        cbSaler.addItem("3");
+        loadCustomer();
 
         btnAdd = new JButton("Ajouter");
 
@@ -252,6 +251,15 @@ public class AddVehiclePanel extends JPanel {
 
         panel.add(component, gbc);
     }
+
+    private void loadCustomer() {
+        CustomerController controller = new CustomerController();
+
+        for(Customer customer : controller.getAllCustomer()) {
+            cbSaler.addItem(customer);
+        }
+    }
+
 
     private void loadGaranty() {
         GarantyController controller = new GarantyController();

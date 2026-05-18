@@ -20,7 +20,13 @@ public class Customer {
         this.locality = locality;
     }
 
+
     public Integer getCustomerNumber() {
         return customerNumber;
+    }
+
+    @Override
+    public String toString() {
+        return customerNumber + " - " + firstName + " " + lastName;
     }
 }
