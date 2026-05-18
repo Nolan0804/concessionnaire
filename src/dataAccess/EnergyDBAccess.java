@@ -24,7 +24,7 @@ public class EnergyDBAccess implements EnergyDAO {
         ResultSet rs = statement.executeQuery();
 
         while(rs.next()) {
-            Energy energy = new Energy(rs.getString("name"), rs.getBoolean("is_eco_friendly"));
+            Energy energy = new Energy(rs.getString("type"), rs.getBoolean("is_eco_friendly"));
             energies.add(energy);
         }
 
