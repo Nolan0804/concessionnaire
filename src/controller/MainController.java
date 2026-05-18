@@ -6,11 +6,10 @@ public class MainController {
 
     public MainController(MainFrame view) {
         this.view = view;
-        initController();
+        view.getmenuBarView().getExitApps().addActionListener(new ExitListener());
+        view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
     }
 
-    private void initController() {
-        view.getmenuBarView().getExitApps().addActionListener(new ExitListener());
-        view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
-    }
+
+
 }

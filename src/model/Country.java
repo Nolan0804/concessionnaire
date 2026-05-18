@@ -18,4 +18,9 @@ public class Country {
             throw new InvalidInputException("Le nom du pays ne peux être vide !");
         }
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

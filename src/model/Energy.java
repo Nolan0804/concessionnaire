@@ -22,5 +22,11 @@ public class Energy {
         if (name == null || name.isEmpty()) {
             throw new InvalidInputException("Le type d'énergie ne peux être vide !");
         }
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + (isEcoFriendly ? "ECO" : "NON-ECO");
     }
 }

@@ -19,7 +19,8 @@ public class Vehicle {
     private Integer yearOfProduction;
     private Boolean isVatDeductible;
     private Garanty garanty;
-    private Color color;
+    private String hexColor;
+    private String typeColor;
     private Energy energy;
     private Brand brand;
     private String state;
@@ -28,7 +29,7 @@ public class Vehicle {
     public Vehicle(String VIN, Double kilometer, LocalDate arrivalDate, Double sale_price, Double purshase_price,
             String registrationNumber, Integer power, String gearBox, Integer gearNumber, Integer doorNumber,
             Integer seatNumber, String information, Integer euroStandard, Integer yearOfProduction,
-            Boolean isVatDeductible, Garanty garanty, Color color, Energy energy, Brand brand, String state, Customer saler) {
+            Boolean isVatDeductible, Garanty garanty, String hexColor, String typeColor, Energy energy, Brand brand, String state, Customer saler) {
         this.VIN = VIN;
         this.kilometer = kilometer;
         this.arrivalDate = arrivalDate;
@@ -45,10 +46,99 @@ public class Vehicle {
         this.yearOfProduction = yearOfProduction;
         this.isVatDeductible = isVatDeductible;
         this.garanty = garanty;
-        this.color = color;
+        this.hexColor = hexColor;
+        this.typeColor = typeColor;
         this.energy = energy;
         this.brand = brand;
         this.state = state;
         this.saler = saler;
+    }
+
+    public String getVIN() {
+        return VIN;
+    }
+
+    public Double getKilometer() {
+        return kilometer;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public Double getSalePrice() {
+        return sale_price;
+    }
+
+    public Double getPurchasePrice() {
+        return purshase_price;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public Integer getPower() {
+        return power;
+    }
+
+    public String getGearBox() {
+        return gearBox;
+    }
+
+    public Integer getGearNumber() {
+        return gearNumber;
+    }
+
+    public Integer getDoorNumber() {
+        return doorNumber;
+    }
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public Integer getEuroStandard() {
+        return euroStandard;
+    }
+
+    public Integer getYearOfProduction() {
+        return yearOfProduction;
+    }
+
+    public Boolean getIsVatDeductible() {
+        return isVatDeductible;
+    }
+
+    public Garanty getGaranty() {
+        return garanty;
+    }
+
+    public String getHexColor() {
+        return hexColor;
+    }
+
+    public String getTypeColor() {
+        return typeColor;
+    }
+
+    public Energy getEnergy() {
+        return energy;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public Customer getSaler() {
+        return saler;
     }
 }
