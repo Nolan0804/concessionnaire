@@ -7,8 +7,13 @@ import java.time.Year;
 import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
+
+import model.Energy;
+import model.Garanty;
 import utils.LimitDocumentFilter;
 import utils.NumberOnlyFilter;
+
+import controller.EnergyController;
 
 public class AddVehiclePanel extends JPanel {
     private JTextField txtVin;
@@ -27,8 +32,8 @@ public class AddVehiclePanel extends JPanel {
     private JSpinner spProductionYear;
     private JCheckBox chkVatDeductible;
     private JComboBox<String> cbGearBox;
-    private JComboBox<String> cbGaranty;
-    private JComboBox<String> cbEnergy;
+    private JComboBox<Garanty> cbGaranty;
+    private JComboBox<Energy> cbEnergy;
     private JComboBox<String> cbBrand;
     private JComboBox<String> cbState;
     private JComboBox<String> cbColorType;
@@ -120,6 +125,7 @@ public class AddVehiclePanel extends JPanel {
         // TODO : add garanty BDD
 
         cbEnergy = new JComboBox<>();
+        loadEnergy();
         // TODO : add energy BDD
 
         cbBrand = new JComboBox<>();
@@ -245,5 +251,13 @@ public class AddVehiclePanel extends JPanel {
         gbc.weightx = 0.7;
 
         panel.add(component, gbc);
+    }
+
+    private void loadEnergy() {
+        EnergyController controller = new EnergyController();
+
+        for(Energy energy : controller.getAllEnergy()) {
+            cbEnergy.addItem(energy);
+        }
     }
 }

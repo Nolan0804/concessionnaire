@@ -30,4 +30,5 @@ public class EnergyDBAccess implements EnergyDAO {
 
         return energies;
     }
+
 }

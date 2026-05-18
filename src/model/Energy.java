@@ -24,4 +24,9 @@ public class Energy {
         }
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return name + " - " + (isEcoFriendly ? "ECO" : "NON-ECO");
+    }
 }
