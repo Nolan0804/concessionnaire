@@ -248,7 +248,6 @@ public class AddVehiclePanel extends JPanel {
 
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-
         panel.add(component, gbc);
     }
 
