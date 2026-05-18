@@ -26,9 +26,14 @@ public class Garanty {
     }
 
     public void setDurationInMonths(Integer durationInMonths) throws InvalidInputException {
-        if(durationInMonths == null || durationInMonths < 0 || durationInMonths > 24) {
+        if(durationInMonths == null || durationInMonths < 0) {
             throw new InvalidInputException("La durée d'une garantie ne peux être négative ou supérieur à 24 !");
         }
         this.durationInMonths = durationInMonths;
+    }
+
+    @Override
+    public String toString() {
+        return type + " - " + durationInMonths/12 + (durationInMonths/12 > 1 ? " ans": " an");
     }
 }

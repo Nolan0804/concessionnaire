@@ -14,6 +14,7 @@ import utils.NumberOnlyFilter;
 
 import controller.EnergyController;
 import controller.BrandController;
+import controller.GarantyController;
 
 public class AddVehiclePanel extends JPanel {
     private JTextField txtVin;
@@ -122,7 +123,7 @@ public class AddVehiclePanel extends JPanel {
         cbGearBox.addItem("Manual");
 
         cbGaranty = new JComboBox<>();
-        // TODO : add garanty BDD
+        loadGaranty();
 
         cbEnergy = new JComboBox<>();
         loadEnergy();
@@ -250,6 +251,14 @@ public class AddVehiclePanel extends JPanel {
         gbc.weightx = 0.7;
 
         panel.add(component, gbc);
+    }
+
+    private void loadGaranty() {
+        GarantyController controller = new GarantyController();
+
+        for(Garanty garanty : controller.getAllGaranty()) {
+            cbGaranty.addItem(garanty);
+        }
     }
 
     private void loadBrand() {
