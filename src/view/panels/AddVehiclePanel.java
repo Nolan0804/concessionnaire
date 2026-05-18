@@ -126,7 +126,6 @@ public class AddVehiclePanel extends JPanel {
 
         cbEnergy = new JComboBox<>();
         loadEnergy();
-        // TODO : add energy BDD
 
         cbBrand = new JComboBox<>();
         // Todo : add brand BDD
