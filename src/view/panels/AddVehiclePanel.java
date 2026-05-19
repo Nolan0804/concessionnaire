@@ -8,12 +8,14 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
 
+import controller.CustomerController;
 import model.*;
 import utils.LimitDocumentFilter;
 import utils.NumberOnlyFilter;
 
 import controller.EnergyController;
 import controller.BrandController;
+import controller.GarantyController;
 
 public class AddVehiclePanel extends JPanel {
     private JTextField txtVin;
@@ -37,7 +39,7 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<Brand> cbBrand;
     private JComboBox<String> cbState;
     private JComboBox<String> cbColorType;
-    private JComboBox<String> cbSaler;
+    private JComboBox<Customer> cbSaler;
     private JButton btnAdd;
 
     public AddVehiclePanel() {
@@ -122,7 +124,7 @@ public class AddVehiclePanel extends JPanel {
         cbGearBox.addItem("Manual");
 
         cbGaranty = new JComboBox<>();
-        // TODO : add garanty BDD
+        loadGaranty();
 
         cbEnergy = new JComboBox<>();
         loadEnergy();
@@ -147,9 +149,7 @@ public class AddVehiclePanel extends JPanel {
         cbColorType.addItem("Pearlescent");
 
         cbSaler = new JComboBox<>();
-        cbSaler.addItem("1");
-        cbSaler.addItem("2");
-        cbSaler.addItem("3");
+        loadCustomer();
 
         btnAdd = new JButton("Ajouter");
 
@@ -248,8 +248,24 @@ public class AddVehiclePanel extends JPanel {
 
         gbc.gridx = 1;
         gbc.weightx = 0.7;
-
         panel.add(component, gbc);
+    }
+
+    private void loadCustomer() {
+        CustomerController controller = new CustomerController();
+
+        for(Customer customer : controller.getAllCustomer()) {
+            cbSaler.addItem(customer);
+        }
+    }
+
+
+    private void loadGaranty() {
+        GarantyController controller = new GarantyController();
+
+        for(Garanty garanty : controller.getAllGaranty()) {
+            cbGaranty.addItem(garanty);
+        }
     }
 
     private void loadBrand() {
@@ -266,5 +282,97 @@ public class AddVehiclePanel extends JPanel {
         for(Energy energy : controller.getAllEnergy()) {
             cbEnergy.addItem(energy);
         }
+    }
+
+    public JTextField getTxtVin() {
+        return txtVin;
+    }
+
+    public JTextField getTxtKilometer() {
+        return txtKilometer;
+    }
+
+    public JTextField getTxtSalePrice() {
+        return txtSalePrice;
+    }
+
+    public JTextField getTxtPurchasePrice() {
+        return txtPurchasePrice;
+    }
+
+    public JTextField getTxtRegistration() {
+        return txtRegistration;
+    }
+
+    public JTextField getTxtPower() {
+        return txtPower;
+    }
+
+    public JTextField getTxtHexColor() {
+        return txtHexColor;
+    }
+
+    public JTextArea getTxtInformation() {
+        return txtInformation;
+    }
+
+    public JSpinner getSpArrivalDate() {
+        return spArrivalDate;
+    }
+
+    public JSpinner getSpGearNumber() {
+        return spGearNumber;
+    }
+
+    public JSpinner getSpDoorNumber() {
+        return spDoorNumber;
+    }
+
+    public JSpinner getSpSeatNumber() {
+        return spSeatNumber;
+    }
+
+    public JSpinner getSpEuroStandard() {
+        return spEuroStandard;
+    }
+
+    public JSpinner getSpProductionYear() {
+        return spProductionYear;
+    }
+
+    public JCheckBox getChkVatDeductible() {
+        return chkVatDeductible;
+    }
+
+    public JComboBox<String> getCbGearBox() {
+        return cbGearBox;
+    }
+
+    public JComboBox<Garanty> getCbGaranty() {
+        return cbGaranty;
+    }
+
+    public JComboBox<Energy> getCbEnergy() {
+        return cbEnergy;
+    }
+
+    public JComboBox<Brand> getCbBrand() {
+        return cbBrand;
+    }
+
+    public JComboBox<String> getCbState() {
+        return cbState;
+    }
+
+    public JComboBox<String> getCbColorType() {
+        return cbColorType;
+    }
+
+    public JComboBox<Customer> getCbSaler() {
+        return cbSaler;
+    }
+
+    public JButton getBtnAdd() {
+        return btnAdd;
     }
 }

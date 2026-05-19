@@ -7,8 +7,8 @@ import java.util.List;
 
 public class EnergyController {
     private EnergyDBAccess dao;
-    public EnergyController() {
 
+    public EnergyController() {
         try {
             dao = new EnergyDBAccess();
         } catch (Exception e) {

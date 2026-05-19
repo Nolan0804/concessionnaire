@@ -115,4 +115,87 @@ public class VehicleDBAccess implements VehicleDAO {
 
         return vehicles;
     }
+
+    @Override
+    public void deleteVehicleVin(String vin) throws SQLException {
+        String sql = """ 
+                DELETE FROM Vehicle
+                WHERE VIN = ?
+                """;
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, vin);
+        statement.executeUpdate();
+    }
+
+    @Override
+    public Boolean vehicleExists(String vinNumber) throws SQLException {
+        String sql =
+                """
+                SELECT VIN
+                FROM Vehicle
+                WHERE VIN = ?
+                """;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, vinNumber);
+        ResultSet rs = statement.executeQuery();
+        return rs.next();
+    }
+
+    @Override
+    public void updateVehicle(Vehicle vehicle) throws SQLException {
+        String sql =
+                """
+                UPDATE Vehicle
+                SET
+                    kilometer = ?,
+                    arrival_date = ?,
+                    sale_price = ?,
+                    purchase_price = ?,
+                    registration = ?,
+                    power = ?,
+                    gear_box_type = ?,
+                    gear_number = ?,
+                    door_number = ?,
+                    seat_number = ?,
+                    information = ?,
+                    euro_standard = ?,
+                    production_year = ?,
+                    is_VAT_Deductible = ?,
+                    garanty_type = ?,
+                    hex_color = ?,
+                    type_color = ?,
+                    energy = ?,
+                    brand_name = ?,
+                    state = ?,
+                    saler = ?
+                WHERE VIN = ?
+                """;
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDouble(1, vehicle.getKilometer());
+        statement.setDate(2, java.sql.Date.valueOf(vehicle.getArrivalDate()));
+        statement.setDouble(3, vehicle.getSalePrice());
+        statement.setDouble(4, vehicle.getPurchasePrice());
+        statement.setString(5, vehicle.getRegistrationNumber());
+        statement.setInt(6, vehicle.getPower());
+        statement.setString(7, vehicle.getGearBox());
+        statement.setInt(8, vehicle.getGearNumber());
+        statement.setInt(9, vehicle.getDoorNumber());
+        statement.setInt(10, vehicle.getSeatNumber());
+        statement.setString(11, vehicle.getInformation());
+        statement.setInt(12, vehicle.getEuroStandard());
+        statement.setInt(13, vehicle.getYearOfProduction());
+        statement.setBoolean(14, vehicle.getIsVatDeductible());
+        statement.setString(15, vehicle.getGaranty().getType());
+        statement.setString(16,vehicle.getHexColor());
+        statement.setString(17,vehicle.getTypeColor());
+        statement.setString(18, vehicle.getEnergy().getName());
+        statement.setString(19, vehicle.getBrand().getName());
+        statement.setString(20, vehicle.getState());
+        statement.setInt(21, vehicle.getSaler().getCustomerNumber());
+        statement.setString(22, vehicle.getVIN());
+
+        statement.executeUpdate();
+    }
 }
