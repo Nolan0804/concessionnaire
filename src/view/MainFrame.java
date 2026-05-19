@@ -9,6 +9,7 @@ import view.panels.*;
 public class MainFrame extends JFrame {
     public MenuBarView menuBarView;
     private JPanel container;
+    private AddVehiclePanel addVehiclePanel;
     public MainFrame() {
         super("Concessionnaire SiNo");
         ImageIcon icon = new ImageIcon(
@@ -35,8 +36,13 @@ public class MainFrame extends JFrame {
 
     public void showAddVehiclePanel() {
         container.removeAll();
-        container.add(new AddVehiclePanel(), BorderLayout.CENTER);
+        addVehiclePanel = new AddVehiclePanel();
+        container.add(addVehiclePanel);
         container.revalidate();
         container.repaint();
     }
+    public AddVehiclePanel getAddVehiclePanel() {
+        return addVehiclePanel;
+    }
+
 }

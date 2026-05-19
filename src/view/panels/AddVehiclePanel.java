@@ -283,4 +283,96 @@ public class AddVehiclePanel extends JPanel {
             cbEnergy.addItem(energy);
         }
     }
+
+    public JTextField getTxtVin() {
+        return txtVin;
+    }
+
+    public JTextField getTxtKilometer() {
+        return txtKilometer;
+    }
+
+    public JTextField getTxtSalePrice() {
+        return txtSalePrice;
+    }
+
+    public JTextField getTxtPurchasePrice() {
+        return txtPurchasePrice;
+    }
+
+    public JTextField getTxtRegistration() {
+        return txtRegistration;
+    }
+
+    public JTextField getTxtPower() {
+        return txtPower;
+    }
+
+    public JTextField getTxtHexColor() {
+        return txtHexColor;
+    }
+
+    public JTextArea getTxtInformation() {
+        return txtInformation;
+    }
+
+    public JSpinner getSpArrivalDate() {
+        return spArrivalDate;
+    }
+
+    public JSpinner getSpGearNumber() {
+        return spGearNumber;
+    }
+
+    public JSpinner getSpDoorNumber() {
+        return spDoorNumber;
+    }
+
+    public JSpinner getSpSeatNumber() {
+        return spSeatNumber;
+    }
+
+    public JSpinner getSpEuroStandard() {
+        return spEuroStandard;
+    }
+
+    public JSpinner getSpProductionYear() {
+        return spProductionYear;
+    }
+
+    public JCheckBox getChkVatDeductible() {
+        return chkVatDeductible;
+    }
+
+    public JComboBox<String> getCbGearBox() {
+        return cbGearBox;
+    }
+
+    public JComboBox<Garanty> getCbGaranty() {
+        return cbGaranty;
+    }
+
+    public JComboBox<Energy> getCbEnergy() {
+        return cbEnergy;
+    }
+
+    public JComboBox<Brand> getCbBrand() {
+        return cbBrand;
+    }
+
+    public JComboBox<String> getCbState() {
+        return cbState;
+    }
+
+    public JComboBox<String> getCbColorType() {
+        return cbColorType;
+    }
+
+    public JComboBox<Customer> getCbSaler() {
+        return cbSaler;
+    }
+
+    public JButton getBtnAdd() {
+        return btnAdd;
+    }
 }
