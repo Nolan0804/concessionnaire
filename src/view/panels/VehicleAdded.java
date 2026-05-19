@@ -25,4 +25,13 @@ public class VehicleAdded extends JOptionPane {
                 JOptionPane.ERROR_MESSAGE
         );
     }
+
+    public static void successMessage(Component parent, String message) {
+        JOptionPane.showMessageDialog(
+                parent,
+                message,
+                "Succès",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
 }

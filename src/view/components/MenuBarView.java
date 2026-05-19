@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MenuBarView extends JMenuBar {
     private JMenuItem menu, exitApps, backHome;
-    private JMenuItem vehicleMenu, showListVehicle, addVehicle;
+    private JMenuItem vehicleMenu, showListVehicle, deleteVehicle, updateVehicle, addVehicle;
     private JMenuItem customerMenu, showListCustomer, addCustomer;
     private JMenuItem saleMenu, showListSale, addSale;
     private JMenuItem garantyMenu, showListGaranty;
@@ -18,8 +18,12 @@ public class MenuBarView extends JMenuBar {
 
         vehicleMenu = new JMenu("Voiture");
         addVehicle = new JMenuItem("Ajouter une voiture");
+        deleteVehicle = new JMenuItem("Supprimer une voiture");
+        updateVehicle = new JMenuItem("Mettre à jour une voiture");
         showListVehicle = new JMenuItem("Liste voitures");
         vehicleMenu.add(addVehicle);
+        vehicleMenu.add(deleteVehicle);
+        vehicleMenu.add(updateVehicle);
         vehicleMenu.add(showListVehicle);
 
         customerMenu = new JMenu("Client");
@@ -63,6 +67,10 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getAddVehicle() {
         return addVehicle;
     }
+    public JMenuItem getDeleteVehicle() {
+        return deleteVehicle;
+    }
+    public JMenuItem getUpdateVehicle() {return updateVehicle;}
     public JMenuItem getCustomerMenu() {
         return customerMenu;
     }

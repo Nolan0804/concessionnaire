@@ -8,12 +8,8 @@ import java.util.List;
 
 public interface VehicleDAO {
     void insertVehicle(Vehicle vehicle) throws SQLException;
-
     List<Vehicle> getAllVehicles() throws SQLException, InvalidInputException;
-
-    //Vehicle getVehicleVin(String vinNumber) throws SQLException;
-
-    // void deleteVehicleVin(String vinNumber) throws SQLException;
-
-    // void updateVehicle(Vehicle vehicle) throws SQLException;
+    Boolean vehicleExists(String vinNumber) throws SQLException;
+    void deleteVehicleVin(String vinNumber) throws SQLException;
+    void updateVehicle(Vehicle vehicle) throws SQLException;
 }

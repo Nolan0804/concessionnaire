@@ -10,16 +10,27 @@ import view.panels.VehicleAdded;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
+import view.panels.DeleteVehicleDialogPanel;
+import javax.swing.JOptionPane;
 public class MainController {
     private final MainFrame view;
 
     public MainController(MainFrame view) {
         this.view = view;
         view.getmenuBarView().getExitApps().addActionListener(new ExitListener());
+        view.getmenuBarView().getBackHome().addActionListener(e -> {
+            view.getContentPane().removeAll();
+            view.repaint();
+        });
         view.getmenuBarView().getAddVehicle().addActionListener(e -> {
                     view.showAddVehiclePanel();
                     view.getAddVehiclePanel().getBtnAdd().addActionListener(ev -> addVehicle());});
+        view.getmenuBarView().getDeleteVehicle().addActionListener(e -> {
+                    DeleteVehicleDialogPanel dialog = new DeleteVehicleDialogPanel(view);
+                    dialog.getBtnCancel().addActionListener(ev -> dialog.dispose());
+                    dialog.getBtnDelete().addActionListener(ev -> deleteVehicle(dialog));
+                    dialog.setVisible(true);
+                });
     }
 
     private void addVehicle() {
@@ -112,6 +123,48 @@ public class MainController {
 
         } catch (Exception e) {
             VehicleAdded.errorMessage(view, e.getMessage());
+        }
+    }
+
+    private void deleteVehicle(DeleteVehicleDialogPanel dialog) {
+        try {
+            String vin = dialog.getTxtVin().getText();
+
+            if(ValidForms.isEmpty(vin)) {
+                VehicleAdded.errorMessage(view, "VIN obligatoire");
+                return;
+            }
+
+            if(!ValidForms.isValidVIN(vin)) {
+                VehicleAdded.errorMessage(view, "VIN invalide");
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(view, "Supprimer le véhicule ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if(confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+            VehicleBusiness business = new VehicleBusiness();
+            if(!business.vehicleExists(vin)) {
+                VehicleAdded.errorMessage(
+                        view,
+                        "Ce VIN n'existe pas"
+                );
+                return;
+            }
+            business.deleteVehicle(vin);
+            VehicleAdded.successMessage(
+                    view,
+                    "Véhicule supprimé"
+            );
+            dialog.dispose();
+
+        } catch (Exception e) {
+            VehicleAdded.errorMessage(
+                    view,
+                    e.getMessage()
+            );
         }
     }
 }

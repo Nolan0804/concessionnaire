@@ -41,6 +41,10 @@ public class MainFrame extends JFrame {
         container.revalidate();
         container.repaint();
     }
+
+    public void showDeleteVehicleDialogPanel() {
+        DeleteVehicleDialogPanel deleteVehicleDialogPanel = new DeleteVehicleDialogPanel(this);
+    }
     public AddVehiclePanel getAddVehiclePanel() {
         return addVehiclePanel;
     }

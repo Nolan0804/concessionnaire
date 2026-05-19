@@ -28,4 +28,22 @@ public class VehicleBusiness {
 
         dao.insertVehicle(vehicle);
     }
+
+    public void deleteVehicle(String vin) throws Exception {
+        if(vin == null || vin.trim().isEmpty()) {
+            throw new Exception("VIN obligatoire");
+        }
+
+        dao.deleteVehicleVin(vin);
+    }
+
+    public boolean vehicleExists(String vin) throws Exception {
+        if(vin == null || vin.trim().isEmpty()) {
+            throw new Exception(
+                    "VIN obligatoire"
+            );
+        }
+
+        return dao.vehicleExists(vin);
+    }
 }
