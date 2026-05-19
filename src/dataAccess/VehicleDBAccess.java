@@ -136,7 +136,6 @@ public class VehicleDBAccess implements VehicleDAO {
                 FROM Vehicle
                 WHERE VIN = ?
                 """;
-
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, vinNumber);
         ResultSet rs = statement.executeQuery();
