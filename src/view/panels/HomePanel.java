@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+
 import view.components.Car;
+import view.components.CarThread;
 
 public class HomePanel extends JPanel {
     private ArrayList<Car> cars = new ArrayList<>();
@@ -13,30 +15,19 @@ public class HomePanel extends JPanel {
     public HomePanel() {
         setBackground(Color.WHITE);
 
-        for (int i = 0; i < 30; i++) {
-            cars.add(new Car(
-                    random.nextInt(1200), 50 + (i * 50),
+        for (int i = 0; i < 15; i++) {
+            Car car = new Car(
+                    random.nextInt(1200),
+                    50 + (i * 35),
                     2 + random.nextInt(5),
                     new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255))
-            ));
+            );
+
+            cars.add(car);
+
+            CarThread thread = new CarThread(car, this);
+            thread.start();
         }
-        startAnimation();
-    }
-
-    private void startAnimation() {
-        Timer timer = new Timer(30, e -> {
-            for (Car car : cars) {
-                int newX = car.getX();
-                car.setX(newX + car.getSpeed());
-                if (car.getX() > getWidth()) {
-                    car.setX(-40);
-                    car.setY(random.nextInt(500));
-                }
-            }
-            repaint();
-        });
-
-        timer.start();
     }
 
     @Override
