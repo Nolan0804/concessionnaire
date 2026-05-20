@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import view.panels.DeleteVehicleDialogPanel;
 import javax.swing.JOptionPane;
+import java.util.List;
 public class MainController {
     private final MainFrame view;
 
@@ -30,7 +31,7 @@ public class MainController {
                     dialog.getBtnCancel().addActionListener(ev -> dialog.dispose());
                     dialog.getBtnDelete().addActionListener(ev -> deleteVehicle(dialog));
                     dialog.setVisible(true);
-                });
+        });
     }
 
     private void addVehicle() {
@@ -161,9 +162,7 @@ public class MainController {
             dialog.dispose();
 
         } catch (Exception e) {
-            VehicleAdded.errorMessage(
-                    view,
-                    e.getMessage()
+            VehicleAdded.errorMessage(view, e.getMessage()
             );
         }
     }

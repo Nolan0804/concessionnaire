@@ -2,6 +2,7 @@ package business;
 
 import dataAccess.VehicleDBAccess;
 import model.Vehicle;
+import java.util.List;
 
 public class VehicleBusiness {
     private VehicleDBAccess dao;
@@ -12,6 +13,11 @@ public class VehicleBusiness {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Vehicle> getAllVehicle() throws Exception {
+
+        return dao.getAllVehicles();
     }
 
     public void addVehicle(Vehicle vehicle) throws Exception {
