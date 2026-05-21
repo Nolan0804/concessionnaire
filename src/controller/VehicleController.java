@@ -7,8 +7,8 @@ import model.*;
 import view.components.DialogMessage;
 import view.utils.ValidForms;
 import view.MainFrame;
-import view.panels.AddVehiclePanel;
-import view.panels.DeleteVehicleDialogPanel;
+import java.util.List;
+import view.panels.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,6 +19,7 @@ public class VehicleController {
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
         initController();
+        loadVehicles();
     }
 
     public void initController() {
@@ -29,25 +30,15 @@ public class VehicleController {
                 DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());}});
     }
 
-    public void initDeleteDialog(DeleteVehicleDialogPanel dialog) throws DataAccessException, InvalidInputException{
-        dialog.getBtnCancel()
-                .addActionListener(e ->
-                        dialog.dispose()
-                );
-
-        dialog.getBtnDelete().addActionListener(e -> {
-            try {
-                    deleteVehicle(dialog);
-                    DialogMessage.successMessage(view, "Vehicle", "Véhicule supprimé");
-                        dialog.dispose();
-                    } catch (Exception ex) {
-                    DialogMessage.errorMessage(
-                                view,
-                                "Vehicle",
-                                ex.getMessage()
-                        );
-                    }
-                });
+    public void loadVehicles() {
+        try {
+            VehicleBusiness business = new VehicleBusiness();
+            List<Vehicle> vehicles = business.getAllVehicle();
+            view.showVehicleList();
+            view.getVehicleListPanel().loadVehicles(vehicles);
+        } catch (DataAccessException | InvalidInputException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addVehicle() throws DataAccessException, InvalidInputException {
@@ -168,11 +159,9 @@ public class VehicleController {
         }
     }
 
-    private void deleteVehicle(DeleteVehicleDialogPanel dialog) throws Exception {
-        String vin = dialog.getTxtVin().getText();
-
+    public void deleteVehicle(String vin) throws InvalidInputException {
         if(ValidForms.isEmpty(vin)) {
-            throw new Exception("VIN obligatoire");
+            throw new InvalidInputException("VIN obligatoire");
         }
 
         VehicleBusiness business = new VehicleBusiness();

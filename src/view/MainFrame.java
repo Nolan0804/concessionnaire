@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
     private  MenuBarView menuBarView;
     private JPanel container;
     private AddVehiclePanel addVehiclePanel;
-    private DeleteVehicleDialogPanel deleteVehicleDialog;
+    private VehicleListPanel vehicleListPanel;
 
     public MainFrame() {
 
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
 
         // PANELS
         homePanel = new HomePanel();
-
+        vehicleListPanel = new VehicleListPanel();
         addVehiclePanel = new AddVehiclePanel();
 
         // HOME AU DEMARRAGE
@@ -73,12 +73,14 @@ public class MainFrame extends JFrame {
         container.repaint();
     }
 
-
-    public DeleteVehicleDialogPanel showDeleteVehicleDialog() {
-        return new DeleteVehicleDialogPanel(this);
+    public void showVehicleList() {
+        container.removeAll();
+        container.add(vehicleListPanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
     }
 
-    public DeleteVehicleDialogPanel getDeleteVehicleDialog() {
-        return deleteVehicleDialog;
+    public VehicleListPanel getVehicleListPanel() {
+        return vehicleListPanel;
     }
 }

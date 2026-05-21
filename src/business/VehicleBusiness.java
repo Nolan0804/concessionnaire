@@ -1,6 +1,8 @@
 package business;
 
 import dataAccess.VehicleDBAccess;
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import model.Vehicle;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class VehicleBusiness {
         }
     }
 
-    public List<Vehicle> getAllVehicle() throws Exception {
+    public List<Vehicle> getAllVehicle() throws DataAccessException, InvalidInputException {
         return dao.getAllVehicles();
     }
 
@@ -33,11 +35,15 @@ public class VehicleBusiness {
         dao.insertVehicle(vehicle);
     }
 
-    public void deleteVehicle(String vin) throws Exception {
-        if(vin == null || vin.trim().isEmpty()) {
-            throw new Exception("VIN obligatoire");
+    public void deleteVehicle(String vin) throws InvalidInputException {
+        try {
+            if(vin == null || vin.trim().isEmpty()) {
+                throw new InvalidInputException("VIN obligatoire");
+            }
+            dao.deleteVehicleVin(vin);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
         }
-        dao.deleteVehicleVin(vin);
     }
 
     public boolean vehicleExists(String vin) throws Exception {

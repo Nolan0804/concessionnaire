@@ -17,30 +17,14 @@ public class MainController {
     }
 
     private void initController() {
-        view.getmenuBarView()
-                .getExitApps()
-                .addActionListener(e ->
-                        System.exit(0)
-                );
+        view.getmenuBarView().getExitApps().addActionListener(e -> System.exit(0));
+        view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
 
-        view.getmenuBarView()
-                .getBackHome()
-                .addActionListener(e ->
-                        view.showHome()
-                );
-
-        view.getmenuBarView()
-                .getAddVehicle()
-                .addActionListener(e ->
-                        view.showAddVehiclePanel()
-                );
-
-        view.getmenuBarView().getDeleteVehicle().addActionListener(e -> {
+        view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
+        view.getmenuBarView().getShowListVehicle().addActionListener(e -> {
                 try {
                     VehicleController vehicleController = new VehicleController(view);
-                    DeleteVehicleDialogPanel dialog = view.showDeleteVehicleDialog();
-                    vehicleController.initDeleteDialog(dialog);
-                    dialog.setVisible(true);
+                    vehicleController.loadVehicles();
                 } catch (DataAccessException | InvalidInputException ex) {
                     DialogMessage.errorMessage(
                             view,
@@ -49,5 +33,6 @@ public class MainController {
                     );
                 }
             });
+
     }
 }

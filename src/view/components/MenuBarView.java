@@ -4,9 +4,9 @@ import javax.swing.*;
 
 public class MenuBarView extends JMenuBar {
     private JMenuItem menu, exitApps, backHome;
-    private JMenuItem vehicleMenu, showListVehicle, deleteVehicle, updateVehicle, addVehicle;
-    private JMenuItem customerMenu, showListCustomer, addCustomer;
-    private JMenuItem saleMenu, showListSale, addSale;
+    private JMenuItem vehicleMenu, showListVehicle, addVehicle;
+    private JMenuItem customerMenu, showListCustomer;
+    private JMenuItem saleMenu, showListSale;
     private JMenuItem garantyMenu, showListGaranty;
 
     public MenuBarView() {
@@ -18,12 +18,8 @@ public class MenuBarView extends JMenuBar {
 
         vehicleMenu = new JMenu("Vehicle");
         addVehicle = new JMenuItem("Add a car");
-        deleteVehicle = new JMenuItem("Delete a car");
-        updateVehicle = new JMenuItem("Update a car");
         showListVehicle = new JMenuItem("List cars");
         vehicleMenu.add(addVehicle);
-        vehicleMenu.add(deleteVehicle);
-        vehicleMenu.add(updateVehicle);
         vehicleMenu.add(showListVehicle);
 
         customerMenu = new JMenu("Customer");
@@ -63,10 +59,6 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getAddVehicle() {
         return addVehicle;
     }
-    public JMenuItem getDeleteVehicle() {
-        return deleteVehicle;
-    }
-    public JMenuItem getUpdateVehicle() {return updateVehicle;}
     public JMenuItem getCustomerMenu() {
         return customerMenu;
     }
@@ -82,7 +74,5 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getGarantyMenu() {
         return garantyMenu;
     }
-    public JMenuItem getShowListGaranty() {
-        return showListGaranty;
-    }
+    public JMenuItem getShowListGaranty() {return showListGaranty;}
 }
