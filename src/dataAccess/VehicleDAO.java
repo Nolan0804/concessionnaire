@@ -1,5 +1,6 @@
 package dataAccess;
 
+import exception.DataAccessException;
 import exception.InvalidInputException;
 import model.Vehicle;
 
@@ -7,9 +8,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface VehicleDAO {
-    void insertVehicle(Vehicle vehicle) throws SQLException;
-    List<Vehicle> getAllVehicles() throws SQLException, InvalidInputException;
-    Boolean vehicleExists(String vinNumber) throws SQLException;
-    void deleteVehicleVin(String vinNumber) throws SQLException;
-    void updateVehicle(Vehicle vehicle) throws SQLException;
+    void insertVehicle(Vehicle vehicle) throws DataAccessException;
+    List<Vehicle> getAllVehicles() throws DataAccessException, InvalidInputException;
+    Boolean vehicleExists(String vinNumber) throws DataAccessException;
+    void deleteVehicleVin(String vinNumber) throws DataAccessException;
+    void updateVehicle(Vehicle vehicle) throws DataAccessException;
 }

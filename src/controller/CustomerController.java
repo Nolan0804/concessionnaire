@@ -1,13 +1,15 @@
 package controller;
 
 import dataAccess.CustomerDBAccess;
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import model.Customer;
 import java.util.List;
 
 public class CustomerController {
     private CustomerDBAccess dao;
 
-    public CustomerController() {
+    public CustomerController() throws DataAccessException, InvalidInputException{
         try {
             dao = new CustomerDBAccess();
         } catch (Exception e) {
@@ -15,7 +17,7 @@ public class CustomerController {
         }
     }
 
-    public List<Customer> getAllCustomer() {
+    public List<Customer> getAllCustomer() throws DataAccessException, InvalidInputException {
         try {
             return dao.getAllCustomer();
         } catch (Exception e) {

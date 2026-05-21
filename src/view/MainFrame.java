@@ -1,52 +1,86 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 import view.components.*;
 import view.panels.*;
 
 public class MainFrame extends JFrame {
-    public MenuBarView menuBarView;
+    private HomePanel homePanel;
+    private  MenuBarView menuBarView;
     private JPanel container;
     private AddVehiclePanel addVehiclePanel;
+    private VehicleListPanel vehicleListPanel;
+
     public MainFrame() {
+
         super("Concessionnaire SiNo");
-        ImageIcon icon = new ImageIcon(
-                Objects.requireNonNull(MainFrame.class.getResource("/img/logo.png"))
-        );
-        this.setIconImage(icon.getImage());
+
         this.setSize(1080, 600);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setLocationRelativeTo(null);
 
+        // MENU
         menuBarView = new MenuBarView();
+
         setJMenuBar(menuBarView);
 
+        // CONTAINER PRINCIPAL
         container = new JPanel(new BorderLayout());
-        container.setBackground(new Color(212, 212, 212));
 
         add(container, BorderLayout.CENTER);
+
+        // PANELS
+        homePanel = new HomePanel();
+        vehicleListPanel = new VehicleListPanel();
+        addVehiclePanel = new AddVehiclePanel();
+
+        // HOME AU DEMARRAGE
+        showHome();
+
         this.setVisible(true);
     }
 
     public MenuBarView getmenuBarView() {
+
         return menuBarView;
+    }
+
+    public AddVehiclePanel getAddVehiclePanel() {
+
+        return addVehiclePanel;
+    }
+
+    // HOME
+    public void showHome() {
+
+        container.removeAll();
+
+        container.add(homePanel, BorderLayout.CENTER);
+
+        container.revalidate();
+
+        container.repaint();
     }
 
     public void showAddVehiclePanel() {
         container.removeAll();
-        addVehiclePanel = new AddVehiclePanel();
-        container.add(addVehiclePanel);
+        container.add(addVehiclePanel, BorderLayout.CENTER);
         container.revalidate();
         container.repaint();
     }
 
-    public void showDeleteVehicleDialogPanel() {
-        DeleteVehicleDialogPanel deleteVehicleDialogPanel = new DeleteVehicleDialogPanel(this);
-    }
-    public AddVehiclePanel getAddVehiclePanel() {
-        return addVehiclePanel;
+    public void showVehicleList() {
+        container.removeAll();
+        container.add(vehicleListPanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
     }
 
+    public VehicleListPanel getVehicleListPanel() {
+        return vehicleListPanel;
+    }
 }

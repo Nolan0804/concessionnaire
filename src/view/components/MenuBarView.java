@@ -4,42 +4,34 @@ import javax.swing.*;
 
 public class MenuBarView extends JMenuBar {
     private JMenuItem menu, exitApps, backHome;
-    private JMenuItem vehicleMenu, showListVehicle, deleteVehicle, updateVehicle, addVehicle;
-    private JMenuItem customerMenu, showListCustomer, addCustomer;
-    private JMenuItem saleMenu, showListSale, addSale;
+    private JMenuItem vehicleMenu, showListVehicle, addVehicle;
+    private JMenuItem customerMenu, showListCustomer;
+    private JMenuItem saleMenu, showListSale;
     private JMenuItem garantyMenu, showListGaranty;
 
     public MenuBarView() {
         menu = new JMenu("Menu");
-        backHome = new JMenuItem("Revenir à l'accueil");
-        exitApps = new JMenuItem("Quitter l'application");
+        backHome = new JMenuItem("Back to home");
+        exitApps = new JMenuItem("Leave the app");
         menu.add(backHome);
         menu.add(exitApps);
 
-        vehicleMenu = new JMenu("Voiture");
-        addVehicle = new JMenuItem("Ajouter une voiture");
-        deleteVehicle = new JMenuItem("Supprimer une voiture");
-        updateVehicle = new JMenuItem("Mettre à jour une voiture");
-        showListVehicle = new JMenuItem("Liste voitures");
+        vehicleMenu = new JMenu("Vehicle");
+        addVehicle = new JMenuItem("Add a car");
+        showListVehicle = new JMenuItem("List cars");
         vehicleMenu.add(addVehicle);
-        vehicleMenu.add(deleteVehicle);
-        vehicleMenu.add(updateVehicle);
         vehicleMenu.add(showListVehicle);
 
-        customerMenu = new JMenu("Client");
-        addCustomer = new JMenuItem("Ajouter un client");
-        showListCustomer = new JMenuItem("Liste clients");
-        customerMenu.add(addCustomer);
+        customerMenu = new JMenu("Customer");
+        showListCustomer = new JMenuItem("List customers");
         customerMenu.add(showListCustomer);
 
-        saleMenu = new JMenu("Vente");
-        addSale = new JMenuItem("Ajouter une vente");
+        saleMenu = new JMenu("Sale");
         showListSale = new JMenuItem("Liste ventes");
-        saleMenu.add(addSale);
         saleMenu.add(showListSale);
 
-        garantyMenu = new JMenu("Garanties");
-        showListGaranty = new JMenuItem("Voir liste garanties");
+        garantyMenu = new JMenu("Garanty");
+        showListGaranty = new JMenuItem("List garanties");
         garantyMenu.add(showListGaranty);
 
         add(menu);
@@ -67,18 +59,11 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getAddVehicle() {
         return addVehicle;
     }
-    public JMenuItem getDeleteVehicle() {
-        return deleteVehicle;
-    }
-    public JMenuItem getUpdateVehicle() {return updateVehicle;}
     public JMenuItem getCustomerMenu() {
         return customerMenu;
     }
     public JMenuItem getShowListCustomer() {
         return showListCustomer;
-    }
-    public JMenuItem getAddCustomer() {
-        return addCustomer;
     }
     public JMenuItem getSaleMenu() {
         return saleMenu;
@@ -86,13 +71,8 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getShowListSale() {
         return showListSale;
     }
-    public JMenuItem getAddSale() {
-        return addSale;
-    }
     public JMenuItem getGarantyMenu() {
         return garantyMenu;
     }
-    public JMenuItem getShowListGaranty() {
-        return showListGaranty;
-    }
+    public JMenuItem getShowListGaranty() {return showListGaranty;}
 }

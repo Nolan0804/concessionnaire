@@ -1,6 +1,6 @@
 package view.panels;
 
-import utils.LimitDocumentFilter;
+import view.utils.LimitDocumentFilter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +13,7 @@ public class DeleteVehicleDialogPanel extends JDialog {
     private JButton btnCancel;
 
     public DeleteVehicleDialogPanel(JFrame parent) {
-        super(parent, "Supprimer un véhicule", true);
+        super(parent, "Delete a car", true);
 
         setSize(450, 220);
         setLocationRelativeTo(parent);
@@ -31,7 +31,7 @@ public class DeleteVehicleDialogPanel extends JDialog {
         gbc.gridx = 0;
         gbc.gridy = 0;
 
-        JLabel lblVin = new JLabel("VIN du véhicule à supprimer :");
+        JLabel lblVin = new JLabel("Vehicle VIN to remove:");
         lblVin.setFont(new Font("Arial", Font.BOLD, 14));
         contentPanel.add(lblVin, gbc);
 
@@ -52,8 +52,8 @@ public class DeleteVehicleDialogPanel extends JDialog {
                         )
                 );
 
-        btnDelete = new JButton("Supprimer");
-        btnCancel = new JButton("Annuler");
+        btnDelete = new JButton("Delete");
+        btnCancel = new JButton("Cancel");
 
         buttonPanel.add(btnDelete);
         buttonPanel.add(btnCancel);
