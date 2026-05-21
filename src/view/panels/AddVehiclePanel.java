@@ -10,8 +10,8 @@ import javax.swing.text.AbstractDocument;
 
 import controller.CustomerController;
 import model.*;
-import utils.LimitDocumentFilter;
-import utils.NumberOnlyFilter;
+import view.utils.LimitDocumentFilter;
+import view.utils.NumberOnlyFilter;
 
 import controller.EnergyController;
 import controller.BrandController;

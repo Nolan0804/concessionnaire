@@ -1,6 +1,6 @@
 package view.panels;
 
-import utils.LimitDocumentFilter;
+import view.utils.LimitDocumentFilter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
