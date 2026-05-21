@@ -1,26 +1,22 @@
 package controller;
 
-import dataAccess.BrandDBAccess;
+import business.BrandBusiness;
+
+import exception.DataAccessException;
+import exception.InvalidInputException;
+
 import model.Brand;
+
 import java.util.List;
 
 public class BrandController {
-    private BrandDBAccess dao;
+    private BrandBusiness brandBusiness;
 
-    public BrandController() {
-        try {
-            dao = new BrandDBAccess();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public BrandController() throws DataAccessException, InvalidInputException {
+        brandBusiness = new BrandBusiness();
     }
 
-    public List<Brand> getAllBrand() {
-        try {
-            return dao.getAllBrand();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Brand> getAllBrand() throws DataAccessException, InvalidInputException {
+        return brandBusiness.getAllBrand();
     }
 }

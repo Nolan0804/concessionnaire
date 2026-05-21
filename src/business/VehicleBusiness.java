@@ -16,7 +16,6 @@ public class VehicleBusiness {
     }
 
     public List<Vehicle> getAllVehicle() throws Exception {
-
         return dao.getAllVehicles();
     }
 
@@ -31,7 +30,6 @@ public class VehicleBusiness {
                     "VIN invalide"
             );
         }
-
         dao.insertVehicle(vehicle);
     }
 
@@ -39,7 +37,6 @@ public class VehicleBusiness {
         if(vin == null || vin.trim().isEmpty()) {
             throw new Exception("VIN obligatoire");
         }
-
         dao.deleteVehicleVin(vin);
     }
 
@@ -49,7 +46,6 @@ public class VehicleBusiness {
                     "VIN obligatoire"
             );
         }
-
         return dao.vehicleExists(vin);
     }
 }

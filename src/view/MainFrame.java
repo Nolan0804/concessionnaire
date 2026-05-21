@@ -75,9 +75,7 @@ public class MainFrame extends JFrame {
 
 
     public DeleteVehicleDialogPanel showDeleteVehicleDialog() {
-        DeleteVehicleDialogPanel dialog = new DeleteVehicleDialogPanel(this);
-        dialog.setVisible(true);
-        return dialog;
+        return new DeleteVehicleDialogPanel(this);
     }
 
     public DeleteVehicleDialogPanel getDeleteVehicleDialog() {

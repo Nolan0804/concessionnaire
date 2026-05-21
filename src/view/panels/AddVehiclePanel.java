@@ -7,12 +7,14 @@ import java.time.Year;
 import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
-
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import controller.CustomerController;
 import model.*;
+import view.components.DialogMessage;
 import view.utils.LimitDocumentFilter;
 import view.utils.NumberOnlyFilter;
-
+import java.util.List;
 import controller.EnergyController;
 import controller.BrandController;
 import controller.GarantyController;
@@ -41,7 +43,7 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<String> cbColorType;
     private JComboBox<Customer> cbSaler;
     private JButton btnAdd;
-
+    private BrandController brandController;
     public AddVehiclePanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(230,230,230));
@@ -269,10 +271,19 @@ public class AddVehiclePanel extends JPanel {
     }
 
     private void loadBrand() {
-        BrandController controller = new BrandController();
+        try {
+            brandController = new BrandController();
+            List<Brand> brands = brandController.getAllBrand();
+            for(Brand brand : brands) {
+                cbBrand.addItem(brand);
+            }
 
-        for(Brand brand : controller.getAllBrand()) {
-            cbBrand.addItem(brand);
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Brand Error",
+                    e.getMessage()
+            );
         }
     }
 

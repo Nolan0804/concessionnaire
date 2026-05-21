@@ -2,13 +2,12 @@ package controller;
 
 import business.VehicleBusiness;
 import model.*;
+import view.components.DialogMessage;
 import view.utils.ValidForms;
 import view.MainFrame;
 import view.panels.AddVehiclePanel;
 import view.panels.DeleteVehicleDialogPanel;
-import view.panels.VehicleAdded;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -30,10 +29,19 @@ public class VehicleController {
                         dialog.dispose()
                 );
 
-        dialog.getBtnDelete()
-                .addActionListener(e ->
-                        deleteVehicle(dialog)
-                );
+        dialog.getBtnDelete().addActionListener(e -> {
+            try {
+                    deleteVehicle(dialog);
+                    DialogMessage.successMessage(view, "Vehicle", "Véhicule supprimé");
+                        dialog.dispose();
+                    } catch (Exception ex) {
+                    DialogMessage.errorMessage(
+                                view,
+                                "Vehicle",
+                                ex.getMessage()
+                        );
+                    }
+                });
     }
 
     private void addVehicle() {
@@ -41,32 +49,32 @@ public class VehicleController {
             AddVehiclePanel panel = view.getAddVehiclePanel();
 
             if(ValidForms.isEmpty(panel.getTxtVin().getText())) {
-                VehicleAdded.errorMessage(view, "VIN obligatoire");
+                DialogMessage.errorMessage(view, "VIN","VIN obligatoire");
                 return;
             }
 
             if(!ValidForms.isValidVIN(panel.getTxtVin().getText())) {
-                VehicleAdded.errorMessage(view, "Le VIN doit contenir 17 caractères");
+                DialogMessage.errorMessage(view, "VIN", "Le VIN doit contenir 17 caractères");
                 return;
             }
 
             if(!ValidForms.isPositiveDouble(panel.getTxtKilometer().getText())) {
-                VehicleAdded.errorMessage(view, "Kilométrage invalide");
+                DialogMessage.errorMessage(view, "Kilometer","Kilométrage invalide");
                 return;
             }
 
             if(!ValidForms.isPositiveDouble(panel.getTxtSalePrice().getText())) {
-                VehicleAdded.errorMessage(view, "Prix de vente invalide");
+                DialogMessage.errorMessage(view, "Sale Price", "Prix de vente invalide");
                 return;
             }
 
             if(!ValidForms.isPositiveDouble(panel.getTxtPurchasePrice().getText())) {
-                VehicleAdded.errorMessage(view, "Prix d'achat invalide");
+                DialogMessage.errorMessage(view, "Purshase Price", "Prix d'achat invalide");
                 return;
             }
 
             if(!ValidForms.isPositiveInteger(panel.getTxtPower().getText())) {
-                VehicleAdded.errorMessage(view, "Puissance invalide");
+                DialogMessage.errorMessage(view, "Power", "Puissance invalide");
                 return;
             }
 
@@ -143,67 +151,25 @@ public class VehicleController {
 
             VehicleBusiness business = new VehicleBusiness();
             business.addVehicle(vehicle);
-            new VehicleAdded();
+            new DialogMessage();
 
         } catch (Exception e) {
-            VehicleAdded.errorMessage(
+            DialogMessage.errorMessage(
                     view,
+                    "Add Vehicle",
                     e.getMessage()
             );
         }
     }
 
-    private void deleteVehicle(DeleteVehicleDialogPanel dialog) {
-        try {
-            String vin = dialog.getTxtVin().getText();
+    private void deleteVehicle(DeleteVehicleDialogPanel dialog) throws Exception {
+        String vin = dialog.getTxtVin().getText();
 
-            if(ValidForms.isEmpty(vin)) {
-                VehicleAdded.errorMessage(
-                        view,
-                        "VIN obligatoire"
-                );
-                return;
-            }
-
-            if(!ValidForms.isValidVIN(vin)) {
-                VehicleAdded.errorMessage(
-                        view,
-                        "VIN invalide"
-                );
-                return;
-            }
-
-            int confirm = JOptionPane.showConfirmDialog(
-                            view,
-                            "Supprimer le véhicule ?",
-                            "Confirmation",
-                            JOptionPane.YES_NO_OPTION
-                    );
-
-            if(confirm != JOptionPane.YES_OPTION) {
-                return;
-            }
-
-            VehicleBusiness business = new VehicleBusiness();
-            if(!business.vehicleExists(vin)) {
-                VehicleAdded.errorMessage(
-                        view,
-                        "Ce VIN n'existe pas"
-                );
-                return;
-            }
-
-            business.deleteVehicle(vin);
-            VehicleAdded.successMessage(
-                    view,
-                    "Véhicule supprimé"
-            );
-            dialog.dispose();
-        } catch (Exception e) {
-            VehicleAdded.errorMessage(
-                    view,
-                    e.getMessage()
-            );
+        if(ValidForms.isEmpty(vin)) {
+            throw new Exception("VIN obligatoire");
         }
+
+        VehicleBusiness business = new VehicleBusiness();
+        business.deleteVehicle(vin);
     }
 }

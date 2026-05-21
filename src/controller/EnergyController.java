@@ -2,7 +2,6 @@ package controller;
 
 import dataAccess.EnergyDBAccess;
 import model.Energy;
-
 import java.util.List;
 
 public class EnergyController {

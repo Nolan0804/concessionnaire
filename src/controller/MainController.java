@@ -20,12 +20,12 @@ public class MainController {
 
         view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
 
-        // ADD VEHICLE
         view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
 
         view.getmenuBarView().getDeleteVehicle().addActionListener(e -> {
                     DeleteVehicleDialogPanel dialog = view.showDeleteVehicleDialog();
                     vehicleController.initDeleteDialog(dialog);
+                    dialog.setVisible(true);
                 });
     }
 }

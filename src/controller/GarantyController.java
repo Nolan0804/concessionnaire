@@ -2,7 +2,6 @@ package controller;
 
 import dataAccess.GarantyDBAccess;
 import model.Garanty;
-
 import java.util.List;
 
 public class GarantyController {

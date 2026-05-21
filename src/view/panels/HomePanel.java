@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import view.components.Car;
+import model.Car;
 import view.components.CarThread;
 
 public class HomePanel extends JPanel {

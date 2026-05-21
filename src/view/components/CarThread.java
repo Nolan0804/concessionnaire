@@ -1,5 +1,6 @@
 package view.components;
 
+import model.Car;
 import view.panels.HomePanel;
 
 public class CarThread extends Thread {
