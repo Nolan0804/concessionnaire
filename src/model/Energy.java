@@ -11,9 +11,6 @@ public class Energy {
         this.isEcoFriendly = isEcoFriendly;
     }
 
-    public Boolean getEcoFriendly() {
-        return isEcoFriendly;
-    }
     public String getName() {
         return name;
     }

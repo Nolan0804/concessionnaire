@@ -10,16 +10,71 @@ public class Customer {
 
     public Customer(Integer customerNumber, String firstName, String lastName, String email, String phoneNumber,
             String address, LocalDate dateOfBirth, Locality locality) {
+        setCustomerNumber(customerNumber);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+        setAddress(address);
+        setDateOfBirth(dateOfBirth);
+        setLocality(locality);
+    }
+    public void setCustomerNumber(int customerNumber) {
+        if (customerNumber <= 0) {
+            throw new IllegalArgumentException("Customer number must be positive.");
+        }
         this.customerNumber = customerNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
-        this.locality = locality;
     }
 
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be empty.");
+        }
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be empty.");
+        }
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            throw new IllegalArgumentException("Invalid email format.");
+        }
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null ||
+                !phoneNumber.matches("^\\+[0-9]{9,15}$")) {
+            throw new IllegalArgumentException("Invalid phone number format.");
+        }
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("Address cannot be empty.");
+        }
+        this.address = address;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        if (dateOfBirth == null || dateOfBirth.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Invalid birth date.");
+        }
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setLocality(Locality locality) {
+        if (locality == null) {
+            throw new IllegalArgumentException("Locality cannot be empty.");
+        }
+        this.locality = locality;
+    }
 
     public Integer getCustomerNumber() {
         return customerNumber;

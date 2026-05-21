@@ -7,13 +7,19 @@ public class Locality {
 
     public Locality(String name, Integer postalCode, Country country) throws IllegalArgumentException {
         setName(name);
-        this.country = country;
+        setCountry(country);
         setPostalCode(postalCode);
     }
 
     public void setName(String name) throws IllegalArgumentException {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Le nom ne peux être null !");
+        }
+    }
+
+    public void setCountry(Country country) throws IllegalArgumentException {
+        if (country == null) {
+            throw new IllegalArgumentException("Le pays ne peux être null !");
         }
     }
 
