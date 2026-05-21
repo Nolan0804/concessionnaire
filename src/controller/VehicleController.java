@@ -10,6 +10,7 @@ import view.MainFrame;
 import java.util.List;
 import view.panels.*;
 
+import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -20,6 +21,10 @@ public class VehicleController {
         this.view = view;
         initController();
         loadVehicles();
+        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
+        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
+        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
+        refreshTable();
     }
 
     public void initController() {
@@ -166,5 +171,25 @@ public class VehicleController {
 
         VehicleBusiness business = new VehicleBusiness();
         business.deleteVehicle(vin);
+    }
+
+    private void refreshTable() {
+        try {
+            VehicleBusiness business = new VehicleBusiness();
+            String brand = (String) view.getSearchPanel().getBrandComboBox().getSelectedItem();
+            String energy = (String) view.getSearchPanel().getEnergyComboBox().getSelectedItem();
+            double kilometer = ((Number) view.getSearchPanel().getKilometerSpinner().getValue()).doubleValue();
+            List<Object[]> vehicles = business.searchVehicles(brand, energy, kilometer);
+            DefaultTableModel model = view.getSearchPanel().getTableModel();
+
+            model.setRowCount(0);
+
+            for (Object[] row : vehicles) {
+                model.addRow(row);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

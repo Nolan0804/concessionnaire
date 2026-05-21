@@ -48,10 +48,12 @@ public class VehicleBusiness {
 
     public boolean vehicleExists(String vin) throws Exception {
         if(vin == null || vin.trim().isEmpty()) {
-            throw new Exception(
-                    "VIN obligatoire"
-            );
+            throw new Exception("VIN obligatoire");
         }
         return dao.vehicleExists(vin);
+    }
+
+    public List<Object[]> searchVehicles(String brand, String energy, double maxKilometer) throws DataAccessException {
+        return dao.searchVehicles(brand, energy, maxKilometer);
     }
 }

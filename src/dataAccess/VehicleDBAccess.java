@@ -222,4 +222,38 @@ public class VehicleDBAccess implements VehicleDAO {
             throw new DataAccessException("DATA VEHICLE : Update impossible");
         }
     }
+
+    @Override
+    public List<Object[]> searchVehicles(String brandName, String energyType, double maxKilometer) throws DataAccessException {
+        List<Object[]> vehicles = new ArrayList<>();
+
+        try {
+            String sql = """
+            SELECT *
+            FROM vehicle_search_view
+            WHERE brand_name = ? AND energy = ? AND kilometer <= ?
+            """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, brandName);
+            statement.setString(2, energyType);
+            statement.setDouble(3, maxKilometer);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Object[] row = {
+                        rs.getString("vin"),
+                        rs.getInt("door_number"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("year_created"),
+                        rs.getBoolean("is_eco_friendly")
+                };
+                vehicles.add(row);
+            }
+
+            return vehicles;
+        } catch (SQLException e) {
+            throw new DataAccessException("DATA VEHICLE : Search impossible");
+        }
+    }
 }

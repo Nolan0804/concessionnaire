@@ -12,6 +12,7 @@ import exception.InvalidInputException;
 import controller.CustomerController;
 import model.*;
 import view.components.DialogMessage;
+import view.utils.ComboBoxUtils;
 import view.utils.LimitDocumentFilter;
 import view.utils.NumberOnlyFilter;
 import java.util.List;
@@ -125,14 +126,43 @@ public class AddVehiclePanel extends JPanel {
         cbGearBox.addItem("Automatic");
         cbGearBox.addItem("Manual");
 
-        cbGaranty = new JComboBox<>();
-        loadGaranty();
+        cbGaranty = new JComboBox<Garanty>();
+        try {
+            GarantyController garantyController = new GarantyController();
+            ComboBoxUtils.loadComboBox(cbGaranty, garantyController.getAllGaranty());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Energy Error",
+                    e.getMessage()
+            );
+        }
 
-        cbEnergy = new JComboBox<>();
-        loadEnergy();
+        cbEnergy = new JComboBox<Energy>();
+        try {
+            EnergyController energyController = new EnergyController();
+            ComboBoxUtils.loadComboBox(cbEnergy, energyController.getAllEnergy());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Energy Error",
+                    e.getMessage()
+            );
+        }
 
         cbBrand = new JComboBox<>();
-        loadBrand();
+        try {
+            BrandController brandController = new BrandController();
+            ComboBoxUtils.loadComboBox(cbBrand, brandController.getAllBrand());
+
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Brand Error",
+                    e.getMessage()
+            );
+        }
+
 
         cbState = new JComboBox<>();
         cbState.addItem("New");
@@ -150,11 +180,19 @@ public class AddVehiclePanel extends JPanel {
         cbColorType.addItem("Metallic");
         cbColorType.addItem("Pearlescent");
 
-        cbSaler = new JComboBox<>();
-        loadCustomer();
+        cbSaler = new JComboBox<Customer>();
+        try {
+            CustomerController customerController = new CustomerController();
+            ComboBoxUtils.loadComboBox(cbSaler, customerController.getAllCustomer());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Brand Error",
+                    e.getMessage()
+            );
+        }
 
         btnAdd = new JButton("Ajouter");
-
         btnAdd.setPreferredSize(new Dimension(140,40));
 
         int y = 0;
@@ -253,160 +291,72 @@ public class AddVehiclePanel extends JPanel {
         panel.add(component, gbc);
     }
 
-    private void loadCustomer() {
-        try {
-            CustomerController controller = new CustomerController();
-
-            for(Customer customer : controller.getAllCustomer()) {
-                cbSaler.addItem(customer);
-            }
-        } catch (DataAccessException | InvalidInputException e) {
-            DialogMessage.errorMessage(
-                    this,
-                    "Loading Cutsomer Error",
-                    e.getMessage()
-            );
-        }
-    }
-
-
-    private void loadGaranty() {
-        try {
-            GarantyController controller = new GarantyController();
-
-            for(Garanty garanty : controller.getAllGaranty()) {
-                cbGaranty.addItem(garanty);
-            }
-        } catch (DataAccessException | InvalidInputException e) {
-            DialogMessage.errorMessage(
-                    this,
-                    "Loading Garanty Error",
-                    e.getMessage()
-            );
-        }
-    }
-
-    private void loadBrand() {
-        try {
-            BrandController brandController = new BrandController();
-
-            List<Brand> brands = brandController.getAllBrand();
-            for(Brand brand : brands) {
-                cbBrand.addItem(brand);
-            }
-        } catch (DataAccessException | InvalidInputException e) {
-            DialogMessage.errorMessage(
-                    this,
-                    "Loading Brand Error",
-                    e.getMessage()
-            );
-        }
-    }
-
-    private void loadEnergy() {
-        try {
-            EnergyController controller = new EnergyController();
-
-            for(Energy energy : controller.getAllEnergy()) {
-                cbEnergy.addItem(energy);
-            }
-        } catch (DataAccessException | InvalidInputException e) {
-            DialogMessage.errorMessage(
-                    this,
-                    "Loading Energy Error",
-                    e.getMessage()
-            );
-        }
-    }
-
     public JTextField getTxtVin() {
         return txtVin;
     }
-
     public JTextField getTxtKilometer() {
         return txtKilometer;
     }
-
     public JTextField getTxtSalePrice() {
         return txtSalePrice;
     }
-
     public JTextField getTxtPurchasePrice() {
         return txtPurchasePrice;
     }
-
     public JTextField getTxtRegistration() {
         return txtRegistration;
     }
-
     public JTextField getTxtPower() {
         return txtPower;
     }
-
     public JTextField getTxtHexColor() {
         return txtHexColor;
     }
-
     public JTextArea getTxtInformation() {
         return txtInformation;
     }
-
     public JSpinner getSpArrivalDate() {
         return spArrivalDate;
     }
-
     public JSpinner getSpGearNumber() {
         return spGearNumber;
     }
-
     public JSpinner getSpDoorNumber() {
         return spDoorNumber;
     }
-
     public JSpinner getSpSeatNumber() {
         return spSeatNumber;
     }
-
     public JSpinner getSpEuroStandard() {
         return spEuroStandard;
     }
-
     public JSpinner getSpProductionYear() {
         return spProductionYear;
     }
-
     public JCheckBox getChkVatDeductible() {
         return chkVatDeductible;
     }
-
     public JComboBox<String> getCbGearBox() {
         return cbGearBox;
     }
-
     public JComboBox<Garanty> getCbGaranty() {
         return cbGaranty;
     }
-
     public JComboBox<Energy> getCbEnergy() {
         return cbEnergy;
     }
-
     public JComboBox<Brand> getCbBrand() {
         return cbBrand;
     }
-
     public JComboBox<String> getCbState() {
         return cbState;
     }
-
     public JComboBox<String> getCbColorType() {
         return cbColorType;
     }
-
     public JComboBox<Customer> getCbSaler() {
         return cbSaler;
     }
-
     public JButton getBtnAdd() {
         return btnAdd;
     }

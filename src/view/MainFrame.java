@@ -11,6 +11,7 @@ public class MainFrame extends JFrame {
     private  MenuBarView menuBarView;
     private JPanel container;
     private AddVehiclePanel addVehiclePanel;
+    private SearchPanelKilometerBrandEnergy searchPanel;
     private VehicleListPanel vehicleListPanel;
 
     public MainFrame() {
@@ -28,6 +29,7 @@ public class MainFrame extends JFrame {
         homePanel = new HomePanel();
         vehicleListPanel = new VehicleListPanel();
         addVehiclePanel = new AddVehiclePanel();
+        searchPanel = new SearchPanelKilometerBrandEnergy();
 
         showHome();
         this.setVisible(true);
@@ -36,10 +38,18 @@ public class MainFrame extends JFrame {
     public MenuBarView getmenuBarView() {return menuBarView;}
 
     public AddVehiclePanel getAddVehiclePanel() {return addVehiclePanel;}
+    public SearchPanelKilometerBrandEnergy getSearchPanel() {return searchPanel;}
 
     public void showHome() {
         container.removeAll();
         container.add(homePanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
+    }
+
+    public void showSearchPanel() {
+        container.removeAll();
+        container.add(searchPanel, BorderLayout.CENTER);
         container.revalidate();
         container.repaint();
     }

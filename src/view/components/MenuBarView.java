@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MenuBarView extends JMenuBar {
     private JMenuItem menu, exitApps, backHome;
-    private JMenuItem vehicleMenu, showListVehicle, addVehicle;
+    private JMenuItem vehicleMenu, showListVehicle, searchVehicleKilometerBrandEnergy, addVehicle;
     private JMenuItem customerMenu, showListCustomer;
     private JMenuItem saleMenu, showListSale;
     private JMenuItem garantyMenu, showListGaranty;
@@ -19,8 +19,10 @@ public class MenuBarView extends JMenuBar {
         vehicleMenu = new JMenu("Vehicle");
         addVehicle = new JMenuItem("Add a car");
         showListVehicle = new JMenuItem("List cars");
+        searchVehicleKilometerBrandEnergy = new JMenuItem("Search cars by kilometer brand energy");
         vehicleMenu.add(addVehicle);
         vehicleMenu.add(showListVehicle);
+        vehicleMenu.add(searchVehicleKilometerBrandEnergy);
 
         customerMenu = new JMenu("Customer");
         showListCustomer = new JMenuItem("List customers");
@@ -68,6 +70,7 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getSaleMenu() {
         return saleMenu;
     }
+    public JMenuItem getSearchVehicleKilometerBrandEnergy() {return searchVehicleKilometerBrandEnergy;}
     public JMenuItem getShowListSale() {
         return showListSale;
     }
