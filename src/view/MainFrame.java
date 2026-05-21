@@ -14,55 +14,33 @@ public class MainFrame extends JFrame {
     private VehicleListPanel vehicleListPanel;
 
     public MainFrame() {
-
         super("Concessionnaire SiNo");
-
         this.setSize(1080, 600);
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         this.setLocationRelativeTo(null);
 
-        // MENU
         menuBarView = new MenuBarView();
-
         setJMenuBar(menuBarView);
 
-        // CONTAINER PRINCIPAL
         container = new JPanel(new BorderLayout());
-
         add(container, BorderLayout.CENTER);
 
-        // PANELS
         homePanel = new HomePanel();
         vehicleListPanel = new VehicleListPanel();
         addVehiclePanel = new AddVehiclePanel();
 
-        // HOME AU DEMARRAGE
         showHome();
-
         this.setVisible(true);
     }
 
-    public MenuBarView getmenuBarView() {
+    public MenuBarView getmenuBarView() {return menuBarView;}
 
-        return menuBarView;
-    }
+    public AddVehiclePanel getAddVehiclePanel() {return addVehiclePanel;}
 
-    public AddVehiclePanel getAddVehiclePanel() {
-
-        return addVehiclePanel;
-    }
-
-    // HOME
     public void showHome() {
-
         container.removeAll();
-
         container.add(homePanel, BorderLayout.CENTER);
-
         container.revalidate();
-
         container.repaint();
     }
 

@@ -14,12 +14,10 @@ public class VehicleListPanel extends JPanel {
     private DefaultTableModel model;
     public VehicleListPanel() {
         setLayout(new BorderLayout());
-
         initComponents();
     }
 
     private void initComponents() {
-
         String[] columns = {
                 "VIN",
                 "Brand",

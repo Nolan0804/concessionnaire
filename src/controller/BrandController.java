@@ -6,7 +6,6 @@ import exception.DataAccessException;
 import exception.InvalidInputException;
 
 import model.Brand;
-
 import java.util.List;
 
 public class BrandController {

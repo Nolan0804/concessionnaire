@@ -1,16 +1,12 @@
 package controller;
 
 import view.MainFrame;
-import view.panels.DeleteVehicleDialogPanel;
 import view.components.DialogMessage;
 import exception.*;
 
 public class MainController {
-
     private final MainFrame view;
 
-    private VehicleController vehicleController;
-    private DeleteVehicleDialogPanel dialog;
     public MainController(MainFrame view) {
         this.view = view;
         initController();
