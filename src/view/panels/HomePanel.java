@@ -36,7 +36,13 @@ public class HomePanel extends JPanel {
 
         g.setColor(Color.BLUE);
         g.setFont(new Font("Arial", Font.BOLD, 32));
-        g.drawString("Bienvenue chez Concessionnaire SiNo", 250, 40);
+
+        String text = "Welcome cardealer";
+        FontMetrics fm = g.getFontMetrics();
+        int x = (getWidth() - fm.stringWidth(text)) / 2;
+        int y = (getHeight() - fm.getHeight()) / 2 + fm.getAscent();
+
+        g.drawString(text, x, y);
 
         for (Car car : cars) {
             g.setColor(car.getColor());

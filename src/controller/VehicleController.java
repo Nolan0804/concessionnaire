@@ -25,8 +25,15 @@ public class VehicleController {
     }
 
     public void initDeleteDialog(DeleteVehicleDialogPanel dialog) {
-        dialog.getBtnCancel().addActionListener(e -> dialog.dispose());
-        dialog.getBtnDelete().addActionListener(e -> deleteVehicle(dialog));
+        dialog.getBtnCancel()
+                .addActionListener(e ->
+                        dialog.dispose()
+                );
+
+        dialog.getBtnDelete()
+                .addActionListener(e ->
+                        deleteVehicle(dialog)
+                );
     }
 
     private void addVehicle() {

@@ -7,14 +7,11 @@ import view.components.*;
 import view.panels.*;
 
 public class MainFrame extends JFrame {
-
     private HomePanel homePanel;
-
-    public MenuBarView menuBarView;
-
+    private  MenuBarView menuBarView;
     private JPanel container;
-
     private AddVehiclePanel addVehiclePanel;
+    private DeleteVehicleDialogPanel deleteVehicleDialog;
 
     public MainFrame() {
 
@@ -69,21 +66,21 @@ public class MainFrame extends JFrame {
         container.repaint();
     }
 
-    // ADD VEHICLE
     public void showAddVehiclePanel() {
-
         container.removeAll();
-
         container.add(addVehiclePanel, BorderLayout.CENTER);
-
         container.revalidate();
-
         container.repaint();
     }
 
-    // DELETE
-    public void showDeleteVehicleDialogPanel() {
 
-        new DeleteVehicleDialogPanel(this);
+    public DeleteVehicleDialogPanel showDeleteVehicleDialog() {
+        DeleteVehicleDialogPanel dialog = new DeleteVehicleDialogPanel(this);
+        dialog.setVisible(true);
+        return dialog;
+    }
+
+    public DeleteVehicleDialogPanel getDeleteVehicleDialog() {
+        return deleteVehicleDialog;
     }
 }

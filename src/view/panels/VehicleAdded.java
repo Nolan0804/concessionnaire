@@ -7,8 +7,8 @@ public class VehicleAdded extends JOptionPane {
         super();
         this.showMessageDialog(
                 null,
-                "Véhicule ajouté avec succès !",
-                "Succès",
+                "Vehicle added successfully!",
+                "Success",
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
