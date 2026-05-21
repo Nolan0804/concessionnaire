@@ -43,7 +43,7 @@ public class AddVehiclePanel extends JPanel {
     private JComboBox<String> cbColorType;
     private JComboBox<Customer> cbSaler;
     private JButton btnAdd;
-    private BrandController brandController;
+
     public AddVehiclePanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(230,230,230));
@@ -254,30 +254,46 @@ public class AddVehiclePanel extends JPanel {
     }
 
     private void loadCustomer() {
-        CustomerController controller = new CustomerController();
+        try {
+            CustomerController controller = new CustomerController();
 
-        for(Customer customer : controller.getAllCustomer()) {
-            cbSaler.addItem(customer);
+            for(Customer customer : controller.getAllCustomer()) {
+                cbSaler.addItem(customer);
+            }
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Cutsomer Error",
+                    e.getMessage()
+            );
         }
     }
 
 
     private void loadGaranty() {
-        GarantyController controller = new GarantyController();
+        try {
+            GarantyController controller = new GarantyController();
 
-        for(Garanty garanty : controller.getAllGaranty()) {
-            cbGaranty.addItem(garanty);
+            for(Garanty garanty : controller.getAllGaranty()) {
+                cbGaranty.addItem(garanty);
+            }
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Garanty Error",
+                    e.getMessage()
+            );
         }
     }
 
     private void loadBrand() {
         try {
-            brandController = new BrandController();
+            BrandController brandController = new BrandController();
+
             List<Brand> brands = brandController.getAllBrand();
             for(Brand brand : brands) {
                 cbBrand.addItem(brand);
             }
-
         } catch (DataAccessException | InvalidInputException e) {
             DialogMessage.errorMessage(
                     this,
@@ -288,10 +304,18 @@ public class AddVehiclePanel extends JPanel {
     }
 
     private void loadEnergy() {
-        EnergyController controller = new EnergyController();
+        try {
+            EnergyController controller = new EnergyController();
 
-        for(Energy energy : controller.getAllEnergy()) {
-            cbEnergy.addItem(energy);
+            for(Energy energy : controller.getAllEnergy()) {
+                cbEnergy.addItem(energy);
+            }
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Energy Error",
+                    e.getMessage()
+            );
         }
     }
 

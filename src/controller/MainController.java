@@ -11,20 +11,41 @@ public class MainController {
     private DeleteVehicleDialogPanel dialog;
     public MainController(MainFrame view) {
         this.view = view;
-        vehicleController = new VehicleController(view);
         initController();
     }
 
     private void initController() {
-        view.getmenuBarView().getExitApps().addActionListener(e -> System.exit(0));
 
-        view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
+        vehicleController =
+                new VehicleController(view);
 
-        view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
+        view.getmenuBarView()
+                .getExitApps()
+                .addActionListener(e ->
+                        System.exit(0)
+                );
 
-        view.getmenuBarView().getDeleteVehicle().addActionListener(e -> {
-                    DeleteVehicleDialogPanel dialog = view.showDeleteVehicleDialog();
+        view.getmenuBarView()
+                .getBackHome()
+                .addActionListener(e ->
+                        view.showHome()
+                );
+
+        view.getmenuBarView()
+                .getAddVehicle()
+                .addActionListener(e ->
+                        view.showAddVehiclePanel()
+                );
+
+        view.getmenuBarView()
+                .getDeleteVehicle()
+                .addActionListener(e -> {
+
+                    DeleteVehicleDialogPanel dialog =
+                            view.showDeleteVehicleDialog();
+
                     vehicleController.initDeleteDialog(dialog);
+
                     dialog.setVisible(true);
                 });
     }

@@ -1,6 +1,8 @@
 package controller;
 
 import business.VehicleBusiness;
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import model.*;
 import view.components.DialogMessage;
 import view.utils.ValidForms;
@@ -14,16 +16,20 @@ import java.util.Date;
 public class VehicleController {
     private final MainFrame view;
 
-    public VehicleController(MainFrame view) {
+    public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
         initController();
     }
 
-    private void initController() {
-        view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> addVehicle());
+    public void initController() {
+        view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
+            try {
+                addVehicle();
+            } catch (DataAccessException | InvalidInputException ex) {
+                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());}});
     }
 
-    public void initDeleteDialog(DeleteVehicleDialogPanel dialog) {
+    public void initDeleteDialog(DeleteVehicleDialogPanel dialog) throws DataAccessException, InvalidInputException{
         dialog.getBtnCancel()
                 .addActionListener(e ->
                         dialog.dispose()
@@ -44,7 +50,7 @@ public class VehicleController {
                 });
     }
 
-    private void addVehicle() {
+    private void addVehicle() throws DataAccessException, InvalidInputException {
         try {
             AddVehiclePanel panel = view.getAddVehiclePanel();
 

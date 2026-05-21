@@ -1,13 +1,15 @@
 package controller;
 
 import dataAccess.EnergyDBAccess;
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import model.Energy;
 import java.util.List;
 
 public class EnergyController {
     private EnergyDBAccess dao;
 
-    public EnergyController() {
+    public EnergyController() throws DataAccessException, InvalidInputException {
         try {
             dao = new EnergyDBAccess();
         } catch (Exception e) {
@@ -15,7 +17,7 @@ public class EnergyController {
         }
     }
 
-    public List<Energy> getAllEnergy() {
+    public List<Energy> getAllEnergy() throws DataAccessException, InvalidInputException{
         try {
             return dao.getAllEnergy();
         } catch (Exception e) {

@@ -1,13 +1,15 @@
 package controller;
 
 import dataAccess.GarantyDBAccess;
+import exception.DataAccessException;
+import exception.InvalidInputException;
 import model.Garanty;
 import java.util.List;
 
 public class GarantyController {
     private GarantyDBAccess dao;
 
-    public GarantyController() {
+    public GarantyController() throws DataAccessException, InvalidInputException{
         try {
             dao = new GarantyDBAccess();
         } catch (Exception e) {
@@ -15,7 +17,7 @@ public class GarantyController {
         }
     }
 
-    public List<Garanty> getAllGaranty() {
+    public List<Garanty> getAllGaranty() throws DataAccessException, InvalidInputException {
         try {
             return dao.getAllGaranty();
         } catch (Exception e) {
