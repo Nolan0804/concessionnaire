@@ -3,14 +3,21 @@ package controller;
 import view.MainFrame;
 import view.components.DialogMessage;
 import exception.*;
-import view.panels.SearchPanelKilometerBrandEnergy;
-import java.util.List;
 
 public class MainController {
     private final MainFrame view;
 
     public MainController(MainFrame view) {
         this.view = view;
+        try {
+            new VehicleController(view);
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    view,
+                    "Vehicle Controller Error",
+                    e.getMessage()
+            );
+        }
         initController();
     }
 

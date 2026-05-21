@@ -14,7 +14,6 @@ public class Brand {
         this.originCountry = originCountry;
     }
 
-    // Setter
     public void setName(String name) throws InvalidInputException {
         if (name == null || name.isEmpty()) {
             throw new InvalidInputException("Nom de la marque vide");

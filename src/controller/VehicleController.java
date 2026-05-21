@@ -20,7 +20,6 @@ public class VehicleController {
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
         initController();
-        loadVehicles();
         view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
@@ -175,11 +174,13 @@ public class VehicleController {
 
     private void refreshTable() {
         try {
-            VehicleBusiness business = new VehicleBusiness();
-            String brand = (String) view.getSearchPanel().getBrandComboBox().getSelectedItem();
-            String energy = (String) view.getSearchPanel().getEnergyComboBox().getSelectedItem();
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+            Brand brand = (Brand) view.getSearchPanel().getBrandComboBox().getSelectedItem();
+            Energy energy = (Energy) view.getSearchPanel().getEnergyComboBox().getSelectedItem();
             double kilometer = ((Number) view.getSearchPanel().getKilometerSpinner().getValue()).doubleValue();
-            List<Object[]> vehicles = business.searchVehicles(brand, energy, kilometer);
+
+            List<Object[]> vehicles = vehicleBusiness.searchVehicles(brand.getName(), energy.getName(), kilometer);
+
             DefaultTableModel model = view.getSearchPanel().getTableModel();
 
             model.setRowCount(0);
