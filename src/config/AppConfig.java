@@ -8,6 +8,7 @@ public class AppConfig {
             "Metallic",
             "Pearlescent"
     };
+
     public static final String[] GEARBOX_TYPES = {
             "Automatic",
             "Manual"

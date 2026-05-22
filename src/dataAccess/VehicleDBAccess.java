@@ -237,14 +237,14 @@ public class VehicleDBAccess implements VehicleDAO {
                         rs.getBoolean("is_vat_deductible"),
 
                         new Garanty(
-                                rs.getString("garanty_type"),
+                                rs.getString("garanty_name"),
                                 rs.getInt("garanty_duration")
                         ),
                         rs.getString("hex_color"),
                         rs.getString("type_color"),
 
                         new Energy(
-                                rs.getString("energy_type"),
+                                rs.getString("energy_name"),
                                 rs.getBoolean("is_eco_friendly")
                         ),
 
