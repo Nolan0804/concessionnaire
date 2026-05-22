@@ -1,10 +1,15 @@
 package view.panels;
 
+import com.sun.management.GarbageCollectionNotificationInfo;
+import controller.BrandController;
+import controller.GarantyController;
 import model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import config.AppConfig;
+import view.components.DialogMessage;
+import view.utils.ComboBoxUtils;
 
 public class UpdateVehiclePanel extends JPanel {
 
@@ -99,23 +104,23 @@ public class UpdateVehiclePanel extends JPanel {
 
         formPanel.add(cbState);
 
-        /*
-         * GARANTY
-         */
+        // TODO : get all garanty
 
         formPanel.add(new JLabel("Garanty"));
-
-        cbGaranty =
-                new JComboBox<>();
-
-        cbGaranty.addItem(
-                vehicle.getGaranty()
-        );
-
-        cbGaranty.setSelectedItem(
-                vehicle.getGaranty()
-        );
-
+        cbGaranty = new JComboBox<Garanty>();
+        try {
+            GarantyController garantyController = new GarantyController();
+            ComboBoxUtils.loadComboBox(cbGaranty, garantyController.getAllGaranty());
+            System.out.println(garantyController.getAllGaranty());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Garanty Error",
+                    e.getMessage()
+            );
+        }
+        System.out.println("Selected garanty : " + vehicle.getGaranty());
+        cbGaranty.setSelectedItem(vehicle.getGaranty());
         formPanel.add(cbGaranty);
 
         /*

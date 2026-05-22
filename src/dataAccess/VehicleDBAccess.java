@@ -194,7 +194,7 @@ public class VehicleDBAccess implements VehicleDAO {
 
                         new Garanty(
                                 rs.getString("garanty_type"),
-                                0
+                                24
                         ),
 
                         rs.getString("hex_color"),

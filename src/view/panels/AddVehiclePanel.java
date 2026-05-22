@@ -7,6 +7,8 @@ import java.time.Year;
 import java.util.Date;
 import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
+
+import config.AppConfig;
 import exception.DataAccessException;
 import exception.InvalidInputException;
 import controller.CustomerController;
@@ -122,9 +124,7 @@ public class AddVehiclePanel extends JPanel {
         chkVatDeductible = new JCheckBox("VAT deductible");
         chkVatDeductible.setBackground(Color.WHITE);
 
-        cbGearBox = new JComboBox<>();
-        cbGearBox.addItem("Automatic");
-        cbGearBox.addItem("Manual");
+        cbGearBox = new JComboBox<>(AppConfig.GEARBOX_TYPES);
 
         cbGaranty = new JComboBox<Garanty>();
         try {
@@ -164,21 +164,10 @@ public class AddVehiclePanel extends JPanel {
         }
 
 
-        cbState = new JComboBox<>();
-        cbState.addItem("New");
-        cbState.addItem("Excellent");
-        cbState.addItem("Good");
-        cbState.addItem("Average");
-        cbState.addItem("Damaged");
-
+        cbState = new JComboBox<>(AppConfig.VEHICLE_STATES);
         txtHexColor = new JTextField("#000000");
+        cbColorType = new JComboBox<>(AppConfig.COLOR_TYPES);
 
-        cbColorType = new JComboBox<>();
-        cbColorType.addItem("Glossy");
-        cbColorType.addItem("Matte");
-        cbColorType.addItem("Satin");
-        cbColorType.addItem("Metallic");
-        cbColorType.addItem("Pearlescent");
 
         cbSaler = new JComboBox<Customer>();
         try {

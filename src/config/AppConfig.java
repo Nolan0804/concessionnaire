@@ -1,7 +1,5 @@
 package config;
 
-import javax.swing.*;
-
 public class AppConfig {
     public static final String[] COLOR_TYPES = {
             "Glossy",
