@@ -14,9 +14,6 @@ public class Garanty {
     public String getType() {
         return type;
     }
-    public Integer getDurationInMonths() {
-        return durationInMonths;
-    }
 
     public void setType(String type) throws InvalidInputException{
         if (type == null || type.isEmpty()) {

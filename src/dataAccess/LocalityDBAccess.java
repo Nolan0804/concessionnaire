@@ -41,6 +41,7 @@ public class LocalityDBAccess implements LocalityDAO {
                 Country country = new Country(
                         rs.getString("country_name")
                 );
+
                 return new Locality(
                         rs.getString("name"),
                         rs.getInt("postal_code"),

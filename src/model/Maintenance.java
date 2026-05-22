@@ -14,9 +14,15 @@ public class Maintenance {
         setDescription(description);
         setAnnotation(annotation);
         setKilometer(kilometer);
-        this.vehicle = vehicle;
+        setVehicle(vehicle);
     }
 
+    public void setVehicle(Vehicle vehicle) {
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Le véhicule ne peut pas être nul.");
+        }
+        this.vehicle = vehicle;
+    }
     public void setDate(LocalDate date) {
         if (date == null) {
             throw new IllegalArgumentException("La date ne peut pas être nulle.");

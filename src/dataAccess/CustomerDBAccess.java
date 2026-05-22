@@ -36,7 +36,7 @@ public class CustomerDBAccess implements CustomerDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                Locality locality;
+                Locality locality = localityDAO.getLocalityByCodeLocality(rs.getInt("postal_code"), rs.getString("locality_name"));
 
                 Customer customer = new Customer(
                         rs.getInt("customer_number"),
@@ -46,7 +46,7 @@ public class CustomerDBAccess implements CustomerDAO {
                         rs.getString("phone_number"),
                         rs.getString("address"),
                         rs.getDate("birthday_date").toLocalDate(),
-                        localityDAO.getLocalityByCodeLocality(rs.getInt("postal_code"), rs.getString("locality_name"))
+                        locality
                 );
                 customers.add(customer);
             }

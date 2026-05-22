@@ -1,12 +1,11 @@
 package dataAccess;
 import exception.DataAccessException;
 import exception.InvalidInputException;
-import model.Vehicle;
-import model.Garanty;
-import model.Energy;
-import model.Brand;
+import model.*;
 
+import java.awt.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,6 +160,132 @@ public class VehicleDBAccess implements VehicleDAO {
             throw new DataAccessException("DATA VEHICLE : Exists impossible");
         }
     }
+    @Override
+    public Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException{
+        try {
+            String sql = """
+                SELECT
+                    v.*,
+                
+                    g.type AS garanty_type,
+                    g.duration AS garanty_duration,
+                
+                    e.type AS energy_type,
+                    e.is_eco_friendly,
+        
+                    b.name AS brand_name,
+                    b.year_created,
+                    b.origin_country,
+                
+                    c.customer_number,
+                    c.name AS customer_name,
+                    c.firstname,
+                    c.email,
+                    c.phone_number,
+                    c.address,
+                    c.birthday_date,
+                
+                    l.name AS locality_name,
+                    l.postal_code,
+                
+                    co.name AS country_name
+                
+                FROM vehicle v
+                
+                JOIN garanty g
+                    ON v.garanty_type = g.type
+                
+                JOIN energy e
+                    ON v.energy = e.type
+                
+                JOIN brand b
+                    ON v.brand_name = b.name
+                
+                JOIN customer c
+                    ON v.saler = c.customer_number
+                
+                JOIN locality l
+                    ON c.locality_name = l.name
+                   AND c.postal_code = l.postal_code
+                
+                JOIN country co
+                    ON l.country_name = co.name
+                
+                WHERE v.vin = ?
+            """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, vin);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return new Vehicle(
+                        rs.getString("vin"),
+                        rs.getDouble("kilometer"),
+                        rs.getDate("arrival_date").toLocalDate(),
+                        rs.getDouble("sale_price"),
+                        rs.getDouble("purchase_price"),
+                        rs.getString("registration"),
+                        rs.getInt("power"),
+                        rs.getString("gear_box_type"),
+                        rs.getInt("gear_number"),
+                        rs.getInt("door_number"),
+                        rs.getInt("seat_number"),
+                        rs.getString("information"),
+                        rs.getInt("euro_standard"),
+                        rs.getInt("production_year"),
+                        rs.getBoolean("is_vat_deductible"),
+
+                        new Garanty(
+                                rs.getString("garanty_name"),
+                                rs.getInt("garanty_duration")
+                        ),
+                        rs.getString("hex_color"),
+                        rs.getString("type_color"),
+
+                        new Energy(
+                                rs.getString("energy_name"),
+                                rs.getBoolean("is_eco_friendly")
+                        ),
+
+                        new Brand(
+                                rs.getString("brand_name"),
+                                rs.getInt("year_created"),
+
+                                new Country(
+                                        rs.getString("origin_country")
+                                )
+                        ),
+
+                        rs.getString("state"),
+
+                        new Customer(
+                                rs.getInt("customer_number"),
+                                rs.getString("customer_name"),
+                                rs.getString("firstname"),
+                                rs.getString("email"),
+                                rs.getString("phone_number"),
+                                rs.getString("address"),
+                                rs.getDate("birthday_date").toLocalDate(),
+
+                                new Locality(
+                                        rs.getString("locality_name"),
+                                        rs.getInt("postal_code"),
+
+                                        new Country(
+                                                rs.getString("country_name")
+                                        )
+                                )
+                        )
+                );
+            } else {
+                throw new InvalidInputException("Vehicle with VIN " + vin + " not found.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+    };
+
 
     @Override
     public void updateVehicle(Vehicle vehicle) throws DataAccessException {
@@ -220,6 +345,40 @@ public class VehicleDBAccess implements VehicleDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DataAccessException("DATA VEHICLE : Update impossible");
+        }
+    }
+
+    @Override
+    public List<Object[]> searchVehicles(String brandName, String energyType, double maxKilometer) throws DataAccessException {
+        List<Object[]> vehicles = new ArrayList<>();
+
+        try {
+            String sql = """
+            SELECT *
+            FROM vehicle_search_view
+            WHERE brand_name = ? AND energy = ? AND kilometer <= ?
+            """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, brandName);
+            statement.setString(2, energyType);
+            statement.setDouble(3, maxKilometer);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Object[] row = {
+                        rs.getString("vin"),
+                        rs.getInt("door_number"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("year_created"),
+                        rs.getBoolean("is_eco_friendly")
+                };
+                vehicles.add(row);
+            }
+
+            return vehicles;
+        } catch (SQLException e) {
+            throw new DataAccessException("DATA VEHICLE : Search impossible");
         }
     }
 }

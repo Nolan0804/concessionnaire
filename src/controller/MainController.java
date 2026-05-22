@@ -1,25 +1,30 @@
 package controller;
 
 import view.MainFrame;
-import view.panels.DeleteVehicleDialogPanel;
 import view.components.DialogMessage;
 import exception.*;
 
 public class MainController {
-
     private final MainFrame view;
 
-    private VehicleController vehicleController;
-    private DeleteVehicleDialogPanel dialog;
     public MainController(MainFrame view) {
         this.view = view;
+        try {
+            new VehicleController(view);
+        } catch (DataAccessException | InvalidInputException e) {
+            DialogMessage.errorMessage(
+                    view,
+                    "Vehicle Controller Error",
+                    e.getMessage()
+            );
+        }
         initController();
     }
 
     private void initController() {
         view.getmenuBarView().getExitApps().addActionListener(e -> System.exit(0));
         view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
-
+        view.getmenuBarView().getSearchVehicleKilometerBrandEnergy().addActionListener(e -> view.showSearchPanel());
         view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
         view.getmenuBarView().getShowListVehicle().addActionListener(e -> {
                 try {
@@ -35,4 +40,5 @@ public class MainController {
             });
 
     }
+
 }

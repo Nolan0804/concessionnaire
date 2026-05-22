@@ -1,5 +1,6 @@
 package view.panels;
 
+import exception.DataAccessException;
 import model.Vehicle;
 
 import javax.swing.*;
@@ -8,18 +9,15 @@ import java.awt.*;
 import java.util.List;
 import view.components.ButtonRenderer;
 import view.components.ButtonEditor;
-
+import controller.VehicleController;
 public class VehicleListPanel extends JPanel {
     private JTable table;
     private DefaultTableModel model;
-    public VehicleListPanel() {
+    private VehicleController controller;
+
+    public VehicleListPanel(VehicleController controller) {
         setLayout(new BorderLayout());
-
-        initComponents();
-    }
-
-    private void initComponents() {
-
+        this.controller = controller;
         String[] columns = {
                 "VIN",
                 "Brand",
@@ -31,11 +29,9 @@ public class VehicleListPanel extends JPanel {
         };
 
         model = new DefaultTableModel(columns, 0) {
-
             @Override
             public boolean isCellEditable(int row, int column) {
-
-                return false;
+                return column == 5 || column == 6;
             }
         };
 
@@ -44,14 +40,10 @@ public class VehicleListPanel extends JPanel {
         table.setRowHeight(30);
 
         table.getColumn("Modifier").setCellRenderer(new ButtonRenderer());
-        table.getColumn("Modifier").setCellEditor(new ButtonEditor(
-                new JCheckBox(),
-                table));
+        table.getColumn("Modifier").setCellEditor(new ButtonEditor(new JCheckBox(), table, controller,"update", "Modifier"));
 
         table.getColumn("Supprimer").setCellRenderer(new ButtonRenderer());
-        table.getColumn("Supprimer").setCellEditor(new ButtonEditor(
-                new JCheckBox(),
-                table));
+        table.getColumn("Supprimer").setCellEditor(new ButtonEditor(new JCheckBox(), table, controller,"delete", "Supprimer"));
 
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);

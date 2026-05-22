@@ -10,6 +10,7 @@ import view.MainFrame;
 import java.util.List;
 import view.panels.*;
 
+import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -18,11 +19,10 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        initController();
-        loadVehicles();
-    }
-
-    public void initController() {
+        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
+        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
+        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
+        refreshTable();
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
                 addVehicle();
@@ -34,7 +34,7 @@ public class VehicleController {
         try {
             VehicleBusiness business = new VehicleBusiness();
             List<Vehicle> vehicles = business.getAllVehicle();
-            view.showVehicleList();
+            view.showVehicleList(this);
             view.getVehicleListPanel().loadVehicles(vehicles);
         } catch (DataAccessException | InvalidInputException e) {
             e.printStackTrace();
@@ -77,47 +77,26 @@ public class VehicleController {
 
             String vin = panel.getTxtVin().getText();
             double kilometer = Double.parseDouble(panel.getTxtKilometer().getText().replace(",", "."));
-
             Date date = (Date) panel.getSpArrivalDate().getValue();
-
             LocalDate arrivalDate = LocalDate.now();
-
             double salePrice = Double.parseDouble(panel.getTxtSalePrice().getText().replace(",", "."));
-
             double purchasePrice = Double.parseDouble(panel.getTxtPurchasePrice().getText().replace(",", "."));
-
             String registration = panel.getTxtRegistration().getText();
-
             Integer power = Integer.parseInt(panel.getTxtPower().getText());
-
             String gearBox = (String) panel.getCbGearBox().getSelectedItem();
-
             Integer gearNumber = (Integer) panel.getSpGearNumber().getValue();
-
             Integer doorNumber = (Integer) panel.getSpDoorNumber().getValue();
-
             Integer seatNumber = (Integer) panel.getSpSeatNumber().getValue();
-
             String information = panel.getTxtInformation().getText();
-
             Integer euroStandard = (Integer) panel.getSpEuroStandard().getValue();
-
             boolean vatDeductible = panel.getChkVatDeductible().isSelected();
-
             Integer productionYear = (Integer) panel.getSpProductionYear().getValue();
-
             Garanty garanty = (Garanty) panel.getCbGaranty().getSelectedItem();
-
             Energy energy = (Energy) panel.getCbEnergy().getSelectedItem();
-
             Brand brand = (Brand) panel.getCbBrand().getSelectedItem();
-
             String hexColor = panel.getTxtHexColor().getText();
-
             String typeColor = panel.getCbColorType().getSelectedItem().toString();
-
             String state = (String) panel.getCbState().getSelectedItem();
-
             Customer saler = (Customer) panel.getCbSaler().getSelectedItem();
 
             Vehicle vehicle =
@@ -148,14 +127,9 @@ public class VehicleController {
 
             VehicleBusiness business = new VehicleBusiness();
             business.addVehicle(vehicle);
-            new DialogMessage();
-
+            DialogMessage.successMessage(view, "Add Vehicle", "Véhicule ajouté avec succès !");
         } catch (Exception e) {
-            DialogMessage.errorMessage(
-                    view,
-                    "Add Vehicle",
-                    e.getMessage()
-            );
+            DialogMessage.errorMessage(view, "Add Vehicle", e.getMessage());
         }
     }
 
@@ -164,7 +138,41 @@ public class VehicleController {
             throw new InvalidInputException("VIN obligatoire");
         }
 
+        try {
+            VehicleBusiness business = new VehicleBusiness();
+            business.deleteVehicle(vin);
+        } catch (InvalidInputException e) {
+            DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
+        }
+    }
+    public void showUpdateVehicle(String vin) throws Exception {
         VehicleBusiness business = new VehicleBusiness();
-        business.deleteVehicle(vin);
+        Vehicle vehicle =
+                business.getVehicleByVIN(vin);
+
+        view.showUpdateVehiclePanel(vehicle);
+    }
+
+
+    private void refreshTable() {
+        try {
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+            Brand brand = (Brand) view.getSearchPanel().getBrandComboBox().getSelectedItem();
+            Energy energy = (Energy) view.getSearchPanel().getEnergyComboBox().getSelectedItem();
+            double kilometer = ((Number) view.getSearchPanel().getKilometerSpinner().getValue()).doubleValue();
+
+            List<Object[]> vehicles = vehicleBusiness.searchVehicles(brand.getName(), energy.getName(), kilometer);
+
+            DefaultTableModel model = view.getSearchPanel().getTableModel();
+
+            model.setRowCount(0);
+
+            for (Object[] row : vehicles) {
+                model.addRow(row);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
