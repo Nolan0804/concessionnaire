@@ -34,7 +34,7 @@ public class VehicleController {
         try {
             VehicleBusiness business = new VehicleBusiness();
             List<Vehicle> vehicles = business.getAllVehicle();
-            view.showVehicleList();
+            view.showVehicleList(this);
             view.getVehicleListPanel().loadVehicles(vehicles);
         } catch (DataAccessException | InvalidInputException e) {
             e.printStackTrace();
@@ -77,47 +77,26 @@ public class VehicleController {
 
             String vin = panel.getTxtVin().getText();
             double kilometer = Double.parseDouble(panel.getTxtKilometer().getText().replace(",", "."));
-
             Date date = (Date) panel.getSpArrivalDate().getValue();
-
             LocalDate arrivalDate = LocalDate.now();
-
             double salePrice = Double.parseDouble(panel.getTxtSalePrice().getText().replace(",", "."));
-
             double purchasePrice = Double.parseDouble(panel.getTxtPurchasePrice().getText().replace(",", "."));
-
             String registration = panel.getTxtRegistration().getText();
-
             Integer power = Integer.parseInt(panel.getTxtPower().getText());
-
             String gearBox = (String) panel.getCbGearBox().getSelectedItem();
-
             Integer gearNumber = (Integer) panel.getSpGearNumber().getValue();
-
             Integer doorNumber = (Integer) panel.getSpDoorNumber().getValue();
-
             Integer seatNumber = (Integer) panel.getSpSeatNumber().getValue();
-
             String information = panel.getTxtInformation().getText();
-
             Integer euroStandard = (Integer) panel.getSpEuroStandard().getValue();
-
             boolean vatDeductible = panel.getChkVatDeductible().isSelected();
-
             Integer productionYear = (Integer) panel.getSpProductionYear().getValue();
-
             Garanty garanty = (Garanty) panel.getCbGaranty().getSelectedItem();
-
             Energy energy = (Energy) panel.getCbEnergy().getSelectedItem();
-
             Brand brand = (Brand) panel.getCbBrand().getSelectedItem();
-
             String hexColor = panel.getTxtHexColor().getText();
-
             String typeColor = panel.getCbColorType().getSelectedItem().toString();
-
             String state = (String) panel.getCbState().getSelectedItem();
-
             Customer saler = (Customer) panel.getCbSaler().getSelectedItem();
 
             Vehicle vehicle =
@@ -149,13 +128,8 @@ public class VehicleController {
             VehicleBusiness business = new VehicleBusiness();
             business.addVehicle(vehicle);
             DialogMessage.successMessage(view, "Add Vehicle", "Véhicule ajouté avec succès !");
-
         } catch (Exception e) {
-            DialogMessage.errorMessage(
-                    view,
-                    "Add Vehicle",
-                    e.getMessage()
-            );
+            DialogMessage.errorMessage(view, "Add Vehicle", e.getMessage());
         }
     }
 
@@ -164,9 +138,21 @@ public class VehicleController {
             throw new InvalidInputException("VIN obligatoire");
         }
 
-        VehicleBusiness business = new VehicleBusiness();
-        business.deleteVehicle(vin);
+        try {
+            VehicleBusiness business = new VehicleBusiness();
+            business.deleteVehicle(vin);
+        } catch (InvalidInputException e) {
+            DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
+        }
     }
+    public void showUpdateVehicle(String vin) throws Exception {
+        VehicleBusiness business = new VehicleBusiness();
+        Vehicle vehicle =
+                business.getVehicleByVIN(vin);
+
+        view.showUpdateVehiclePanel(vehicle);
+    }
+
 
     private void refreshTable() {
         try {

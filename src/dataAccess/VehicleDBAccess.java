@@ -161,6 +161,66 @@ public class VehicleDBAccess implements VehicleDAO {
             throw new DataAccessException("DATA VEHICLE : Exists impossible");
         }
     }
+    @Override
+    public Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException{
+        try {
+            String sql =
+                    """
+                    SELECT *
+                    FROM Vehicle
+                    WHERE VIN = ?
+                    """;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, vin);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return new Vehicle(
+                        rs.getString("vin"),
+                        rs.getDouble("kilometer"),
+                        rs.getDate("arrival_date").toLocalDate(),
+                        rs.getDouble("sale_price"),
+                        rs.getDouble("purchase_price"),
+                        rs.getString("registration"),
+                        rs.getInt("power"),
+                        rs.getString("gear_box_type"),
+                        rs.getInt("gear_number"),
+                        rs.getInt("door_number"),
+                        rs.getInt("seat_number"),
+                        rs.getString("information"),
+                        rs.getInt("euro_standard"),
+                        rs.getInt("production_year"),
+                        rs.getBoolean("is_vat_deductible"),
+
+                        new Garanty(
+                                rs.getString("garanty_type"),
+                                0
+                        ),
+
+                        rs.getString("hex_color"),
+                        rs.getString("type_color"),
+
+                        new Energy(
+                                rs.getString("energy"),
+                                false
+                        ),
+
+                        new Brand(
+                                rs.getString("brand_name"),
+                                1890,
+                                null
+                        ),
+                        rs.getString("state"),
+                        null
+                );
+            } else {
+                throw new InvalidInputException("Véhicule non trouvé");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("DATA VEHICLE : Get by VIN impossible");
+        }
+    };
+
 
     @Override
     public void updateVehicle(Vehicle vehicle) throws DataAccessException {

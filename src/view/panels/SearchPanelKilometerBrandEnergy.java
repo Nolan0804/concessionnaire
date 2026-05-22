@@ -66,7 +66,13 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
                 "Eco Friendly"
         };
 
-        tableModel = new DefaultTableModel(columns, 0);
+
+        tableModel = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         resultTable = new JTable(tableModel);
         resultTable.setRowHeight(25);
         resultTable.getTableHeader().setReorderingAllowed(false);

@@ -14,4 +14,5 @@ public interface VehicleDAO {
     List<Object[]> searchVehicles(String brand, String energy, double kilometerMax) throws DataAccessException;
     void deleteVehicleVin(String vinNumber) throws DataAccessException;
     void updateVehicle(Vehicle vehicle) throws DataAccessException;
+    Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException;
 }

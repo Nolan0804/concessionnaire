@@ -35,6 +35,13 @@ public class VehicleBusiness {
         dao.insertVehicle(vehicle);
     }
 
+    public Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException {
+        if(vin == null || vin.trim().isEmpty()) {
+            throw new InvalidInputException("VIN obligatoire");
+        }
+        return dao.getVehicleByVIN(vin);
+    }
+
     public void deleteVehicle(String vin) throws InvalidInputException {
         try {
             if(vin == null || vin.trim().isEmpty()) {

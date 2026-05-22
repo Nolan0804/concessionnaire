@@ -3,8 +3,11 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+import controller.VehicleController;
+import exception.DataAccessException;
 import view.components.*;
 import view.panels.*;
+import model.Vehicle;
 
 public class MainFrame extends JFrame {
     private HomePanel homePanel;
@@ -27,7 +30,6 @@ public class MainFrame extends JFrame {
         add(container, BorderLayout.CENTER);
 
         homePanel = new HomePanel();
-        vehicleListPanel = new VehicleListPanel();
         addVehiclePanel = new AddVehiclePanel();
         searchPanel = new SearchPanelKilometerBrandEnergy();
 
@@ -54,6 +56,14 @@ public class MainFrame extends JFrame {
         container.repaint();
     }
 
+    public void showUpdateVehiclePanel(Vehicle vehicle) {
+        UpdateVehiclePanel updateVehiclePanel = new UpdateVehiclePanel(vehicle);
+        container.removeAll();
+        container.add(updateVehiclePanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
+    }
+
     public void showAddVehiclePanel() {
         container.removeAll();
         container.add(addVehiclePanel, BorderLayout.CENTER);
@@ -61,8 +71,9 @@ public class MainFrame extends JFrame {
         container.repaint();
     }
 
-    public void showVehicleList() {
+    public void showVehicleList(VehicleController controller) {
         container.removeAll();
+        vehicleListPanel = new VehicleListPanel(controller);
         container.add(vehicleListPanel, BorderLayout.CENTER);
         container.revalidate();
         container.repaint();
