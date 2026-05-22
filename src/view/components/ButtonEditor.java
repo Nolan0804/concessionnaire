@@ -1,13 +1,8 @@
 package view.components;
 
 import controller.VehicleController;
-import exception.DataAccessException;
-import exception.InvalidInputException;
-import controller.MainController;
 import javax.swing.*;
-import javax.swing.table.TableCellEditor;
 import java.awt.*;
-import java.sql.SQLException;
 
 public class ButtonEditor extends DefaultCellEditor {
     private JButton button;
@@ -31,17 +26,9 @@ public class ButtonEditor extends DefaultCellEditor {
     }
 
     @Override
-    public Component getTableCellEditorComponent(
-            JTable table,
-            Object value,
-            boolean isSelected,
-            int row,
-            int column) {
-
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         vin = table.getValueAt(row, 0).toString();
-
         button.setText(value.toString());
-
         clicked = true;
 
         return button;
@@ -52,7 +39,6 @@ public class ButtonEditor extends DefaultCellEditor {
         String vin = table.getValueAt(table.getSelectedRow(), 0).toString();
 
         try {
-
             if(action.equals("delete")) {
                 int confirm = JOptionPane.showConfirmDialog(null, "Are you sure ?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
