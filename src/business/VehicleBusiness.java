@@ -21,16 +21,23 @@ public class VehicleBusiness {
         return dao.getAllVehicles();
     }
 
-    public void addVehicle(Vehicle vehicle) throws Exception {
+    public void updateVehicle(Vehicle vehicle) throws DataAccessException, InvalidInputException {
         if(vehicle == null) {
-            throw new Exception(
-                    "Vehicle null"
-            );
+            throw new DataAccessException("Vehicle null");
         }
         if(vehicle.getVIN().length() != 17) {
-            throw new Exception(
-                    "VIN invalide"
-            );
+            throw new InvalidInputException("VIN invalide");
+        }
+        dao.updateVehicle(vehicle);
+    }
+
+
+    public void addVehicle(Vehicle vehicle) throws Exception {
+        if(vehicle == null) {
+            throw new Exception("Vehicle null");
+        }
+        if(vehicle.getVIN().length() != 17) {
+            throw new Exception("VIN invalide");
         }
         dao.insertVehicle(vehicle);
     }
