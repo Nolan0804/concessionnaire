@@ -74,7 +74,10 @@ public class VehicleDBAccess implements VehicleDAO {
         try {
             List<Vehicle> vehicles = new ArrayList<>();
 
-            String sql = "SELECT * FROM vehicle";
+            String sql = """
+                SELECT *
+                FROM vehicle_complete_view
+            """;
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
 
@@ -98,29 +101,49 @@ public class VehicleDBAccess implements VehicleDAO {
 
                         new Garanty(
                                 rs.getString("garanty_type"),
-                                0
+                                rs.getInt("garanty_duration")
                         ),
 
                         rs.getString("hex_color"),
                         rs.getString("type_color"),
 
                         new Energy(
-                                rs.getString("energy"),
-                                false
+                                rs.getString("energy_type"),
+                                rs.getBoolean("is_eco_friendly")
                         ),
 
                         new Brand(
                                 rs.getString("brand_name"),
-                                1890,
-                                null
-                        ),
-                        rs.getString("state"),
-                        null
-                );
+                                rs.getInt("year_created"),
 
+                                new Country(
+                                        rs.getString("origin_country")
+                                )
+                        ),
+
+                        rs.getString("state"),
+
+                        new Customer(
+                                rs.getInt("customer_number"),
+                                rs.getString("customer_name"),
+                                rs.getString("firstname"),
+                                rs.getString("email"),
+                                rs.getString("phone_number"),
+                                rs.getString("address"),
+                                rs.getDate("birthday_date").toLocalDate(),
+
+                                new Locality(
+                                        rs.getString("locality_name"),
+                                        rs.getInt("postal_code"),
+
+                                        new Country(
+                                                rs.getString("country_name")
+                                        )
+                                )
+                        )
+                );
                 vehicles.add(vehicle);
             }
-
             return vehicles;
         } catch (SQLException e) {
             throw new DataAccessException("DATA VEHICLE : List impossible");
@@ -164,54 +187,9 @@ public class VehicleDBAccess implements VehicleDAO {
     public Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException{
         try {
             String sql = """
-                SELECT
-                    v.*,
-                
-                    g.type AS garanty_type,
-                    g.duration AS garanty_duration,
-                
-                    e.type AS energy_type,
-                    e.is_eco_friendly,
-        
-                    b.name AS brand_name,
-                    b.year_created,
-                    b.origin_country,
-                
-                    c.customer_number,
-                    c.name AS customer_name,
-                    c.firstname,
-                    c.email,
-                    c.phone_number,
-                    c.address,
-                    c.birthday_date,
-                
-                    l.name AS locality_name,
-                    l.postal_code,
-                
-                    co.name AS country_name
-                
-                FROM vehicle v
-                
-                JOIN garanty g
-                    ON v.garanty_type = g.type
-                
-                JOIN energy e
-                    ON v.energy = e.type
-                
-                JOIN brand b
-                    ON v.brand_name = b.name
-                
-                JOIN customer c
-                    ON v.saler = c.customer_number
-                
-                JOIN locality l
-                    ON c.locality_name = l.name
-                   AND c.postal_code = l.postal_code
-                
-                JOIN country co
-                    ON l.country_name = co.name
-                
-                WHERE v.vin = ?
+                SELECT *
+                FROM vehicle_complete_view
+                WHERE vin = ?
             """;
 
             PreparedStatement statement = connection.prepareStatement(sql);
