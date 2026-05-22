@@ -395,6 +395,52 @@ INSERT INTO `vehicle` VALUES ('1HGCM82633A482751',15000.00,'2026-01-10',28000.00
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `vehicle_complete_view`
+--
+
+DROP TABLE IF EXISTS `vehicle_complete_view`;
+/*!50001 DROP VIEW IF EXISTS `vehicle_complete_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vehicle_complete_view` AS SELECT 
+ 1 AS `vin`,
+ 1 AS `kilometer`,
+ 1 AS `arrival_date`,
+ 1 AS `sale_price`,
+ 1 AS `purchase_price`,
+ 1 AS `registration`,
+ 1 AS `power`,
+ 1 AS `gear_box_type`,
+ 1 AS `gear_number`,
+ 1 AS `door_number`,
+ 1 AS `seat_number`,
+ 1 AS `information`,
+ 1 AS `euro_standard`,
+ 1 AS `is_vat_deductible`,
+ 1 AS `production_year`,
+ 1 AS `hex_color`,
+ 1 AS `type_color`,
+ 1 AS `state`,
+ 1 AS `garanty_type`,
+ 1 AS `garanty_duration`,
+ 1 AS `energy_type`,
+ 1 AS `is_eco_friendly`,
+ 1 AS `brand_name`,
+ 1 AS `year_created`,
+ 1 AS `origin_country`,
+ 1 AS `customer_number`,
+ 1 AS `customer_name`,
+ 1 AS `firstname`,
+ 1 AS `email`,
+ 1 AS `phone_number`,
+ 1 AS `address`,
+ 1 AS `birthday_date`,
+ 1 AS `locality_name`,
+ 1 AS `postal_code`,
+ 1 AS `country_name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `vehicle_search_view`
 --
 
@@ -412,6 +458,24 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `year_created`,
  1 AS `is_eco_friendly`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `vehicle_complete_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vehicle_complete_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vehicle_complete_view` AS select `v`.`vin` AS `vin`,`v`.`kilometer` AS `kilometer`,`v`.`arrival_date` AS `arrival_date`,`v`.`sale_price` AS `sale_price`,`v`.`purchase_price` AS `purchase_price`,`v`.`registration` AS `registration`,`v`.`power` AS `power`,`v`.`gear_box_type` AS `gear_box_type`,`v`.`gear_number` AS `gear_number`,`v`.`door_number` AS `door_number`,`v`.`seat_number` AS `seat_number`,`v`.`information` AS `information`,`v`.`euro_standard` AS `euro_standard`,`v`.`is_vat_deductible` AS `is_vat_deductible`,`v`.`production_year` AS `production_year`,`v`.`hex_color` AS `hex_color`,`v`.`type_color` AS `type_color`,`v`.`state` AS `state`,`g`.`type` AS `garanty_type`,`g`.`duration` AS `garanty_duration`,`e`.`type` AS `energy_type`,`e`.`is_eco_friendly` AS `is_eco_friendly`,`b`.`name` AS `brand_name`,`b`.`year_created` AS `year_created`,`b`.`origin_country` AS `origin_country`,`c`.`customer_number` AS `customer_number`,`c`.`name` AS `customer_name`,`c`.`firstname` AS `firstname`,`c`.`email` AS `email`,`c`.`phone_number` AS `phone_number`,`c`.`address` AS `address`,`c`.`birthday_date` AS `birthday_date`,`l`.`name` AS `locality_name`,`l`.`postal_code` AS `postal_code`,`co`.`name` AS `country_name` from ((((((`vehicle` `v` join `garanty` `g` on((`v`.`garanty_type` = `g`.`type`))) join `energy` `e` on((`v`.`energy` = `e`.`type`))) join `brand` `b` on((`v`.`brand_name` = `b`.`name`))) join `customer` `c` on((`v`.`saler` = `c`.`customer_number`))) join `locality` `l` on(((`c`.`locality_name` = `l`.`name`) and (`c`.`postal_code` = `l`.`postal_code`)))) join `country` `co` on((`l`.`country_name` = `co`.`name`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `vehicle_search_view`
@@ -440,4 +504,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-22 21:10:27
+-- Dump completed on 2026-05-22 22:54:45

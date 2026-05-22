@@ -1,18 +1,16 @@
 package view.panels;
 
-import com.sun.management.GarbageCollectionNotificationInfo;
-import controller.BrandController;
-import controller.GarantyController;
+import controller.*;
 import model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.Year;
 import config.AppConfig;
 import view.components.DialogMessage;
 import view.utils.ComboBoxUtils;
 
 public class UpdateVehiclePanel extends JPanel {
-
     private JTextField txtVin;
     private JTextField txtKilometer;
     private JTextField txtSalePrice;
@@ -53,8 +51,8 @@ public class UpdateVehiclePanel extends JPanel {
         add(lblTitle, BorderLayout.NORTH);
 
         JPanel formPanel = new JPanel(new GridLayout(0, 2, 10, 10));
-
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
         formPanel.add(new JLabel("Kilometer"));
         txtKilometer = new JTextField(String.valueOf(vehicle.getKilometer()));
         formPanel.add(txtKilometer);
@@ -104,14 +102,11 @@ public class UpdateVehiclePanel extends JPanel {
 
         formPanel.add(cbState);
 
-        // TODO : get all garanty
-
         formPanel.add(new JLabel("Garanty"));
         cbGaranty = new JComboBox<Garanty>();
         try {
             GarantyController garantyController = new GarantyController();
             ComboBoxUtils.loadComboBox(cbGaranty, garantyController.getAllGaranty());
-            System.out.println(garantyController.getAllGaranty());
         } catch (Exception e) {
             DialogMessage.errorMessage(
                     this,
@@ -123,93 +118,66 @@ public class UpdateVehiclePanel extends JPanel {
         cbGaranty.setSelectedItem(vehicle.getGaranty());
         formPanel.add(cbGaranty);
 
-        /*
-         * ENERGY
-         */
-
         formPanel.add(new JLabel("Energy"));
-
-        cbEnergy =
-                new JComboBox<>();
-
-        cbEnergy.addItem(
-                vehicle.getEnergy()
-        );
-
-        cbEnergy.setSelectedItem(
-                vehicle.getEnergy()
-        );
-
+        cbEnergy = new JComboBox<Energy>();
+        try {
+            EnergyController energyController = new EnergyController();
+            ComboBoxUtils.loadComboBox(cbEnergy, energyController.getAllEnergy());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Energy Error",
+                    e.getMessage()
+            );
+        }
+        cbEnergy.setSelectedItem(vehicle.getEnergy());
         formPanel.add(cbEnergy);
 
 
         formPanel.add(new JLabel("Brand"));
-
-        cbBrand =
-                new JComboBox<>();
-
-        cbBrand.addItem(
-                vehicle.getBrand()
-        );
-
-        cbBrand.setSelectedItem(
-                vehicle.getBrand()
-        );
-
+        cbBrand = new JComboBox<Brand>();
+        try {
+            BrandController brandController = new BrandController();
+            ComboBoxUtils.loadComboBox(cbBrand, brandController.getAllBrand());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Brand Error",
+                    e.getMessage()
+            );
+        }
+        cbBrand.setSelectedItem(vehicle.getBrand());
         formPanel.add(cbBrand);
 
-        /*
-         * SALER
-         */
-
         formPanel.add(new JLabel("Saler"));
-
-        cbSaler =
-                new JComboBox<>();
-
-        cbSaler.addItem(
-                vehicle.getSaler()
-        );
-
-        cbSaler.setSelectedItem(
-                vehicle.getSaler()
-        );
-
+        cbSaler = new JComboBox<Customer>();
+        try {
+            CustomerController customerController = new CustomerController();
+            ComboBoxUtils.loadComboBox(cbSaler, customerController.getAllCustomer());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Customer Error",
+                    e.getMessage()
+            );
+        }
+        cbSaler.setSelectedItem(vehicle.getSaler());
         formPanel.add(cbSaler);
 
-        /*
-         * GEAR NUMBER
-         */
 
         formPanel.add(new JLabel("Gear number"));
-
         spGearNumber = new JSpinner(
-                new SpinnerNumberModel((int) vehicle.getGearNumber(),5,8,1)
+                new SpinnerNumberModel((int) vehicle.getGearNumber(),AppConfig.GEARBOX_LOWEST,AppConfig.GEARBOX_HIGHEST,1)
         );
-
         formPanel.add(spGearNumber);
 
-        /*
-         * DOOR NUMBER
-         */
-
         formPanel.add(new JLabel("Door number"));
-
-        spDoorNumber =
-                new JSpinner(
-                        new SpinnerNumberModel(
-                                (int) vehicle.getDoorNumber(),
-                                1,
-                                10,
-                                1
-                        )
-                );
-
+        spDoorNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getDoorNumber(), AppConfig.DOOR_LOWEST, AppConfig.DOOR_HIGHEST, 1));
         formPanel.add(spDoorNumber);
 
 
         formPanel.add(new JLabel("Seat number"));
-        spSeatNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getSeatNumber(), 1, 10, 1));
+        spSeatNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getSeatNumber(), AppConfig.SEAT_LOWEST, AppConfig.SEAT_HIGHEST, 1));
         formPanel.add(spSeatNumber);
 
         formPanel.add(new JLabel("Euro standard"));
@@ -218,8 +186,8 @@ public class UpdateVehiclePanel extends JPanel {
                 new JSpinner(
                         new SpinnerNumberModel(
                                 (int) vehicle.getEuroStandard(),
-                                1,
-                                10,
+                                AppConfig.EURO_STANDARD_LOWEST,
+                                AppConfig.SEAT_HIGHEST,
                                 1
                         )
                 );
@@ -230,8 +198,8 @@ public class UpdateVehiclePanel extends JPanel {
         spProductionYear =
                 new JSpinner(new SpinnerNumberModel(
                         (int) vehicle.getYearOfProduction(),
-                        1900,
-                        2100,
+                        AppConfig.YEAR_PRODUCTION_LOWEST,
+                        Year.now().getValue(),
                         1)
                 );
         formPanel.add(spProductionYear);
@@ -245,89 +213,5 @@ public class UpdateVehiclePanel extends JPanel {
 
     public JButton getBtnUpdate() {
         return btnUpdate;
-    }
-
-    public JTextField getTxtVin() {
-        return txtVin;
-    }
-
-    public JTextField getTxtKilometer() {
-        return txtKilometer;
-    }
-
-    public JTextField getTxtSalePrice() {
-        return txtSalePrice;
-    }
-
-    public JTextField getTxtPurchasePrice() {
-        return txtPurchasePrice;
-    }
-
-    public JTextField getTxtRegistration() {
-        return txtRegistration;
-    }
-
-    public JTextField getTxtPower() {
-        return txtPower;
-    }
-
-    public JTextField getTxtHexColor() {
-        return txtHexColor;
-    }
-
-    public JTextArea getTxtInformation() {
-        return txtInformation;
-    }
-
-    public JCheckBox getChkVatDeductible() {
-        return chkVatDeductible;
-    }
-
-    public JComboBox<String> getCbGearBox() {
-        return cbGearBox;
-    }
-
-    public JComboBox<String> getCbColorType() {
-        return cbColorType;
-    }
-
-    public JComboBox<String> getCbState() {
-        return cbState;
-    }
-
-    public JComboBox<Garanty> getCbGaranty() {
-        return cbGaranty;
-    }
-
-    public JComboBox<Energy> getCbEnergy() {
-        return cbEnergy;
-    }
-
-    public JComboBox<Brand> getCbBrand() {
-        return cbBrand;
-    }
-
-    public JComboBox<Customer> getCbSaler() {
-        return cbSaler;
-    }
-
-    public JSpinner getSpGearNumber() {
-        return spGearNumber;
-    }
-
-    public JSpinner getSpDoorNumber() {
-        return spDoorNumber;
-    }
-
-    public JSpinner getSpSeatNumber() {
-        return spSeatNumber;
-    }
-
-    public JSpinner getSpEuroStandard() {
-        return spEuroStandard;
-    }
-
-    public JSpinner getSpProductionYear() {
-        return spProductionYear;
     }
 }
