@@ -17,6 +17,7 @@ public class Country {
         if (name == null || name.isEmpty()) {
             throw new InvalidInputException("Le nom du pays ne peux être vide !");
         }
+        this.name = name;
     }
 
     @Override

@@ -70,10 +70,11 @@ public class Customer {
     }
 
     public void setLocality(Locality locality) {
-        if (locality == null) {
-            throw new IllegalArgumentException("Locality cannot be empty.");
-        }
         this.locality = locality;
+    }
+
+    public Locality getLocality() {
+        return locality;
     }
 
     public Integer getCustomerNumber() {

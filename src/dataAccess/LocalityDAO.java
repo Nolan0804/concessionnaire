@@ -4,7 +4,6 @@ import exception.DataAccessException;
 import exception.InvalidInputException;
 import model.Locality;
 
-import java.sql.SQLException;
 
 public interface LocalityDAO {
 

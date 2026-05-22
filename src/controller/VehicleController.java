@@ -19,14 +19,10 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        initController();
         view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
         refreshTable();
-    }
-
-    public void initController() {
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
                 addVehicle();
@@ -152,7 +148,7 @@ public class VehicleController {
 
             VehicleBusiness business = new VehicleBusiness();
             business.addVehicle(vehicle);
-            new DialogMessage();
+            DialogMessage.successMessage(view, "Add Vehicle", "Véhicule ajouté avec succès !");
 
         } catch (Exception e) {
             DialogMessage.errorMessage(
