@@ -3,12 +3,14 @@ package model;
 import exception.InvalidInputException;
 import java.time.Year;
 
-public class Brand {
+public class Brand extends ComboBoxItem{
     private String name;
     private Country originCountry;
     private Integer yearCreated;
 
     public Brand(String name, Integer yearCreated, Country originCountry) throws InvalidInputException {
+        super(name);
+
         setName(name);
         setYearCreated(yearCreated);
         this.originCountry = originCountry;

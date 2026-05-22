@@ -2,11 +2,13 @@ package model;
 
 import exception.InvalidInputException;
 
-public class Garanty {
+public class Garanty extends ComboBoxItem {
     private String type;
     private Integer durationInMonths;
 
     public Garanty(String type, Integer durationInMonths) throws InvalidInputException {
+        super(type);
+
         setType(type);
         setDurationInMonths(durationInMonths);
     }
@@ -31,6 +33,7 @@ public class Garanty {
 
     @Override
     public String toString() {
-        return type + " - " + durationInMonths/12 + (durationInMonths/12 > 1 ? " ans": " an");
+        int durationInYear = durationInMonths / 12;
+        return type + " - " + durationInYear + (durationInYear > 1 ? " ans": " an");
     }
 }

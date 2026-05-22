@@ -2,6 +2,7 @@ package view.panels;
 
 import com.sun.management.GarbageCollectionNotificationInfo;
 import controller.BrandController;
+import controller.EnergyController;
 import controller.GarantyController;
 import model.*;
 
@@ -104,14 +105,11 @@ public class UpdateVehiclePanel extends JPanel {
 
         formPanel.add(cbState);
 
-        // TODO : get all garanty
-
         formPanel.add(new JLabel("Garanty"));
         cbGaranty = new JComboBox<Garanty>();
         try {
             GarantyController garantyController = new GarantyController();
             ComboBoxUtils.loadComboBox(cbGaranty, garantyController.getAllGaranty());
-            System.out.println(garantyController.getAllGaranty());
         } catch (Exception e) {
             DialogMessage.errorMessage(
                     this,
@@ -123,39 +121,35 @@ public class UpdateVehiclePanel extends JPanel {
         cbGaranty.setSelectedItem(vehicle.getGaranty());
         formPanel.add(cbGaranty);
 
-        /*
-         * ENERGY
-         */
-
         formPanel.add(new JLabel("Energy"));
-
-        cbEnergy =
-                new JComboBox<>();
-
-        cbEnergy.addItem(
-                vehicle.getEnergy()
-        );
-
-        cbEnergy.setSelectedItem(
-                vehicle.getEnergy()
-        );
-
+        cbEnergy = new JComboBox<Energy>();
+        try {
+            EnergyController energyController = new EnergyController();
+            ComboBoxUtils.loadComboBox(cbEnergy, energyController.getAllEnergy());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Energy Error",
+                    e.getMessage()
+            );
+        }
+        cbEnergy.setSelectedItem(vehicle.getEnergy());
         formPanel.add(cbEnergy);
 
 
         formPanel.add(new JLabel("Brand"));
-
-        cbBrand =
-                new JComboBox<>();
-
-        cbBrand.addItem(
-                vehicle.getBrand()
-        );
-
-        cbBrand.setSelectedItem(
-                vehicle.getBrand()
-        );
-
+        cbBrand = new JComboBox<Brand>();
+        try {
+            BrandController brandController = new BrandController();
+            ComboBoxUtils.loadComboBox(cbBrand, brandController.getAllBrand());
+        } catch (Exception e) {
+            DialogMessage.errorMessage(
+                    this,
+                    "Loading Brand Error",
+                    e.getMessage()
+            );
+        }
+        cbBrand.setSelectedItem(vehicle.getBrand());
         formPanel.add(cbBrand);
 
         /*
