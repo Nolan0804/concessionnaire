@@ -29,7 +29,7 @@ public class MenuBarView extends JMenuBar {
         showListCustomer = new JMenuItem("List customers");
         customerMenu.add(showListCustomer);
 
-        searchTrialEnergyKilometer = new JMenuItem("Search trials by energy kilometer");
+        searchTrialEnergyKilometer = new JMenuItem("Search trials by energy kilometer potential buyer");
         customerMenu.add(searchTrialEnergyKilometer);
 
 
