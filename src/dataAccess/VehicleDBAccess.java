@@ -381,4 +381,54 @@ public class VehicleDBAccess implements VehicleDAO {
             throw new DataAccessException("DATA VEHICLE : Search impossible");
         }
     }
+
+    public List<Object[]> searchTrials(String energyType, double maxKilometer, boolean isPotentialBuyer) throws DataAccessException {
+        try {
+            List<Object[]> results = new ArrayList<>();
+
+            String sql = """
+            SELECT
+                c.name, c.firstname, c.email,
+                t.date, t.duration, t.comment,
+                v.vin, v.power, v.purchase_price,
+                b.name AS brand_name, b.year_created
+            FROM trial t
+            JOIN customer c ON t.customer_number = c.customer_number
+            JOIN vehicle v ON t.vin_number = v.vin
+            JOIN brand b ON v.brand_name = b.name
+            JOIN energy e ON v.energy = e.type
+            WHERE e.type = ?
+              AND v.kilometer <= ?
+              AND t.is_potential_sale = ?
+        """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, energyType);
+            statement.setDouble(2, maxKilometer);
+            statement.setBoolean(3, isPotentialBuyer);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Object[] row = {
+                        rs.getString("name"),
+                        rs.getString("firstname"),
+                        rs.getString("email"),
+                        rs.getDate("date"),
+                        rs.getInt("duration"),
+                        rs.getString("comment"),
+                        rs.getString("vin"),
+                        rs.getInt("power"),
+                        rs.getDouble("purchase_price"),
+                        rs.getString("brand_name"),
+                        rs.getInt("year_created")
+                };
+                results.add(row);
+            }
+
+            return results;
+        } catch (SQLException e) {
+            throw new DataAccessException("DATA TRIAL : Search impossible");
+        }
+    }
 }
