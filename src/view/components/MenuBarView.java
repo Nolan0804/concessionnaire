@@ -8,6 +8,7 @@ public class MenuBarView extends JMenuBar {
     private JMenuItem customerMenu, showListCustomer;
     private JMenuItem saleMenu, showListSale;
     private JMenuItem garantyMenu, showListGaranty;
+    private JMenuItem searchTrialEnergyKilometer;
 
     public MenuBarView() {
         menu = new JMenu("Menu");
@@ -27,6 +28,10 @@ public class MenuBarView extends JMenuBar {
         customerMenu = new JMenu("Customer");
         showListCustomer = new JMenuItem("List customers");
         customerMenu.add(showListCustomer);
+
+        searchTrialEnergyKilometer = new JMenuItem("Search trials by energy kilometer");
+        customerMenu.add(searchTrialEnergyKilometer);
+
 
         saleMenu = new JMenu("Sale");
         showListSale = new JMenuItem("Liste ventes");
@@ -78,4 +83,5 @@ public class MenuBarView extends JMenuBar {
         return garantyMenu;
     }
     public JMenuItem getShowListGaranty() {return showListGaranty;}
+    public JMenuItem getSearchTrialEnergyKilometer() { return searchTrialEnergyKilometer; }
 }

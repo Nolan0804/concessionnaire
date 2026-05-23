@@ -23,6 +23,12 @@ public class VehicleController {
         view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
         refreshTable();
+
+        view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
+        view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
+        view.getSearchTrialPanel().getPotentialBuyerCheckBox().addActionListener(e -> refreshTrialTable());
+        refreshTrialTable();
+
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
                 addVehicle();
@@ -145,14 +151,12 @@ public class VehicleController {
             DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
         }
     }
+
     public void showUpdateVehicle(String vin) throws Exception {
         VehicleBusiness business = new VehicleBusiness();
-        Vehicle vehicle =
-                business.getVehicleByVIN(vin);
-
+        Vehicle vehicle = business.getVehicleByVIN(vin);
         view.showUpdateVehiclePanel(vehicle);
     }
-
 
     private void refreshTable() {
         try {
@@ -164,10 +168,30 @@ public class VehicleController {
             List<Object[]> vehicles = vehicleBusiness.searchVehicles(brand.getName(), energy.getName(), kilometer);
 
             DefaultTableModel model = view.getSearchPanel().getTableModel();
-
             model.setRowCount(0);
 
             for (Object[] row : vehicles) {
+                model.addRow(row);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void refreshTrialTable() {
+        try {
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+            Energy energy = (Energy) view.getSearchTrialPanel().getEnergyComboBox().getSelectedItem();
+            double kilometer = ((Number) view.getSearchTrialPanel().getKilometerSpinner().getValue()).doubleValue();
+            boolean isPotentialBuyer = view.getSearchTrialPanel().getPotentialBuyerCheckBox().isSelected();
+
+            List<Object[]> results = vehicleBusiness.searchTrials(energy.getName(), kilometer, isPotentialBuyer);
+
+            DefaultTableModel model = view.getSearchTrialPanel().getTableModel();
+            model.setRowCount(0);
+
+            for (Object[] row : results) {
                 model.addRow(row);
             }
 
