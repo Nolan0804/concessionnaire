@@ -4,6 +4,8 @@ import dataAccess.VehicleDBAccess;
 import exception.DataAccessException;
 import exception.InvalidInputException;
 import model.Vehicle;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class VehicleBusiness {
@@ -66,6 +68,10 @@ public class VehicleBusiness {
 
     public List<Object[]> searchTrials(String energy, double maxKilometer, boolean isPotentialBuyer) throws DataAccessException {
         return dao.searchTrials(energy, maxKilometer, isPotentialBuyer);
+    }
+
+    public List<Object[]> searchSales(LocalDate dateStart, LocalDate dateEnd, double maxPrice, String paymentMethod) throws DataAccessException {
+        return dao.searchSales(dateStart, dateEnd, maxPrice, paymentMethod);
     }
 
 }
