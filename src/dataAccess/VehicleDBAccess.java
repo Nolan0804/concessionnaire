@@ -431,4 +431,50 @@ public class VehicleDBAccess implements VehicleDAO {
             throw new DataAccessException("DATA TRIAL : Search impossible");
         }
     }
+
+    public List<Object[]> searchSales(LocalDate dateStart, LocalDate dateEnd, double maxPrice, String paymentMethod) throws DataAccessException {
+        try {
+            List<Object[]> results = new ArrayList<>();
+
+            String sql = """
+            SELECT
+                c.name, c.firstname, c.email,
+                s.date, v.sale_price,
+                v.vin, v.kilometer, v.power
+            FROM sale s
+            JOIN customer c ON s.customer_number = c.customer_number
+            JOIN vehicle v ON s.vin_vehicle = v.vin
+            WHERE s.date BETWEEN ? AND ?
+              AND v.sale_price <= ?
+              AND s.payment_method = ?
+        """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDate(1, Date.valueOf(dateStart));
+            statement.setDate(2, Date.valueOf(dateEnd));
+            statement.setDouble(3, maxPrice);
+            statement.setString(4, paymentMethod);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Object[] row = {
+                        rs.getString("name"),
+                        rs.getString("firstname"),
+                        rs.getString("email"),
+                        rs.getDate("date"),
+                        rs.getDouble("sale_price"),
+                        rs.getString("vin"),
+                        rs.getDouble("kilometer"),
+                        rs.getInt("power")
+                };
+                results.add(row);
+            }
+
+            return results;
+        } catch (SQLException e) {
+            throw new DataAccessException("DATA SALE : Search impossible");
+        }
+    }
+
 }
