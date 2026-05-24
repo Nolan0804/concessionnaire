@@ -12,6 +12,7 @@ import view.panels.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class VehicleController {
@@ -28,6 +29,13 @@ public class VehicleController {
         view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
         view.getSearchTrialPanel().getPotentialBuyerCheckBox().addActionListener(e -> refreshTrialTable());
         refreshTrialTable();
+
+        view.getSearchSalePanel().getPaymentMethodComboBox().addActionListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getMaxPriceSpinner().addChangeListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getDateStartSpinner().addChangeListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getDateEndSpinner().addChangeListener(e -> refreshSaleTable());
+        refreshSaleTable();
+
 
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
@@ -199,4 +207,28 @@ public class VehicleController {
             ex.printStackTrace();
         }
     }
+
+    private void refreshSaleTable() {
+        try {
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+
+            Date startDate = (Date) view.getSearchSalePanel().getDateStartSpinner().getValue();
+            Date endDate = (Date) view.getSearchSalePanel().getDateEndSpinner().getValue();
+
+            LocalDate dateStart = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate dateEnd = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            double maxPrice = ((Number) view.getSearchSalePanel().getMaxPriceSpinner().getValue()).doubleValue();
+            String paymentMethod = (String) view.getSearchSalePanel().getPaymentMethodComboBox().getSelectedItem();
+
+            List<Object[]> results = vehicleBusiness.searchSales(dateStart, dateEnd, maxPrice, paymentMethod);
+
+            DefaultTableModel model = view.getSearchSalePanel().getTableModel();
+            model.setRowCount(0);
+            for (Object[] row : results) model.addRow(row);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
