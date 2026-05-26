@@ -114,7 +114,7 @@ public class UpdateVehiclePanel extends JPanel {
                     e.getMessage()
             );
         }
-        System.out.println("Selected garanty : " + vehicle.getGaranty());
+        
         cbGaranty.setSelectedItem(vehicle.getGaranty());
         formPanel.add(cbGaranty);
 
@@ -132,7 +132,6 @@ public class UpdateVehiclePanel extends JPanel {
         }
         cbEnergy.setSelectedItem(vehicle.getEnergy());
         formPanel.add(cbEnergy);
-
 
         formPanel.add(new JLabel("Brand"));
         cbBrand = new JComboBox<Brand>();

@@ -2,7 +2,6 @@ package dataAccess;
 
 import exception.DataAccessException;
 import exception.InvalidInputException;
-import model.Energy;
 import model.Garanty;
 
 import java.sql.Connection;
