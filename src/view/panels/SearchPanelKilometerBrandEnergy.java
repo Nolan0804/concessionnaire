@@ -2,8 +2,7 @@ package view.panels;
 
 import controller.BrandController;
 import controller.EnergyController;
-import exception.DataAccessException;
-import exception.InvalidInputException;
+
 import model.Brand;
 import model.Energy;
 import view.components.DialogMessage;
@@ -12,7 +11,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import view.utils.ComboBoxUtils;
-import java.util.List;
 
 public class SearchPanelKilometerBrandEnergy extends JPanel {
     private JComboBox<Brand> brandComboBox;
@@ -112,6 +110,5 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
     public JComboBox<Brand> getBrandComboBox() {return brandComboBox;}
     public JComboBox<Energy> getEnergyComboBox() {return energyComboBox;}
     public JSpinner getKilometerSpinner() {return kilometerSpinner;}
-    public JTable getResultTable() {return resultTable;}
     public DefaultTableModel getTableModel() {return tableModel;}
 }

@@ -5,9 +5,7 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class ButtonRenderer extends JButton implements TableCellRenderer {
-
     public ButtonRenderer() {
-
         setOpaque(true);
     }
 
@@ -21,7 +19,6 @@ public class ButtonRenderer extends JButton implements TableCellRenderer {
             int column) {
 
         setText(value.toString());
-
         return this;
     }
 }

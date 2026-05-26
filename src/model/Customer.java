@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Customer {
+public class Customer extends ComboBoxItem {
     private Integer customerNumber;
     private String firstName, lastName, email, phoneNumber, address;
     private LocalDate dateOfBirth;
@@ -10,6 +10,7 @@ public class Customer {
 
     public Customer(Integer customerNumber, String firstName, String lastName, String email, String phoneNumber,
             String address, LocalDate dateOfBirth, Locality locality) {
+        super(firstName + " " + lastName);
         setCustomerNumber(customerNumber);
         setFirstName(firstName);
         setLastName(lastName);

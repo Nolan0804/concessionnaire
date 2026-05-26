@@ -2,11 +2,13 @@ package model;
 
 import exception.InvalidInputException;
 
-public class Energy {
+public class Energy extends ComboBoxItem{
     private String name;
     private Boolean isEcoFriendly;
 
     public Energy(String name, Boolean isEcoFriendly) throws InvalidInputException {
+        super(name);
+
         setName(name);
         this.isEcoFriendly = isEcoFriendly;
     }

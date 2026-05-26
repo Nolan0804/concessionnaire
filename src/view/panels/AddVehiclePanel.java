@@ -9,18 +9,10 @@ import java.util.Calendar;
 import javax.swing.text.AbstractDocument;
 
 import config.AppConfig;
-import exception.DataAccessException;
-import exception.InvalidInputException;
-import controller.CustomerController;
+import controller.*;
 import model.*;
+import view.utils.*;
 import view.components.DialogMessage;
-import view.utils.ComboBoxUtils;
-import view.utils.LimitDocumentFilter;
-import view.utils.NumberOnlyFilter;
-import java.util.List;
-import controller.EnergyController;
-import controller.BrandController;
-import controller.GarantyController;
 
 public class AddVehiclePanel extends JPanel {
     private JTextField txtVin;
@@ -103,19 +95,19 @@ public class AddVehiclePanel extends JPanel {
         spArrivalDate.setEditor(editorDate);
 
         spGearNumber = new JSpinner(
-                new SpinnerNumberModel(6,5,8,1)
+                new SpinnerNumberModel(6, AppConfig.GEARBOX_LOWEST, AppConfig.GEARBOX_HIGHEST,1)
         );
         spDoorNumber = new JSpinner(
-                new SpinnerNumberModel(5,3,5,1)
+                new SpinnerNumberModel(5, AppConfig.DOOR_LOWEST, AppConfig.DOOR_HIGHEST,1)
         );
         spSeatNumber = new JSpinner(
-                new SpinnerNumberModel(5,1,9,1)
+                new SpinnerNumberModel(5, AppConfig.SEAT_LOWEST, AppConfig.SEAT_HIGHEST,1)
         );
         spEuroStandard = new JSpinner(
-                new SpinnerNumberModel(1,1,7,1)
+                new SpinnerNumberModel(1, AppConfig.EURO_STANDARD_LOWEST, AppConfig.EURO_STANDARD_HIGHEST,1)
         );
         spProductionYear = new JSpinner(
-                new SpinnerNumberModel(2020,1886,Year.now().getValue(),1)
+                new SpinnerNumberModel(2020, AppConfig.YEAR_PRODUCTION_LOWEST, Year.now().getValue(),1)
         );
 
         JSpinner.NumberEditor editorProductionYear = new JSpinner.NumberEditor(spProductionYear, "#");
@@ -163,11 +155,9 @@ public class AddVehiclePanel extends JPanel {
             );
         }
 
-
         cbState = new JComboBox<>(AppConfig.VEHICLE_STATES);
         txtHexColor = new JTextField("#000000");
         cbColorType = new JComboBox<>(AppConfig.COLOR_TYPES);
-
 
         cbSaler = new JComboBox<Customer>();
         try {
@@ -260,9 +250,7 @@ public class AddVehiclePanel extends JPanel {
 
         scrollPane.setBorder(null);
 
-        scrollPane.getVerticalScrollBar()
-                .setUnitIncrement(16);
-
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
     }
 

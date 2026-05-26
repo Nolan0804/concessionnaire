@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import view.panels.UpdateVehiclePanel;
 
 public class VehicleController {
     private final MainFrame view;
@@ -42,6 +43,7 @@ public class VehicleController {
                 addVehicle();
             } catch (DataAccessException | InvalidInputException ex) {
                 DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());}});
+
     }
 
     public void loadVehicles() {
@@ -147,11 +149,50 @@ public class VehicleController {
         }
     }
 
+    public void updateVehicle(UpdateVehiclePanel view, Vehicle vehicle) {
+        view.getBtnUpdate().addActionListener(e -> {
+            try {
+                Vehicle updatedVehicle = new Vehicle(
+                        vehicle.getVIN(),
+                        Double.parseDouble(view.getTxtKilometer().getText()),
+                        vehicle.getArrivalDate(),
+                        Double.parseDouble(view.getTxtSalePrice().getText()),
+                        Double.parseDouble(view.getTxtPurchasePrice().getText()),
+                        view.getTxtRegistration().getText(),
+                        Integer.parseInt(view.getTxtPower().getText()),
+                        view.getCbGearBox().getSelectedItem().toString(),
+                        (Integer) view.getSpGearNumber().getValue(),
+                        (Integer) view.getSpDoorNumber().getValue(),
+                        (Integer) view.getSpSeatNumber().getValue(),
+                        view.getTxtInformation().getText(),
+                        (Integer) view.getSpEuroStandard().getValue(),
+                        (Integer) view.getSpProductionYear().getValue(),
+                        view.getChkVatDeductible().isSelected(),
+                        (Garanty) view.getCbGaranty().getSelectedItem(),
+                        view.getTxtHexColor().getText(),
+                        view.getCbColorType().getSelectedItem().toString(),
+                        (Energy) view.getCbEnergy().getSelectedItem(),
+                        (Brand) view.getCbBrand().getSelectedItem(),
+                        view.getCbState().getSelectedItem().toString(),
+                        (Customer) view.getCbSaler().getSelectedItem()
+                );
+
+                VehicleBusiness vehicleBusiness = new VehicleBusiness();
+                vehicleBusiness.updateVehicle(updatedVehicle);
+
+                DialogMessage.successMessage(view, "Update Vehicle", "Véhicule mis à jour avec succès !");
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                DialogMessage.errorMessage(view, "Update Vehicle", ex.getMessage());
+            }
+        });
+    }
+
     public void deleteVehicle(String vin) throws InvalidInputException {
         if(ValidForms.isEmpty(vin)) {
             throw new InvalidInputException("VIN obligatoire");
         }
-
         try {
             VehicleBusiness business = new VehicleBusiness();
             business.deleteVehicle(vin);

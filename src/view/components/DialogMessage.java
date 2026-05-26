@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DialogMessage {
-
     public static void errorMessage(Component parent, String title, String message) {
         JOptionPane.showMessageDialog(
                 parent,
