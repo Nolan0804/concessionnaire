@@ -201,7 +201,6 @@ public class UpdateVehiclePanel extends JPanel {
         formPanel.add(spProductionYear);
 
         btnUpdate = new JButton("Valider la modification");
-
         formPanel.add(new JLabel());
         formPanel.add(btnUpdate);
         add(new JScrollPane(formPanel), BorderLayout.CENTER);

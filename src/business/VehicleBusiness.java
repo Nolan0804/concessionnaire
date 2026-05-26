@@ -31,7 +31,6 @@ public class VehicleBusiness {
         dao.updateVehicle(vehicle);
     }
 
-
     public void addVehicle(Vehicle vehicle) throws Exception {
         if(vehicle == null) {
             throw new Exception("Vehicle null");
@@ -58,13 +57,6 @@ public class VehicleBusiness {
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean vehicleExists(String vin) throws Exception {
-        if(vin == null || vin.trim().isEmpty()) {
-            throw new Exception("VIN obligatoire");
-        }
-        return dao.vehicleExists(vin);
     }
 
     public List<Object[]> searchVehicles(String brand, String energy, double maxKilometer) throws DataAccessException {

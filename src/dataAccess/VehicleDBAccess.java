@@ -1,11 +1,10 @@
 package dataAccess;
 import exception.DataAccessException;
 import exception.InvalidInputException;
+import exception.PrimaryKeyDuplicateException;
 import model.*;
 
-import java.awt.*;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class VehicleDBAccess implements VehicleDAO {
     }
 
     @Override
-    public void insertVehicle(Vehicle vehicle) throws DataAccessException {
+    public void insertVehicle(Vehicle vehicle) throws DataAccessException, PrimaryKeyDuplicateException {
         try {
             String sql = """
             INSERT INTO vehicle(vin, kilometer, arrival_date, sale_price, purchase_price, registration, power, gear_box_type, gear_number, door_number, seat_number, information, euro_standard,
@@ -65,6 +64,10 @@ public class VehicleDBAccess implements VehicleDAO {
 
             statement.executeUpdate();
         } catch (SQLException e) {
+            if(e.getMessage().contains("duplicate")) {
+                throw new PrimaryKeyDuplicateException("A vehicle with VIN " + vehicle.getVIN() + " already exists.");
+            }
+
             throw new DataAccessException("DATA VEHICLE : Insert impossible");
         }
     }
@@ -166,23 +169,6 @@ public class VehicleDBAccess implements VehicleDAO {
         }
     }
 
-    @Override
-    public Boolean vehicleExists(String vinNumber) throws DataAccessException {
-        try {
-            String sql =
-                    """
-                    SELECT VIN
-                    FROM Vehicle
-                    WHERE VIN = ?
-                    """;
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, vinNumber);
-            ResultSet rs = statement.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            throw new DataAccessException("DATA VEHICLE : Exists impossible");
-        }
-    }
     @Override
     public Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException{
         try {
