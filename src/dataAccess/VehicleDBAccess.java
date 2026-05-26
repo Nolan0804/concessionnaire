@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDBAccess implements VehicleDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public VehicleDBAccess() throws DataAccessException {
         try {

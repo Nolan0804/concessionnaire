@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDBAccess implements CustomerDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public CustomerDBAccess() throws DataAccessException {
         try {

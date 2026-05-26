@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GarantyDBAccess implements GarantyDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public GarantyDBAccess() throws DataAccessException {
         try {

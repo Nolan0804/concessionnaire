@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnergyDBAccess implements EnergyDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public EnergyDBAccess() throws DataAccessException {
         try {

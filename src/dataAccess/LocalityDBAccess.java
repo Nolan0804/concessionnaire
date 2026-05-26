@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LocalityDBAccess implements LocalityDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public LocalityDBAccess() throws DataAccessException {
         try {
