@@ -155,11 +155,9 @@ public class AddVehiclePanel extends JPanel {
             );
         }
 
-
         cbState = new JComboBox<>(AppConfig.VEHICLE_STATES);
         txtHexColor = new JTextField("#000000");
         cbColorType = new JComboBox<>(AppConfig.COLOR_TYPES);
-
 
         cbSaler = new JComboBox<Customer>();
         try {
@@ -252,9 +250,7 @@ public class AddVehiclePanel extends JPanel {
 
         scrollPane.setBorder(null);
 
-        scrollPane.getVerticalScrollBar()
-                .setUnitIncrement(16);
-
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
     }
 

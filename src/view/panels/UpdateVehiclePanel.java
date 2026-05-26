@@ -164,17 +164,13 @@ public class UpdateVehiclePanel extends JPanel {
         cbSaler.setSelectedItem(vehicle.getSaler());
         formPanel.add(cbSaler);
 
-
         formPanel.add(new JLabel("Gear number"));
-        spGearNumber = new JSpinner(
-                new SpinnerNumberModel((int) vehicle.getGearNumber(),AppConfig.GEARBOX_LOWEST,AppConfig.GEARBOX_HIGHEST,1)
-        );
+        spGearNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getGearNumber(),AppConfig.GEARBOX_LOWEST,AppConfig.GEARBOX_HIGHEST,1));
         formPanel.add(spGearNumber);
 
         formPanel.add(new JLabel("Door number"));
         spDoorNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getDoorNumber(), AppConfig.DOOR_LOWEST, AppConfig.DOOR_HIGHEST, 1));
         formPanel.add(spDoorNumber);
-
 
         formPanel.add(new JLabel("Seat number"));
         spSeatNumber = new JSpinner(new SpinnerNumberModel((int) vehicle.getSeatNumber(), AppConfig.SEAT_LOWEST, AppConfig.SEAT_HIGHEST, 1));
@@ -213,5 +209,89 @@ public class UpdateVehiclePanel extends JPanel {
 
     public JButton getBtnUpdate() {
         return btnUpdate;
+    }
+
+    public JTextField getTxtVin() {
+        return txtVin;
+    }
+
+    public JTextField getTxtKilometer() {
+        return txtKilometer;
+    }
+
+    public JTextField getTxtSalePrice() {
+        return txtSalePrice;
+    }
+
+    public JTextField getTxtPurchasePrice() {
+        return txtPurchasePrice;
+    }
+
+    public JTextField getTxtRegistration() {
+        return txtRegistration;
+    }
+
+    public JTextField getTxtPower() {
+        return txtPower;
+    }
+
+    public JTextField getTxtHexColor() {
+        return txtHexColor;
+    }
+
+    public JTextArea getTxtInformation() {
+        return txtInformation;
+    }
+
+    public JCheckBox getChkVatDeductible() {
+        return chkVatDeductible;
+    }
+
+    public JComboBox<String> getCbGearBox() {
+        return cbGearBox;
+    }
+
+    public JComboBox<String> getCbColorType() {
+        return cbColorType;
+    }
+
+    public JComboBox<String> getCbState() {
+        return cbState;
+    }
+
+    public JComboBox<Garanty> getCbGaranty() {
+        return cbGaranty;
+    }
+
+    public JComboBox<Energy> getCbEnergy() {
+        return cbEnergy;
+    }
+
+    public JComboBox<Brand> getCbBrand() {
+        return cbBrand;
+    }
+
+    public JComboBox<Customer> getCbSaler() {
+        return cbSaler;
+    }
+
+    public JSpinner getSpGearNumber() {
+        return spGearNumber;
+    }
+
+    public JSpinner getSpDoorNumber() {
+        return spDoorNumber;
+    }
+
+    public JSpinner getSpSeatNumber() {
+        return spSeatNumber;
+    }
+
+    public JSpinner getSpEuroStandard() {
+        return spEuroStandard;
+    }
+
+    public JSpinner getSpProductionYear() {
+        return spProductionYear;
     }
 }
