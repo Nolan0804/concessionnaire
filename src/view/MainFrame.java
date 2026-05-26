@@ -10,10 +10,12 @@ import model.Vehicle;
 
 public class MainFrame extends JFrame {
     private HomePanel homePanel;
-    private  MenuBarView menuBarView;
+    private MenuBarView menuBarView;
     private JPanel container;
     private AddVehiclePanel addVehiclePanel;
     private SearchPanelKilometerBrandEnergy searchPanel;
+    private SearchPanelTrialEnergyKilometer searchTrialPanel;
+    private SearchPanelSalePeriod searchSalePanel;
     private VehicleListPanel vehicleListPanel;
     private UpdateVehiclePanel updateVehiclePanel;
 
@@ -32,14 +34,19 @@ public class MainFrame extends JFrame {
         homePanel = new HomePanel();
         addVehiclePanel = new AddVehiclePanel();
         searchPanel = new SearchPanelKilometerBrandEnergy();
+        searchTrialPanel = new SearchPanelTrialEnergyKilometer();
+        searchSalePanel = new SearchPanelSalePeriod();
+
         showHome();
         this.setVisible(true);
     }
 
-    public MenuBarView getmenuBarView() {return menuBarView;}
+    public MenuBarView getmenuBarView() { return menuBarView; }
 
-    public AddVehiclePanel getAddVehiclePanel() {return addVehiclePanel;}
-    public SearchPanelKilometerBrandEnergy getSearchPanel() {return searchPanel;}
+    public AddVehiclePanel getAddVehiclePanel() { return addVehiclePanel; }
+    public SearchPanelKilometerBrandEnergy getSearchPanel() { return searchPanel; }
+    public SearchPanelTrialEnergyKilometer getSearchTrialPanel() { return searchTrialPanel; }
+    public SearchPanelSalePeriod getSearchSalePanel() { return searchSalePanel; }
 
     public void showHome() {
         container.removeAll();
@@ -51,6 +58,20 @@ public class MainFrame extends JFrame {
     public void showSearchPanel() {
         container.removeAll();
         container.add(searchPanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
+    }
+
+    public void showSearchTrialPanel() {
+        container.removeAll();
+        container.add(searchTrialPanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
+    }
+
+    public void showSearchSalePanel() {
+        container.removeAll();
+        container.add(searchSalePanel, BorderLayout.CENTER);
         container.revalidate();
         container.repaint();
     }

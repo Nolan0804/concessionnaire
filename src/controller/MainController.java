@@ -25,6 +25,8 @@ public class MainController {
         view.getmenuBarView().getExitApps().addActionListener(e -> System.exit(0));
         view.getmenuBarView().getBackHome().addActionListener(e -> view.showHome());
         view.getmenuBarView().getSearchVehicleKilometerBrandEnergy().addActionListener(e -> view.showSearchPanel());
+        view.getmenuBarView().getSearchTrialEnergyKilometer().addActionListener(e -> view.showSearchTrialPanel());
+        view.getmenuBarView().getSearchSalePeriod().addActionListener(e -> view.showSearchSalePanel());
         view.getmenuBarView().getAddVehicle().addActionListener(e -> view.showAddVehiclePanel());
         view.getmenuBarView().getShowListVehicle().addActionListener(e -> {
                 try {
