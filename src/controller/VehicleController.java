@@ -28,7 +28,9 @@ public class VehicleController {
             try {
                 addVehicle();
             } catch (DataAccessException | InvalidInputException ex) {
-                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());}});
+                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());
+            }
+        });
 
     }
 
