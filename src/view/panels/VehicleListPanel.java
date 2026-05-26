@@ -63,8 +63,4 @@ public class VehicleListPanel extends JPanel {
             });
         }
     }
-
-    public JTable getTable() {
-        return table;
-    }
 }

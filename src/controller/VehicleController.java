@@ -42,8 +42,9 @@ public class VehicleController {
             try {
                 addVehicle();
             } catch (DataAccessException | InvalidInputException ex) {
-                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());}});
-
+                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());
+            }
+        });
     }
 
     public void loadVehicles() {
@@ -144,6 +145,7 @@ public class VehicleController {
             VehicleBusiness business = new VehicleBusiness();
             business.addVehicle(vehicle);
             DialogMessage.successMessage(view, "Add Vehicle", "Véhicule ajouté avec succès !");
+            view.showHome();
         } catch (Exception e) {
             DialogMessage.errorMessage(view, "Add Vehicle", e.getMessage());
         }
@@ -179,7 +181,7 @@ public class VehicleController {
 
                 VehicleBusiness vehicleBusiness = new VehicleBusiness();
                 vehicleBusiness.updateVehicle(updatedVehicle);
-
+                loadVehicles();
                 DialogMessage.successMessage(view, "Update Vehicle", "Véhicule mis à jour avec succès !");
 
             } catch (Exception ex) {
@@ -205,6 +207,9 @@ public class VehicleController {
         VehicleBusiness business = new VehicleBusiness();
         Vehicle vehicle = business.getVehicleByVIN(vin);
         view.showUpdateVehiclePanel(vehicle);
+
+        UpdateVehiclePanel panel = view.getUpdateVehiclePanel();
+        updateVehicle(panel, vehicle);
     }
 
     private void refreshTable() {

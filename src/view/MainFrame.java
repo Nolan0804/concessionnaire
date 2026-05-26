@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import controller.VehicleController;
-import exception.DataAccessException;
 import view.components.*;
 import view.panels.*;
 import model.Vehicle;
@@ -18,6 +17,7 @@ public class MainFrame extends JFrame {
     private SearchPanelTrialEnergyKilometer searchTrialPanel;
     private SearchPanelSalePeriod searchSalePanel;
     private VehicleListPanel vehicleListPanel;
+    private UpdateVehiclePanel updateVehiclePanel;
 
     public MainFrame() {
         super("Concessionnaire SiNo");
@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
     }
 
     public void showUpdateVehiclePanel(Vehicle vehicle) {
-        UpdateVehiclePanel updateVehiclePanel = new UpdateVehiclePanel(vehicle);
+        updateVehiclePanel = new UpdateVehiclePanel(vehicle);
         container.removeAll();
         container.add(updateVehiclePanel, BorderLayout.CENTER);
         container.revalidate();
@@ -101,5 +101,8 @@ public class MainFrame extends JFrame {
 
     public VehicleListPanel getVehicleListPanel() {
         return vehicleListPanel;
+    }
+    public UpdateVehiclePanel getUpdateVehiclePanel() {
+        return updateVehiclePanel;
     }
 }
