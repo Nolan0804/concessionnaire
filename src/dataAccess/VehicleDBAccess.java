@@ -320,8 +320,18 @@ public class VehicleDBAccess implements VehicleDAO {
 
         try {
             String sql = """
-            SELECT *
-            FROM vehicle_search_view
+            SELECT
+                v.vin,
+                v.door_number,
+                v.sale_price,
+                v.kilometer,
+                b.name AS brand_name,
+                e.type AS energy,
+                v.production_year AS year_created,
+                e.is_eco_friendly
+            FROM Vehicle v
+            JOIN Brand b ON v.brand_name = b.name
+            JOIN Energy e ON v.energy = e.type
             WHERE brand_name = ? AND energy = ? AND kilometer <= ?
             """;
 
