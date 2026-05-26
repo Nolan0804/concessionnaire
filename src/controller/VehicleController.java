@@ -12,6 +12,7 @@ import view.panels.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import view.panels.UpdateVehiclePanel;
 
@@ -24,6 +25,19 @@ public class VehicleController {
         view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
         view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
         refreshTable();
+
+        view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
+        view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
+        view.getSearchTrialPanel().getPotentialBuyerCheckBox().addActionListener(e -> refreshTrialTable());
+        refreshTrialTable();
+
+        view.getSearchSalePanel().getPaymentMethodComboBox().addActionListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getMaxPriceSpinner().addChangeListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getDateStartSpinner().addChangeListener(e -> refreshSaleTable());
+        view.getSearchSalePanel().getDateEndSpinner().addChangeListener(e -> refreshSaleTable());
+        refreshSaleTable();
+
+
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
                 addVehicle();
@@ -186,10 +200,10 @@ public class VehicleController {
             DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
         }
     }
+
     public void showUpdateVehicle(String vin) throws Exception {
         VehicleBusiness business = new VehicleBusiness();
         Vehicle vehicle = business.getVehicleByVIN(vin);
-
         view.showUpdateVehiclePanel(vehicle);
     }
 
@@ -203,7 +217,6 @@ public class VehicleController {
             List<Object[]> vehicles = vehicleBusiness.searchVehicles(brand.getName(), energy.getName(), kilometer);
 
             DefaultTableModel model = view.getSearchPanel().getTableModel();
-
             model.setRowCount(0);
 
             for (Object[] row : vehicles) {
@@ -214,4 +227,49 @@ public class VehicleController {
             ex.printStackTrace();
         }
     }
+
+    private void refreshTrialTable() {
+        try {
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+            Energy energy = (Energy) view.getSearchTrialPanel().getEnergyComboBox().getSelectedItem();
+            double kilometer = ((Number) view.getSearchTrialPanel().getKilometerSpinner().getValue()).doubleValue();
+            boolean isPotentialBuyer = view.getSearchTrialPanel().getPotentialBuyerCheckBox().isSelected();
+
+            List<Object[]> results = vehicleBusiness.searchTrials(energy.getName(), kilometer, isPotentialBuyer);
+
+            DefaultTableModel model = view.getSearchTrialPanel().getTableModel();
+            model.setRowCount(0);
+
+            for (Object[] row : results) {
+                model.addRow(row);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void refreshSaleTable() {
+        try {
+            VehicleBusiness vehicleBusiness = new VehicleBusiness();
+
+            Date startDate = (Date) view.getSearchSalePanel().getDateStartSpinner().getValue();
+            Date endDate = (Date) view.getSearchSalePanel().getDateEndSpinner().getValue();
+
+            LocalDate dateStart = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate dateEnd = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            double maxPrice = ((Number) view.getSearchSalePanel().getMaxPriceSpinner().getValue()).doubleValue();
+            String paymentMethod = (String) view.getSearchSalePanel().getPaymentMethodComboBox().getSelectedItem();
+
+            List<Object[]> results = vehicleBusiness.searchSales(dateStart, dateEnd, maxPrice, paymentMethod);
+
+            DefaultTableModel model = view.getSearchSalePanel().getTableModel();
+            model.setRowCount(0);
+            for (Object[] row : results) model.addRow(row);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
