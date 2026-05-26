@@ -1,7 +1,5 @@
 package dataAccess;
-import exception.DataAccessException;
-import exception.InvalidInputException;
-import exception.PrimaryKeyDuplicateException;
+import exception.*;
 import model.*;
 
 import java.time.LocalDate;
@@ -65,7 +63,7 @@ public class VehicleDBAccess implements VehicleDAO {
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            if(e.getMessage().contains("duplicate")) {
+            if(e.getMessage().contains("Duplicate")) {
                 throw new PrimaryKeyDuplicateException("A vehicle with VIN " + vehicle.getVIN() + " already exists.");
             }
 
@@ -155,7 +153,7 @@ public class VehicleDBAccess implements VehicleDAO {
     }
 
     @Override
-    public void deleteVehicleVin(String vin) throws DataAccessException {
+    public void deleteVehicleByVin(String vin) throws DataAccessException, VehicleNotFoundException {
         try {
             String sql = """ 
                 DELETE FROM Vehicle
@@ -164,7 +162,11 @@ public class VehicleDBAccess implements VehicleDAO {
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, vin);
-            statement.executeUpdate();
+            int rowsAffected =  statement.executeUpdate();
+
+            if(rowsAffected == 0) {
+                throw new VehicleNotFoundException("Aucun véhicule trouvé avec le VIN : " + vin);
+            }
         } catch (SQLException e) {
             throw new DataAccessException("DATA VEHICLE : Delete impossible");
         }

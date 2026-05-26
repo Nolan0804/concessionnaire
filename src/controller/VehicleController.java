@@ -3,6 +3,7 @@ package controller;
 import business.VehicleBusiness;
 import exception.DataAccessException;
 import exception.InvalidInputException;
+import exception.VehicleNotFoundException;
 import model.*;
 import view.components.DialogMessage;
 import view.utils.ValidForms;
@@ -21,10 +22,10 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
-        refreshTable();
+        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTableVehicle());
+        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTableVehicle());
+        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTableVehicle());
+        refreshTableVehicle();
 
         view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
         view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
@@ -198,7 +199,7 @@ public class VehicleController {
         try {
             VehicleBusiness business = new VehicleBusiness();
             business.deleteVehicle(vin);
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | VehicleNotFoundException e) {
             DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
         }
     }
@@ -212,7 +213,7 @@ public class VehicleController {
         updateVehicle(panel, vehicle);
     }
 
-    private void refreshTable() {
+    private void refreshTableVehicle() {
         try {
             VehicleBusiness vehicleBusiness = new VehicleBusiness();
             Brand brand = (Brand) view.getSearchPanel().getBrandComboBox().getSelectedItem();
