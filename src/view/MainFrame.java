@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private SearchPanelKilometerBrandEnergy searchPanel;
     private SearchPanelTrialEnergyKilometer searchTrialPanel;
     private SearchPanelSalePeriod searchSalePanel;
+    private SearchPanelRevenue searchRevenuePanel;
     private VehicleListPanel vehicleListPanel;
     private UpdateVehiclePanel updateVehiclePanel;
 
@@ -47,6 +48,7 @@ public class MainFrame extends JFrame {
     public SearchPanelKilometerBrandEnergy getSearchPanel() { return searchPanel; }
     public SearchPanelTrialEnergyKilometer getSearchTrialPanel() { return searchTrialPanel; }
     public SearchPanelSalePeriod getSearchSalePanel() { return searchSalePanel; }
+    public SearchPanelRevenue getSearchRevenuePanel() { return searchRevenuePanel; }
 
     public void showHome() {
         container.removeAll();
@@ -72,6 +74,13 @@ public class MainFrame extends JFrame {
     public void showSearchSalePanel() {
         container.removeAll();
         container.add(searchSalePanel, BorderLayout.CENTER);
+        container.revalidate();
+        container.repaint();
+    }
+
+    public void showRevenuePanel() {
+        container.removeAll();
+        container.add(searchRevenuePanel, BorderLayout.CENTER);
         container.revalidate();
         container.repaint();
     }
