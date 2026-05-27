@@ -37,6 +37,7 @@ public class MainFrame extends JFrame {
         searchPanel = new SearchPanelKilometerBrandEnergy();
         searchTrialPanel = new SearchPanelTrialEnergyKilometer();
         searchSalePanel = new SearchPanelSalePeriod();
+        searchRevenuePanel = new SearchPanelRevenue();
 
         showHome();
         this.setVisible(true);
