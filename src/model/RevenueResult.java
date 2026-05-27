@@ -30,7 +30,7 @@ public class RevenueResult {
     public double getCheapestPurchasePrice() {return cheapestPurchasePrice;}
 
     public double getNetProfit() {
-        return totalCosts - totalRevenue;
+        return totalRevenue - totalCosts;
     }
 
 }
