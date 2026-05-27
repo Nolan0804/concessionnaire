@@ -5,6 +5,6 @@ import model.RevenueResult;
 
 import java.time.LocalDate;
 
-public interface  SaleDao {
+public interface SaleDAO {
     RevenueResult getRevenueByPeriod(LocalDate dateStart, LocalDate dateEnd) throws DataAccessException;
 }

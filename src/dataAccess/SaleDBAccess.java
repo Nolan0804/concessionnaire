@@ -6,7 +6,7 @@ import model.RevenueResult;
 import java.sql.*;
 import java.time.LocalDate;
 
-public class SaleDBAccess implements SaleDao {
+public class SaleDBAccess implements SaleDAO {
     private Connection connection;
 
     public SaleDBAccess() throws DataAccessException {
