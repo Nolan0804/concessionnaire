@@ -22,7 +22,7 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        view.getSearchPanel().getSearchButton().addActionListener(e -> refreshTable());
+        view.getSearchPanel().getSearchButton().addActionListener(e -> refreshTableVehicle());
 
         view.getSearchTrialPanel().getSearchButton().addActionListener(e -> refreshTrialTable());
 
