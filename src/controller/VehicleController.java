@@ -21,21 +21,11 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
-        refreshTable();
+        view.getSearchPanel().getSearchButton().addActionListener(e -> refreshTable());
 
-        view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
-        view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
-        view.getSearchTrialPanel().getPotentialBuyerCheckBox().addActionListener(e -> refreshTrialTable());
-        refreshTrialTable();
+        view.getSearchTrialPanel().getSearchButton().addActionListener(e -> refreshTrialTable());
 
-        view.getSearchSalePanel().getPaymentMethodComboBox().addActionListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getMaxPriceSpinner().addChangeListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getDateStartSpinner().addChangeListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getDateEndSpinner().addChangeListener(e -> refreshSaleTable());
-        refreshSaleTable();
+        view.getSearchSalePanel().getSearchButton().addActionListener(e -> refreshSaleTable());
 
 
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {

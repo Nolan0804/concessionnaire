@@ -7,6 +7,7 @@ public class MenuBarView extends JMenuBar {
     private JMenuItem vehicleMenu, showListVehicle, searchVehicleKilometerBrandEnergy, addVehicle;
     private JMenuItem customerMenu, showListCustomer;
     private JMenuItem saleMenu, showListSale, searchSalePeriod;
+    private JMenuItem revenueCalculation;
     private JMenuItem garantyMenu, showListGaranty;
     private JMenuItem searchTrialEnergyKilometer;
 
@@ -38,6 +39,11 @@ public class MenuBarView extends JMenuBar {
         searchSalePeriod = new JMenuItem("Search sales by period");
         saleMenu.add(showListSale);
         saleMenu.add(searchSalePeriod);
+
+        revenueCalculation = new JMenuItem("Revenue calculation");
+        saleMenu.add(showListSale);
+        saleMenu.add(searchSalePeriod);
+        saleMenu.add(revenueCalculation);
 
         garantyMenu = new JMenu("Garanty");
         showListGaranty = new JMenuItem("List garanties");
@@ -72,4 +78,5 @@ public class MenuBarView extends JMenuBar {
     public JMenuItem getShowListGaranty() {return showListGaranty;}
     public JMenuItem getSearchTrialEnergyKilometer() { return searchTrialEnergyKilometer; }
     public JMenuItem getSearchSalePeriod() { return searchSalePeriod; }
+    public JMenuItem getRevenueCalculation() { return revenueCalculation; }
 }
