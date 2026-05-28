@@ -23,16 +23,9 @@ public class VehicleController {
         this.view = view;
         view.getSearchPanel().getSearchButton().addActionListener(e -> refreshTable());
 
-        view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
-        view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());
-        view.getSearchTrialPanel().getPotentialBuyerCheckBox().addActionListener(e -> refreshTrialTable());
-        refreshTrialTable();
+        view.getSearchTrialPanel().getSearchButton().addActionListener(e -> refreshTrialTable());
 
-        view.getSearchSalePanel().getPaymentMethodComboBox().addActionListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getMaxPriceSpinner().addChangeListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getDateStartSpinner().addChangeListener(e -> refreshSaleTable());
-        view.getSearchSalePanel().getDateEndSpinner().addChangeListener(e -> refreshSaleTable());
-        refreshSaleTable();
+        view.getSearchSalePanel().getSearchButton().addActionListener(e -> refreshSaleTable());
 
 
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {

@@ -10,6 +10,7 @@ public class SearchPanelSalePeriod extends JPanel {
     private JSpinner dateEndSpinner;
     private JSpinner maxPriceSpinner;
     private JComboBox<String> paymentMethodComboBox;
+    private JButton searchButton;
     private JTable resultTable;
     private DefaultTableModel tableModel;
 
@@ -28,6 +29,8 @@ public class SearchPanelSalePeriod extends JPanel {
         paymentMethodComboBox = new JComboBox<>(new String[]{
                 "Cash", "Card", "Bank Transfer", "Financing"
         });
+
+        searchButton = new JButton("Recherche");
 
         String[] columns = {
                 "Name", "Firstname", "Email",
@@ -54,7 +57,7 @@ public class SearchPanelSalePeriod extends JPanel {
 
         JPanel formPanel = new JPanel();
         formPanel.setBorder(BorderFactory.createTitledBorder("Sale Search"));
-        formPanel.setLayout(new GridLayout(5, 2, 10, 10));
+        formPanel.setLayout(new GridLayout(6, 2, 10, 10));
 
         formPanel.add(new JLabel("Start date :"));
         formPanel.add(dateStartSpinner);
@@ -69,6 +72,7 @@ public class SearchPanelSalePeriod extends JPanel {
         formPanel.add(paymentMethodComboBox);
 
         formPanel.add(new JLabel());
+        formPanel.add(searchButton);
 
         JScrollPane scrollPane = new JScrollPane(resultTable);
 
@@ -81,4 +85,5 @@ public class SearchPanelSalePeriod extends JPanel {
     public JSpinner getMaxPriceSpinner() { return maxPriceSpinner; }
     public JComboBox<String> getPaymentMethodComboBox() { return paymentMethodComboBox; }
     public DefaultTableModel getTableModel() { return tableModel; }
+    public JButton getSearchButton() { return searchButton; }
 }
