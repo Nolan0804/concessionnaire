@@ -13,6 +13,7 @@ public class SearchPanelTrialEnergyKilometer extends JPanel {
     private JComboBox<Energy> energyComboBox;
     private JSpinner kilometerSpinner;
     private JCheckBox potentialBuyerCheckBox;
+    private JButton searchButton;
     private JTable resultTable;
     private DefaultTableModel tableModel;
 
@@ -29,6 +30,8 @@ public class SearchPanelTrialEnergyKilometer extends JPanel {
 
         potentialBuyerCheckBox = new JCheckBox();
         potentialBuyerCheckBox.setSelected(false);
+
+        searchButton = new JButton("Recherche");
 
         String[] columns = {
                 "Name", "Firstname", "Email",
@@ -56,7 +59,7 @@ public class SearchPanelTrialEnergyKilometer extends JPanel {
 
         JPanel formPanel = new JPanel();
         formPanel.setBorder(BorderFactory.createTitledBorder("Trial Search"));
-        formPanel.setLayout(new GridLayout(4, 2, 10, 10));
+        formPanel.setLayout(new GridLayout(5, 2, 10, 10));
 
         formPanel.add(new JLabel("Energy :"));
         formPanel.add(energyComboBox);
@@ -68,6 +71,7 @@ public class SearchPanelTrialEnergyKilometer extends JPanel {
         formPanel.add(potentialBuyerCheckBox);
 
         formPanel.add(new JLabel());
+        formPanel.add(searchButton);
 
         JScrollPane scrollPane = new JScrollPane(resultTable);
 
@@ -79,5 +83,6 @@ public class SearchPanelTrialEnergyKilometer extends JPanel {
     public JSpinner getKilometerSpinner() { return kilometerSpinner; }
     public JCheckBox getPotentialBuyerCheckBox() { return potentialBuyerCheckBox; }
     public DefaultTableModel getTableModel() { return tableModel; }
+    public JButton getSearchButton() { return searchButton; }
 }
 
