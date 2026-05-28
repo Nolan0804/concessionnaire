@@ -55,6 +55,12 @@ public class SearchPanelRevenue extends JPanel {
         layoutComponents();
     }
 
+    private void addResultRow(JPanel panel, String label, JLabel value) {
+        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        row.add(new JLabel(label));
+        row.add(value);
+        panel.add(row);
+    }
 
     private void layoutComponents() {
         setLayout(new BorderLayout(10, 10));
@@ -62,49 +68,28 @@ public class SearchPanelRevenue extends JPanel {
         JPanel formPanel = new JPanel();
         formPanel.setBorder(BorderFactory.createTitledBorder("Calcul du chiffre d'affaires"));
         formPanel.setLayout(new GridLayout(3, 2, 10, 10));
-
         formPanel.add(new JLabel("Date de début :"));
         formPanel.add(dateStartSpinner);
-
         formPanel.add(new JLabel("Date de fin :"));
         formPanel.add(dateEndSpinner);
-
         formPanel.add(new JLabel());
         formPanel.add(calculateButton);
 
         JPanel resultPanel = new JPanel();
         resultPanel.setBorder(BorderFactory.createTitledBorder("Résultats"));
-        resultPanel.setLayout(new GridLayout(8, 2, 10, 5));
-
-        resultPanel.add(new JLabel("Chiffre d'affaires :"));
-        resultPanel.add(labelTotalRevenue);
-
-        resultPanel.add(new JLabel("Total charges :"));
-        resultPanel.add(labelTotalCosts);
-
-        resultPanel.add(new JLabel("Bénéfice net :"));
-        resultPanel.add(labelNetProfit);
-
-        resultPanel.add(new JLabel("Nombre de ventes :"));
-        resultPanel.add(labelNumberOfSales);
-
-        resultPanel.add(new JLabel("Vente la plus chère :"));
-        resultPanel.add(labelMaxSale);
-
-        resultPanel.add(new JLabel("Vente la moins chère :"));
-        resultPanel.add(labelMinSale);
-
-        resultPanel.add(new JLabel("Achat le plus cher :"));
-        resultPanel.add(labelMaxPurchase);
-
-        resultPanel.add(new JLabel("Achat le moins cher :"));
-        resultPanel.add(labelMinPurchase);
+        resultPanel.setLayout(new BoxLayout(resultPanel, BoxLayout.Y_AXIS));
+        addResultRow(resultPanel, "Chiffre d'affaires :", labelTotalRevenue);
+        addResultRow(resultPanel, "Total charges :", labelTotalCosts);
+        addResultRow(resultPanel, "Bénéfice net :", labelNetProfit);
+        addResultRow(resultPanel, "Nombre de ventes :", labelNumberOfSales);
+        addResultRow(resultPanel, "Vente la plus chère :", labelMaxSale);
+        addResultRow(resultPanel, "Vente la moins chère :", labelMinSale);
+        addResultRow(resultPanel, "Achat le plus cher :", labelMaxPurchase);
+        addResultRow(resultPanel, "Achat le moins cher :", labelMinPurchase);
 
         add(formPanel, BorderLayout.NORTH);
         add(resultPanel, BorderLayout.CENTER);
-
     }
-
     private void calculateRevenue(){
         try {
             Date startDate = (Date) dateStartSpinner.getValue();
