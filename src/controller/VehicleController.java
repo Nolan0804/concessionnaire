@@ -21,10 +21,7 @@ public class VehicleController {
 
     public VehicleController(MainFrame view) throws DataAccessException, InvalidInputException{
         this.view = view;
-        view.getSearchPanel().getBrandComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getEnergyComboBox().addActionListener(e -> refreshTable());
-        view.getSearchPanel().getKilometerSpinner().addChangeListener(e -> refreshTable());
-        refreshTable();
+        view.getSearchPanel().getSearchButton().addActionListener(e -> refreshTable());
 
         view.getSearchTrialPanel().getEnergyComboBox().addActionListener(e -> refreshTrialTable());
         view.getSearchTrialPanel().getKilometerSpinner().addChangeListener(e -> refreshTrialTable());

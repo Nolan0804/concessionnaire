@@ -16,6 +16,7 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
     private JComboBox<Brand> brandComboBox;
     private JComboBox<Energy> energyComboBox;
     private JSpinner kilometerSpinner;
+    private JButton searchButton;
     private JTable resultTable;
     private DefaultTableModel tableModel;
 
@@ -56,6 +57,8 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
                 )
         );
 
+        searchButton = new JButton("Recherche");
+
         String[] columns = {
                 "VIN",
                 "Doors",
@@ -87,7 +90,7 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
         );
 
         formPanel.setLayout(
-                new GridLayout(4, 2, 10, 10)
+                new GridLayout(5, 2, 10, 10)
         );
 
         formPanel.add(new JLabel("Brand :"));
@@ -100,6 +103,7 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
         formPanel.add(kilometerSpinner);
 
         formPanel.add(new JLabel());
+        formPanel.add(searchButton);
 
         JScrollPane scrollPane = new JScrollPane(resultTable);
 
@@ -110,5 +114,6 @@ public class SearchPanelKilometerBrandEnergy extends JPanel {
     public JComboBox<Brand> getBrandComboBox() {return brandComboBox;}
     public JComboBox<Energy> getEnergyComboBox() {return energyComboBox;}
     public JSpinner getKilometerSpinner() {return kilometerSpinner;}
+    public JButton getSearchButton() {return searchButton;}
     public DefaultTableModel getTableModel() {return tableModel;}
 }
