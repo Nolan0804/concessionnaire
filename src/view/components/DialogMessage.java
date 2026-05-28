@@ -21,14 +21,4 @@ public class DialogMessage {
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
-
-    public static int confirmMessage(Component parent, String message) {
-
-        return JOptionPane.showConfirmDialog(
-                parent,
-                message,
-                "Confirmation",
-                JOptionPane.YES_NO_OPTION
-        );
-    }
 }
