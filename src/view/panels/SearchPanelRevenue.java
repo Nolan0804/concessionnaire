@@ -90,6 +90,7 @@ public class SearchPanelRevenue extends JPanel {
         add(formPanel, BorderLayout.NORTH);
         add(resultPanel, BorderLayout.CENTER);
     }
+
     private void calculateRevenue(){
         try {
             Date startDate = (Date) dateStartSpinner.getValue();
