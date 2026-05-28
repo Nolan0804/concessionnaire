@@ -1,4 +1,4 @@
-# concessionnaire
+# Concessionnaire
 Travail de fin d'année bac 2 JAVA - Concessionnaire d'occasion 
 
 La base de donnée se nomme : cardealer
@@ -16,3 +16,4 @@ Le projet est composé de 11 packages :
 - SQL : contient les scripts SQL pour la création de la base de données et des tables
 - config : contient les classes de configuration de l'application (static final variables)
 - exceptions : contient les classes d'exceptions personnalisées
+

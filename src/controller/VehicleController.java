@@ -3,6 +3,7 @@ package controller;
 import business.VehicleBusiness;
 import exception.DataAccessException;
 import exception.InvalidInputException;
+import exception.VehicleNotFoundException;
 import model.*;
 import view.components.DialogMessage;
 import view.utils.ValidForms;
@@ -188,7 +189,7 @@ public class VehicleController {
         try {
             VehicleBusiness business = new VehicleBusiness();
             business.deleteVehicle(vin);
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | VehicleNotFoundException e) {
             DialogMessage.errorMessage(view, "Delete Vehicle", e.getMessage());
         }
     }
@@ -202,7 +203,7 @@ public class VehicleController {
         updateVehicle(panel, vehicle);
     }
 
-    private void refreshTable() {
+    private void refreshTableVehicle() {
         try {
             VehicleBusiness vehicleBusiness = new VehicleBusiness();
             Brand brand = (Brand) view.getSearchPanel().getBrandComboBox().getSelectedItem();

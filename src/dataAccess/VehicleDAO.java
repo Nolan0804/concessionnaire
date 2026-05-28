@@ -1,8 +1,6 @@
 package dataAccess;
 
-import exception.DataAccessException;
-import exception.InvalidInputException;
-import exception.PrimaryKeyDuplicateException;
+import exception.*;
 import model.Vehicle;
 
 import java.time.LocalDate;
@@ -12,7 +10,7 @@ public interface VehicleDAO {
     void insertVehicle(Vehicle vehicle) throws DataAccessException, PrimaryKeyDuplicateException;
     List<Vehicle> getAllVehicles() throws DataAccessException, InvalidInputException;
     List<Object[]> searchVehicles(String brand, String energy, double kilometerMax) throws DataAccessException;
-    void deleteVehicleVin(String vinNumber) throws DataAccessException;
+    void deleteVehicleByVin(String vinNumber) throws DataAccessException, VehicleNotFoundException;
     void updateVehicle(Vehicle vehicle) throws DataAccessException;
     Vehicle getVehicleByVIN(String vin) throws DataAccessException, InvalidInputException;
     List<Object[]> searchTrials(String energy, double maxKilometer, boolean isPotentialBuyer) throws DataAccessException;
