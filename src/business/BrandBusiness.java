@@ -1,5 +1,6 @@
 package business;
 
+import dataAccess.BrandDAO;
 import dataAccess.BrandDBAccess;
 
 import exception.DataAccessException;
@@ -9,7 +10,7 @@ import model.Brand;
 import java.util.List;
 
 public class BrandBusiness {
-    private BrandDBAccess dao;
+    private BrandDAO dao;
 
     public BrandBusiness() throws DataAccessException {
         dao = new BrandDBAccess();

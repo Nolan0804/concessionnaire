@@ -9,8 +9,8 @@ import model.RevenueResult;
 import java.time.LocalDate;
 
 public class RevenueBusiness {
-
     private SaleDAO dao;
+
     public RevenueBusiness() {
         try {
             dao = new SaleDBAccess();

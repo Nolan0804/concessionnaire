@@ -1,5 +1,6 @@
 package business;
 
+import dataAccess.VehicleDAO;
 import dataAccess.VehicleDBAccess;
 import exception.*;
 import model.Vehicle;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class VehicleBusiness {
-    private VehicleDBAccess dao;
+    private VehicleDAO dao;
 
     public VehicleBusiness() {
         try {

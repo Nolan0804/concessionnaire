@@ -53,7 +53,7 @@ public class VehicleController {
         try {
             AddVehiclePanel panel = view.getAddVehiclePanel();
 
-            if(ValidForms.isEmpty(panel.getTxtVin().getText())) {
+            if(panel.getTxtVin().getText().equals("XXXXXXXXXXXXXXXXX") || ValidForms.isEmpty(panel.getTxtVin().getText())) {
                 DialogMessage.errorMessage(view, "VIN","VIN obligatoire");
                 return;
             }
@@ -85,11 +85,15 @@ public class VehicleController {
 
             String vin = panel.getTxtVin().getText();
             double kilometer = Double.parseDouble(panel.getTxtKilometer().getText().replace(",", "."));
-            Date date = (Date) panel.getSpArrivalDate().getValue();
-            LocalDate arrivalDate = LocalDate.now();
+            LocalDate arrivalDate = (LocalDate) panel.getSpArrivalDate().getValue();
             double salePrice = Double.parseDouble(panel.getTxtSalePrice().getText().replace(",", "."));
             double purchasePrice = Double.parseDouble(panel.getTxtPurchasePrice().getText().replace(",", "."));
-            String registration = panel.getTxtRegistration().getText();
+            String registration;
+            if(panel.getTxtRegistration().getText().equals("X-XXX-XXX")) {
+                registration = null;
+            }else{
+                registration = panel.getTxtRegistration().getText();
+            }
             Integer power = Integer.parseInt(panel.getTxtPower().getText());
             String gearBox = (String) panel.getCbGearBox().getSelectedItem();
             Integer gearNumber = (Integer) panel.getSpGearNumber().getValue();
