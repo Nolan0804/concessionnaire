@@ -14,6 +14,7 @@ public class UpdateVehiclePanel extends JPanel {
     private JTextField txtVin;
     private JTextField txtKilometer;
     private JTextField txtSalePrice;
+    private JSpinner arrivalDate;
     private JTextField txtPurchasePrice;
     private JTextField txtRegistration;
     private JTextField txtPower;
@@ -56,6 +57,17 @@ public class UpdateVehiclePanel extends JPanel {
         formPanel.add(new JLabel("Kilometer"));
         txtKilometer = new JTextField(String.valueOf(vehicle.getKilometer()));
         formPanel.add(txtKilometer);
+
+        formPanel.add(new JLabel("Arrival date"));
+        java.util.Date vehicleArrivalDate = java.util.Date.from(
+                vehicle.getArrivalDate()
+                        .atStartOfDay(java.time.ZoneId.systemDefault())
+                        .toInstant()
+        );
+        arrivalDate = new JSpinner(new SpinnerDateModel(vehicleArrivalDate, null, new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(arrivalDate, "dd/MM/yyyy");
+        arrivalDate.setEditor(dateEditor);
+        formPanel.add(arrivalDate);
 
         formPanel.add(new JLabel("Sale price"));
         txtSalePrice = new JTextField(String.valueOf(vehicle.getSalePrice()));
@@ -213,6 +225,7 @@ public class UpdateVehiclePanel extends JPanel {
     }
     public JTextField getTxtRegistration() {return txtRegistration;}
     public JTextField getTxtPower() {return txtPower;}
+    public JSpinner getArrivalDate() {return arrivalDate;}
     public JTextField getTxtHexColor() {return txtHexColor;}
     public JTextArea getTxtInformation() {return txtInformation;}
     public JCheckBox getChkVatDeductible() {return chkVatDeductible;}

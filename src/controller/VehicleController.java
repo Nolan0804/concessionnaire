@@ -85,7 +85,7 @@ public class VehicleController {
 
             String vin = panel.getTxtVin().getText();
             double kilometer = Double.parseDouble(panel.getTxtKilometer().getText().replace(",", "."));
-            LocalDate arrivalDate = (LocalDate) panel.getSpArrivalDate().getValue();
+            LocalDate arrivalDate = ((Date) panel.getSpArrivalDate().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             double salePrice = Double.parseDouble(panel.getTxtSalePrice().getText().replace(",", "."));
             double purchasePrice = Double.parseDouble(panel.getTxtPurchasePrice().getText().replace(",", "."));
             String registration;
@@ -152,7 +152,7 @@ public class VehicleController {
                 Vehicle updatedVehicle = new Vehicle(
                         vehicle.getVIN(),
                         Double.parseDouble(view.getTxtKilometer().getText()),
-                        vehicle.getArrivalDate(),
+                        ((Date) view.getArrivalDate().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                         Double.parseDouble(view.getTxtSalePrice().getText()),
                         Double.parseDouble(view.getTxtPurchasePrice().getText()),
                         view.getTxtRegistration().getText(),
