@@ -1,6 +1,6 @@
 package view.panels;
 
-import business.RevenueBusiness;
+import controller.RevenueController;
 import exception.DataAccessException;
 import exception.InvalidInputException;
 import model.RevenueResult;
@@ -27,7 +27,10 @@ public class SearchPanelRevenue extends JPanel {
     private JLabel labelMaxPurchase;
     private JLabel labelMinPurchase;
 
+    private RevenueController controller;
+
     public SearchPanelRevenue() {
+        controller = new RevenueController();
         SpinnerDateModel startModel = new SpinnerDateModel();
         dateStartSpinner = new JSpinner(startModel);
 
@@ -99,8 +102,7 @@ public class SearchPanelRevenue extends JPanel {
             LocalDate dateStart = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate dateEnd = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            RevenueBusiness business = new RevenueBusiness();
-            RevenueResult result = business.calculateRevenue(dateStart, dateEnd);
+            RevenueResult result = controller.calculateRevenue(dateStart, dateEnd);
 
             labelTotalRevenue.setText(String.format("%.2f €", result.getTotalRevenue()));
             labelTotalCosts.setText(String.format("%.2f €", result.getTotalCosts()));
