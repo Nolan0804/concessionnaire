@@ -1,9 +1,7 @@
 package controller;
 
 import business.VehicleBusiness;
-import exception.DataAccessException;
-import exception.InvalidInputException;
-import exception.VehicleNotFoundException;
+import exception.*;
 import model.*;
 import view.components.DialogMessage;
 import view.utils.ValidForms;
@@ -32,8 +30,9 @@ public class VehicleController {
         view.getAddVehiclePanel().getBtnAdd().addActionListener(e -> {
             try {
                 addVehicle();
-            } catch (DataAccessException | InvalidInputException ex) {
-                DialogMessage.errorMessage(view, "Add Vehicle", ex.getMessage());
+                DialogMessage.successMessage(view.getAddVehiclePanel(), "Add Vehicle", "Véhicule ajouté avec succès !");
+            } catch (Exception ex) {
+                DialogMessage.errorMessage(view.getAddVehiclePanel(), "Add Vehicle", ex.getMessage());
             }
         });
     }
@@ -49,38 +48,28 @@ public class VehicleController {
         }
     }
 
-    private void addVehicle() throws DataAccessException, InvalidInputException {
-        try {
+    private void addVehicle() throws DataAccessException, InvalidInputException, VehicleNull,
+            PrimaryKeyDuplicateException {
+
             AddVehiclePanel panel = view.getAddVehiclePanel();
 
             if(panel.getTxtVin().getText().equals("XXXXXXXXXXXXXXXXX") || ValidForms.isEmpty(panel.getTxtVin().getText())) {
-                DialogMessage.errorMessage(view, "VIN","VIN obligatoire");
-                return;
+                throw new InvalidInputException("VIN obligatoire");
             }
-
             if(!ValidForms.isValidVIN(panel.getTxtVin().getText())) {
-                DialogMessage.errorMessage(view, "VIN", "Le VIN doit contenir 17 caractères");
-                return;
+                throw new InvalidInputException("Le VIN doit contenir 17 caractères");
             }
-
             if(!ValidForms.isPositiveDouble(panel.getTxtKilometer().getText())) {
-                DialogMessage.errorMessage(view, "Kilometer","Kilométrage invalide");
-                return;
+                throw new InvalidInputException("Kilométrage invalide");
             }
-
             if(!ValidForms.isPositiveDouble(panel.getTxtSalePrice().getText())) {
-                DialogMessage.errorMessage(view, "Sale Price", "Prix de vente invalide");
-                return;
+                throw new InvalidInputException("Prix de vente invalide");
             }
-
             if(!ValidForms.isPositiveDouble(panel.getTxtPurchasePrice().getText())) {
-                DialogMessage.errorMessage(view, "Purshase Price", "Prix d'achat invalide");
-                return;
+                throw new InvalidInputException("Prix d'achat invalide");
             }
-
             if(!ValidForms.isPositiveInteger(panel.getTxtPower().getText())) {
-                DialogMessage.errorMessage(view, "Power", "Puissance invalide");
-                return;
+                throw new InvalidInputException("Puissance invalide");
             }
 
             String vin = panel.getTxtVin().getText();
@@ -137,13 +126,8 @@ public class VehicleController {
                             saler
                     );
 
-            VehicleBusiness business = new VehicleBusiness();
-            business.addVehicle(vehicle);
-            DialogMessage.successMessage(view, "Add Vehicle", "Véhicule ajouté avec succès !");
-            view.showHome();
-        } catch (Exception e) {
-            DialogMessage.errorMessage(view, "Add Vehicle", e.getMessage());
-        }
+        new VehicleBusiness().addVehicle(vehicle);
+
     }
 
     public void updateVehicle(UpdateVehiclePanel view, Vehicle vehicle) {
