@@ -1,5 +1,6 @@
 package business;
 
+import dataAccess.EnergyDAO;
 import dataAccess.EnergyDBAccess;
 
 import exception.DataAccessException;
@@ -9,7 +10,7 @@ import model.Energy;
 import java.util.List;
 
 public class EnergyBusiness {
-    private EnergyDBAccess dao;
+    private EnergyDAO dao;
 
     public EnergyBusiness() throws DataAccessException {
         dao = new EnergyDBAccess();

@@ -11,7 +11,6 @@ import model.RevenueResult;
 import java.time.LocalDate;
 
 public class RevenueBusinessTest {
-
     private RevenueBusiness revenueBusiness;
 
     @BeforeEach

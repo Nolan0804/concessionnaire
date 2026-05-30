@@ -35,7 +35,6 @@ public class Brand extends ComboBoxItem{
         this.yearCreated = yearCreated;
     }
 
-    // Getter
     public String getName() {
         return name;
     }
