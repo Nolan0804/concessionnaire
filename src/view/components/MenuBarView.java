@@ -31,8 +31,6 @@ public class MenuBarView extends JMenuBar {
 
         saleMenu = new JMenu("Sale");
         searchSalePeriod = new JMenuItem("Search sales by period");
-        saleMenu.add(searchSalePeriod);
-
         revenueCalculation = new JMenuItem("Revenue calculation");
         saleMenu.add(searchSalePeriod);
         saleMenu.add(revenueCalculation);
