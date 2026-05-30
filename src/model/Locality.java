@@ -32,14 +32,6 @@ public class Locality {
             this.postalCode = postalCode;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
     public String getName() {
         return name;
     }

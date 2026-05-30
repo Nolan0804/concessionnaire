@@ -29,7 +29,7 @@ public class VehicleDBAccess implements VehicleDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, vehicle.getVIN());
             statement.setDouble(2, vehicle.getKilometer());
-            statement.setDate(3, Date.valueOf(vehicle.getArrivalDate()));
+            statement.setDate(3, java.sql.Date.valueOf(vehicle.getArrivalDate()));
             statement.setDouble(4, vehicle.getSalePrice());
             statement.setDouble(5, vehicle.getPurchasePrice());
 

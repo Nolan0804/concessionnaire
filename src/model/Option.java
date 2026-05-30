@@ -12,14 +12,8 @@ public class Option {
         setPrice(price);
     }
 
-    public Integer getPrice() {
-        return price;
-    }
     public String getName() {
         return name;
-    }
-    public String getDescription() {
-        return description;
     }
 
     public void setPrice(Integer price) throws InvalidInputException {
