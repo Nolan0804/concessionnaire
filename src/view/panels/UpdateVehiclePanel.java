@@ -11,7 +11,6 @@ import view.components.DialogMessage;
 import view.utils.ComboBoxUtils;
 
 public class UpdateVehiclePanel extends JPanel {
-    private JTextField txtVin;
     private JTextField txtKilometer;
     private JTextField txtSalePrice;
     private JSpinner arrivalDate;
